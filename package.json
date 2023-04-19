@@ -1,0 +1,24 @@
+{
+  "name": "alcohol_management_system",
+  "version": "1.0.0",
+  "description": "Manages inventory for Modavie",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo meow",
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JacobLau1/Sys-Dev-Project.git"
+  },
+  "author": "Brandon Lee Felix, Jacob Lau, Mihai",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JacobLau1/Sys-Dev-Project/issues"
+  },
+  "homepage": "https://github.com/JacobLau1/Sys-Dev-Project#readme",
+  "devDependencies": {
+    "vite": "^4.2.2"
+  }
+}
