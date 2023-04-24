@@ -45,7 +45,7 @@ class UserList{
 
         echo '<br/>';
 
-        echo '<a href="http://localhost/moda/index.php?resource=user&action=logout">Logout</a>';
+        echo '<a href="http://localhost/Sys-Dev-Project/index.php?resource=user&action=logout">Logout</a>';
 
         echo '<br/>';
 
