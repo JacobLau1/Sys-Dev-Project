@@ -16,7 +16,7 @@ class UserSetupTwofa{
 
     function render(){
 
-        $qrcodeimageURL= \TokenAuth6238::getBarCodeUrl($this->user->getUsername(), 'localhost', $this->user->getOTPsecretkey(), 'modavie');
+        $qrcodeimageURL= \TokenAuth6238::getBarCodeUrl($this->user->getUsername(), 'localhost', $this->user->getOTPsecretkey(), 'Sys-Dev-Projectvie');
 
         echo 'Download the authenticator app:';
         echo '</br>';
@@ -34,7 +34,7 @@ class UserSetupTwofa{
         echo $html;
 
         echo '</br>';
-        echo '<a href="http://localhost/moda/index.php?resource=user&action=login">Continue</a>';
+        echo '<a href="http://localhost/Sys-Dev-Project/index.php?resource=user&action=login">Continue</a>';
 
     }
 }

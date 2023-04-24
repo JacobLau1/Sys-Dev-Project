@@ -26,9 +26,9 @@ class UserLogin
         if ($this->user->login()) {
             $this->user->getMembershipProvider()->login();
             if ($this->user->getEnabled2FA()) {
-                header('Location: http://localhost/moda/index.php?resource=user&action=validatecode');
+                header('Location: http://localhost/Sys-Dev-Project/index.php?resource=user&action=validatecode');
             } else {
-                header('Location: http://localhost/moda/index.php?resource=user&action=menuselection');
+                header('Location: http://localhost/Sys-Dev-Project/index.php?resource=user&action=menuselection');
             }
         } else {
             $this->userMessage = 'You were not able to login, check your username and passowrd and try again.';

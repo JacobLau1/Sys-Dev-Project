@@ -35,7 +35,7 @@ class UserCreate{
 
                 $this->user->getMembershipProvider()->login();
 
-                header("location: http://localhost/moda/index.php?resource=user&action=setuptwofa");
+                header("location: http://localhost/Sys-Dev-Project/index.php?resource=user&action=setuptwofa");
 
             }
         }
