@@ -54,6 +54,7 @@ class UserList{
               <th>Position</th>
               <th>Username</th>
               <th>2FA Enabled</th>
+              <th>Edit</th>
       ";
 
         // Loop and fill the table with data from the database
@@ -63,6 +64,7 @@ class UserList{
             <td>".$user['position']."</td>
             <td>".$user['username']."</td>
             <td>".$user['enabled2fa']."</td>
+            <td><a href='http://localhost/Sys-Dev-Project/index.php?resource=user&action=edit&id=".$user['id']."'>Edit</a></td>
         </tr>";
         }
 

@@ -224,6 +224,31 @@ class User
 
     }
 
+    function update(){
+
+            $query = "UPDATE users SET position = :position, username = :username, password = :password, enabled2fa = :enabled2fa WHERE id = :id";
+
+            $statement = $this->dbConnection->prepare($query);
+
+            $hashedPassword = password_hash($this->password, PASSWORD_DEFAULT);
+
+            return $statement->execute(['position' => $this->position, 'username' => $this->username, 'password' => $hashedPassword, 'enabled2fa' => $this->enabled2fa, 'id' => $this->id]);
+
+    }
+
+    public function getUserByID($id)
+    {
+
+            $query = "SELECT * FROM users WHERE id = :id";
+
+            $statement = $this->dbConnection->prepare($query);
+
+            $statement->execute(['id' => $id]);
+
+            return $statement->fetchAll(\PDO::FETCH_CLASS, User::class);
+
+    }
+
 }
 
 ?>
