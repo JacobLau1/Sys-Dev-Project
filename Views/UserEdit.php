@@ -66,10 +66,10 @@ class UserEdit {
         // Form to edit the user
         $html .= '<form action="" method="post">';
         $html .= '<input type="hidden" id="id" name="id" value="'.$userModel->getID().'"><br>';
-        $html .= '<label for="type">Type:</label><br>';
-        $html .= '<input type="text" id="type" name="type" value="'.$userModel->getPosition().'"><br>';
-        $html .= '<label for="name">Name:</label><br>';
-        $html .= '<input type="text" id="name" name="name" value="'.$userModel->getUsername().'"><br>';
+        $html .= '<label for="position">Position:</label><br>';
+        $html .= '<input type="text" id="position" name="position" value="'.$userModel->getPosition().'"><br>';
+        $html .= '<label for="username">Username:</label><br>';
+        $html .= '<input type="text" id="username" name="username" value="'.$userModel->getUsername().'"><br>';
 
         $html .= '<input type="submit" value="Submit">';
         $html .= '</form>';
