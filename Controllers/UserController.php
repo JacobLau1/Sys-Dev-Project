@@ -159,22 +159,22 @@ class UserController
     {
 
         //check if the form has been submitted
-        if (isset($_POST['submit'])) {
+        if (isset($_POST['id'])&&isset($_POST['position'])&&isset($_POST['username'])) {
             //get the user id from the form
             $id = $_POST['id'];
 
             //get the user properties from the form
-            $this->user->setPosition($_POST['position']);
-            $this->user->setUsername($_POST['username']);
-            $this->user->setPassword($_POST['password']);
-            $this->user->setEnabled2FA($_POST['enabled2fa']);
+            $userModel = (new \Models\User())->getUserByID($id)[0];
+
+            $userModel->setPosition($_POST['position']);
+            $userModel->setUsername($_POST['username']);
 
             //update the user in the database
-            $success = $this->user->update();
+            $success = $userModel->update();
 
-            //if the update was successful, redirect to the wine menu
+            //if the update was successful, redirect to the list menu
             if ($success) {
-                header("Location: index.php?resource=user&action=menu");
+                header("Location: index.php?resource=user&action=list");
                 exit;
             } else {
                 //if the update failed, display an error message
