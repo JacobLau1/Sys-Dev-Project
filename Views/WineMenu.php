@@ -1,130 +1,78 @@
-<?php
-namespace models;
+<?php namespace views; ?>
 
-require_once(dirname(__DIR__)."/core/dbconnectionmanager.php");
-
-require(dirname(__DIR__)."/core/membershipprovider.php");
-
-class Wine{
-
-    private $id;
-    private $type;
-    private $name;
-    private $format;
-    private $price;
-
-    private $dbConnection;
-
-    private $membershipProvider;
-
-    function __construct(){
-
-        $conManager = new \database\DBConnectionManager();
-
-        $this->dbConnection = $conManager->getConnection();
-
-        $this->membershipProvider = new \membershipprovider\MembershipProvider($this);
-
-    }
-
-    function create(){
-
-        $query = "INSERT INTO wine (type, name, format, price) VALUES(:type, :name, :format, :price)";
-
-        $statement = $this->dbConnection->prepare($query);
-
-        return $statement->execute(['type' => $this->type,'name' => $this->name, 'format' => $this->format,'price' => $this->price]);
-
-    }
-
-    function getWineByID($id){
-        $query = "select * from wine where ID = :id";
-
-        $statement = $this->dbConnection->prepare($query);
-
-        $statement->bindParam(":id", $id);
-
-        $statement->execute();
-
-        return $statement->fetch();
-    }
-
-    function getAll(){
-
-        $query = "select * from wine";
-
-        $statement = $this->dbConnection->prepare($query);
-
-        $statement->execute();
-
-        return $statement->fetchAll();
-
-    }
-
-    function setID($id){
-        $this->id = $id;
-    }
-
-    function setType($type){
-        $this->type = $type;
-    }
-
-    function setName($name){
-        $this->name = $name;
-    }
-
-    function setFormat($format){
-        $this->format = $format;
-    }
-
-    function setPrice($price){
-        $this->price = $price;
-    }
-
-    function getID(){
-        return $this->id;
-    }
-
-    function getType(){
-        return $this->type;
-    }
-
-    function getName(){
-        return $this->name;
-    }
-
-    function getFormat(){
-        return $this->format;
-    }
-
-    function getPrice(){
-        return $this->price;
-    }
-
-    function update() {
-        $query = "update wine set type = :type, name = :name, format = :format, price = :price where ID = :id";
-        $statement = $this->dbConnection->prepare($query);
-        $statement->bindParam(":type", $this->type);
-        $statement->bindParam(":name", $this->name);
-        $statement->bindParam(":format", $this->format);
-        $statement->bindParam(":price", $this->price);
-        $statement->bindParam(":id", $this->id);
-        try {
-            $success = $statement->execute();
-        } catch (PDOException $e) {
-            // handle the error
-            echo "Update failed: " . $e->getMessage();
-            return false;
+<html>
+<head>
+    <style>
+        #employeesTable {
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
         }
 
-        // Print the executed SQL query
-        echo "Executed query: " . $query . "<br/>";
-        echo "With parameters: type={$this->type}, name={$this->name}, format={$this->format}, price={$this->price}, id={$this->id}<br/>";
+        #employeesTable td, #employeesTable th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
 
-        return $success;
+        #employeesTable tr:nth-child(even){background-color: #f2f2f2;}
+
+        #employeesTable tr:hover {background-color: #ddd;}
+
+        #employeesTable th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #04AA6D;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+<?php
+
+class WineMenu {
+    private $user;
+
+    public function __construct($user) {
+        $this->user = $user;
+
     }
 
+    public function render($wines) {
 
+        echo '<br/>';
+
+        echo '<a href="http://localhost/Sys-Dev-Project/index.php?resource=user&action=logout">Logout</a>';
+
+        echo '<br/>';
+
+        $html = '<table id="employeesTable">';
+        $html .= "<th>ID</th>
+            <th>Type</th>
+            <th>Name</th>
+            <th>Format</th>
+            <th>Price</th>
+            <th>Edit</th>
+            ";
+
+        // Loop and fill the table with data from the database
+        foreach ($wines as $wine) {
+            $html .=  "<tr>
+                <td>".$wine['id']."</td>
+                <td>".$wine['type']."</td>
+                <td>".$wine['name']."</td>
+                <td>".$wine['format']."</td>
+                <td>".$wine['price']."</td>
+                <td><a href='http://localhost/Sys-Dev-Project/index.php?resource=wine&action=edit&id=".$wine['id']."'>Edit</a></td>
+            </tr>";
+        }
+
+        $html .= "</table>";
+
+        echo $html;
+    }
 }
 
 ?>
+</body>
+</html>
