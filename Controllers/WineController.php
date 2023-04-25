@@ -104,6 +104,38 @@ class WineController{
         }
     }
 
+    public function handleAdd() {       //handle add
+        // Check if the form has been submitted
+        if(isset($_POST['submit'])) {
+            // Retrieve the submitted values
+            $type = $_POST['type'];
+            $name = $_POST['name'];
+            $format = $_POST['format'];
+            $price = $_POST['price'];
+    
+            // Validate the submitted values (e.g. check if the price is a number)
+    
+            // Create a new wine object and save it to the database
+            $this->wine = new \models\Wine();
+            $this->wine->setType($type);
+            $this->wine->setName($name);
+            $this->wine->setFormat($format);
+            $this->wine->setPrice($price);
+            $this->wine->create();
+    
+            // Redirect to the wine menu after adding a new wine
+            header("Location: index.php?resource=wine&action=menu");
+            exit;
+        } else {
+            // display the add form
+            $viewClass = "\\views\\" . "WineAdd";
+            if(class_exists($viewClass)) {
+                $view = new $viewClass($this->wine);
+                $view->render();
+            }
+        }   
+    }
+
     private function handleDelete()
     {
         //get the id of the wine to delete
