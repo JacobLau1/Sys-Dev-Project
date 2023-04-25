@@ -159,23 +159,22 @@ class UserController
     {
 
         //check if the form has been submitted
-        if (isset($_POST['id'])&&isset($_POST['position'])&&isset($_POST['username'])) {
+        if (isset($_POST['submit'])) {
             //get the user id from the form
             $id = $_POST['id'];
 
             //get the user properties from the form
-            $userModel = (new \Models\User())->getUserByID($id)[0];
-
-            $userModel->setPosition($_POST['position']);
-            $userModel->setUsername($_POST['username']);
-
+            $this->user->setPosition($_POST['position']);
+            $this->user->setUsername($_POST['username']);
+            $this->user->setPassword($_POST['password']);
+            $this->user->setEnabled2FA($_POST['enabled2fa']);
 
             //update the user in the database
-            $success = $userModel->update();
+            $success = $this->user->update();
 
-            //if the update was successful, redirect to the user list
+            //if the update was successful, redirect to the wine menu
             if ($success) {
-                header("Location: index.php?resource=user&action=list");
+                header("Location: index.php?resource=user&action=menu");
                 exit;
             } else {
                 //if the update failed, display an error message
@@ -204,6 +203,20 @@ class UserController
     private function handleDelete()
     {
 
+        //get the id of the user to delete
+        $id = $_GET['id'];
+
+        //delete the user from the database
+        $success = $this->user->delete($id);
+
+        //if the delete was successful, redirect to the user list
+        if ($success) {
+            header("Location: index.php?resource=user&action=menu");
+            exit;
+        } else {
+            //if the delete failed, display an error message
+            echo "Delete failed";
+        }
     }
 
 }
