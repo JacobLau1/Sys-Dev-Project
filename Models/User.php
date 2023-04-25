@@ -249,6 +249,16 @@ class User
 
     }
 
+    public function delete($id)
+    {
+
+            $query = "DELETE FROM users WHERE id = :id";
+
+            $statement = $this->dbConnection->prepare($query);
+
+            return $statement->execute(['id' => $id]);
+    }
+
 }
 
 ?>

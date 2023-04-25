@@ -124,6 +124,26 @@ class Wine{
         return $success;
     }
 
+    public function delete($id)
+    {
+        $query = "delete from wine where ID = :id";
+        $statement = $this->dbConnection->prepare($query);
+        $statement->bindParam(":id", $id);
+        try {
+            $success = $statement->execute();
+        } catch (PDOException $e) {
+            // handle the error
+            echo "Delete failed: " . $e->getMessage();
+            return false;
+        }
+
+        // Print the executed SQL query
+        echo "Executed query: " . $query . "<br/>";
+        echo "With parameters: id={$id}<br/>";
+
+        return $success;
+    }
+
 
 }
 

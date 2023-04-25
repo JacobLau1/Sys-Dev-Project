@@ -38,6 +38,9 @@ class WineController{
                 case 'edit':
                     $this->handleEdit();
                     break;
+                case 'delete':
+                    $this->handleDelete();
+                    break;
             }
         }
 
@@ -101,7 +104,20 @@ class WineController{
         }
     }
 
+    private function handleDelete()
+    {
+        //get the id of the wine to delete
+        $id = $_POST['id'];
 
+        //delete the wine from the database
+        $success = $this->wine->delete($id);
+
+        //if the delete was successful, redirect to the wine list
+        if ($success) {
+            header("Location: index.php?resource=wine&action=menu");
+            exit;
+        }
+    }
 
 
 }

@@ -81,7 +81,7 @@ class WineEdit {
         $html .= '</form>';
 
         // Button to delete the wine
-        $html .= '<form action="" method="post">';
+        $html .= '<form action="http://localhost/Sys-Dev-Project/index.php?resource=wine&action=delete" method="post">';
         $html .= '<input type="hidden" id="id" name="id" value="'.$wine['id'].'"><br>';
         $html .= '<input type="submit" value="Delete Wine">';
 
