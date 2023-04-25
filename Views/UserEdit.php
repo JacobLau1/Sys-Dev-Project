@@ -48,10 +48,7 @@ class UserEdit {
             return;
         }
 
-        //echo out the user id
-        echo "User ID: " . $userModel->getUsername() . "<br>";
 
-        //
         $html = '<table id="employeesTable">';
         $html .= "<th>ID</th>
             <th>Position</th>

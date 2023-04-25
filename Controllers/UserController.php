@@ -95,8 +95,8 @@ class UserController
 
     private function handleSetUpTwoFA()
     {
-        if (isset($_COOKIE['hrappuser'])) {
-            $username = $_COOKIE['hrappuser'];
+        if (isset($_COOKIE['UserSession'])) {
+            $username = $_COOKIE['UserSession'];
             $this->user = $this->user->getUserByUsername($username)[0];
         }
 
@@ -105,8 +105,8 @@ class UserController
 
     private function handleValidateCode()
     {
-        if (isset($_COOKIE['hrappuser'])) {
-            $username = $_COOKIE['hrappuser'];
+        if (isset($_COOKIE['UserSession'])) {
+            $username = $_COOKIE['UserSession'];
             $this->user = $this->user->getUserByUsername($username)[0];
         }
 
@@ -118,24 +118,24 @@ class UserController
 
     private function handleMenuSelection()
     {
-        if (isset($_COOKIE['hrappuser'])) {
-            $username = $_COOKIE['hrappuser'];
+        if (isset($_COOKIE['UserSession'])) {
+            $username = $_COOKIE['UserSession'];
             $this->user = $this->user->getUserByUsername($username)[0];
         }
     }
 
     private function handleUserManagement()
     {
-        if (isset($_COOKIE['hrappuser'])) {
-            $username = $_COOKIE['hrappuser'];
+        if (isset($_COOKIE['UserSession'])) {
+            $username = $_COOKIE['UserSession'];
             $this->user = $this->user->getUserByUsername($username)[0];
         }
     }
 
     private function handleUserList()
     {
-        if (isset($_COOKIE['hrappuser'])) {
-            $username = $_COOKIE['hrappuser'];
+        if (isset($_COOKIE['UserSession'])) {
+            $username = $_COOKIE['UserSession'];
             $this->user = $this->user->getUserByUsername($username)[0];
 
             $userModel = new \Models\User();
@@ -151,6 +151,7 @@ class UserController
 
     private function handleLogout()
     {
+        echo "logout";
         $this->user->logout();
     }
 
