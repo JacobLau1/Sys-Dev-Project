@@ -61,7 +61,7 @@ class WineController{
 
     function handleEdit() {
         //check if the form has been submitted
-        if (isset($_POST['submit'])) {
+        if (isset($_POST['id'])&&isset($_POST['type'])&&isset($_POST['name'])&&isset($_POST['format'])&&isset($_POST['price'])) {
             //get the wine id from the form
             $id = $_POST['id'];
             //get the wine properties from the form
