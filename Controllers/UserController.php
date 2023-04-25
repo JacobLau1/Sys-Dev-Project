@@ -200,6 +200,25 @@ class UserController
         }
     }
 
+    private function handleDelete()
+    {
+
+        //get the id of the user to delete
+        $id = $_GET['id'];
+
+        //delete the user from the database
+        $success = $this->user->delete($id);
+
+        //if the delete was successful, redirect to the user list
+        if ($success) {
+            header("Location: index.php?resource=user&action=menu");
+            exit;
+        } else {
+            //if the delete failed, display an error message
+            echo "Delete failed";
+        }
+    }
+
 }
 
 ?>
