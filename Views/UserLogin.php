@@ -1,19 +1,48 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>HTML 5 Boilerplate</title>
-    <link rel="stylesheet" href="style.css">
-</head>
+<?php namespace views; ?>
+<html>
 <body>
-<script src="index.js">
-    <?php
-    use Controllers\UserController;
-    $userController = new UserController();
-    $userController->login();
-    ?>
-</script>
+
+<h1>User Login</h1>
+<form action="" method="post">
+    <label for="username">username:</label><br>
+    <input type="text" id="username" name="username"><br>
+    <label for="password">Password:</label><br>
+    <input type="password" id="password" name="password"><br><br>
+    <input type="submit" value="Login">
+</form>
+
+
+<?php
+
+class UserLogin
+{
+    private $user;
+    private $userMessage;
+
+    function __construct($user)
+    {
+        $this->user = $user;
+
+        if ($this->user->login()) {
+            $this->user->getMembershipProvider()->login();
+            if ($this->user->getEnabled2FA()) {
+                header('Location: http://localhost/Sys-Dev-Project/index.php?resource=user&action=validatecode');
+            } else {
+                header('Location: http://localhost/Sys-Dev-Project/index.php?resource=user&action=menuselection');
+            }
+        } else {
+            $this->userMessage = 'You were not able to login, check your username and passowrd and try again.';
+            $this->render();
+        }
+    }
+
+    function render(){
+        if (($this->user->getUsername() !== null) && ($this->user->getPassword() !== null))
+            echo $this->userMessage;
+    }
+}
+?>
+
+
 </body>
 </html>
