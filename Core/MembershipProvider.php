@@ -21,7 +21,7 @@ class MembershipProvider{
 
         $_SESSION['username'] = $this->user->getUsername();
 
-        setcookie('hrappuser', $this->user->getUsername(), time()+3600);
+        setcookie('UserSession', $this->user->getUsername(), time()+3600);
 
         echo 'You are logged in as: '.$this->user->getUsername();
 
@@ -49,14 +49,14 @@ class MembershipProvider{
     }
 
     function logout(){
+        session_name("hrapp");
 
+        session_start();
         $_SESSION = array();
-
-        session_destroy ();
-
-        setcookie('hrappuser', $this->user->getUsername(), time()-3600);
-
+        session_destroy();
+        setcookie('UserSession', '', time() - 3600, '/');
     }
+
 
     function generateSecretKey(){
 
