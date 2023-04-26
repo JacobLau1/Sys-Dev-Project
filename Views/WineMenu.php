@@ -49,7 +49,8 @@ class WineMenu {
 
         echo '<br/>';
         echo "<a style='float:left' href='http://localhost/Sys-Dev-Project/index.php?resource=wine&action=add'>Add bottle</a>";
-//test
+//test 
+//testing
 
         $html = '<table id="employeesTable">';
         $html .= "<th>ID</th>
