@@ -17,7 +17,7 @@ class UserController
 
         $action = $_GET['action'];
 
-        $viewClass = "\\Views\\" . "User" . ucfirst($action);
+        $viewClass = "/Views/" . "User" . ucfirst($action);
 
         if (!class_exists($viewClass)) {
             return;
