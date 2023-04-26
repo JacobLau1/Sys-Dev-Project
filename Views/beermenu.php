@@ -2,7 +2,7 @@
 
 <html>
     <body>
-        <a style='float:right' href='http://localhost/Sys-Dev-Project/index.php?resource=user&action=logout'>Logout</a>
+        <a style='float:right' href='http://localhost/Sys-Dev-Project/index.php?resource=user&action=login'>Logout</a>
         <a style='float:left' href='http://localhost/Sys-Dev-Project/index.php?resource=user&action=menuselection'>Back to menu selection</a>
         <br>
         <h2>Beer Page</h2>
