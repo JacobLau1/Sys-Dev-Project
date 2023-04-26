@@ -40,7 +40,8 @@ class WineEdit {
 
     public function render($wine = null) {
         echo '<br/>';
-        echo '<a href="http://localhost/Sys-Dev-Project/index.php?resource=user&action=logout">Logout</a>';
+        echo "<a style='float:left' href='http://localhost/Sys-Dev-Project/index.php?resource=wine&action=menu'>Back to wine</a>";
+        echo "<a style='float:right' href='http://localhost/Sys-Dev-Project/index.php?resource=user&action=login'>Logout</a>";
         echo '<br/>';
 
         if ($wine === null) {
