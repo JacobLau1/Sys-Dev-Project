@@ -13,7 +13,7 @@ Class UserManagement{
 
         if($membershipProvider->isLoggedIn()){
             $html = "";
-            $html .= "<a style='float:right' href='http://localhost/Sys-Dev-Project/index.php?resource=user&action=logout'>Logout</a>";
+            $html .= "<a style='float:right' href='http://localhost/Sys-Dev-Project/index.php?resource=user&action=login'>Logout</a>";
             $html .= "<a style='float:left' href='http://localhost/Sys-Dev-Project/index.php?resource=user&action=menuselection'>Back to menu selection</a>";
 
             //if the position is admin, display admin
