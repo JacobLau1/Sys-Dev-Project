@@ -23,7 +23,7 @@ class App
             if (isset($_GET['resource'])) {
                 $resource = $_GET['resource'];
                 //We are adding a namespace to the class name to differentiate between controller and view classes
-                $controllerClass = "\\Controllers\\" . ucfirst($resource) . "Controller";
+                $controllerClass = "/Controllers/" . ucfirst($resource) . "Controller";
                 if (class_exists($controllerClass)) {
                     $controller = new $controllerClass();
                 }
