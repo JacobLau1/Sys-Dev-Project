@@ -11,6 +11,13 @@ class User
 
     private $id;
     private $position;
+    private $first_name;
+    private $full_name;
+    private $last_seen;
+    private $date_fired;
+    private $date_hired;
+    private $working_status;
+    private $termination_reason;
     private $username;
     private $password;
     private $enabled2fa = false;
@@ -35,11 +42,14 @@ class User
 
     function create()
     {
-        $query = "INSERT INTO users (position, username, password, enabled2fa) VALUES(:position, :username, :password, :enabled2fa)";
+        $query = "INSERT INTO users (position, first_name, full_name, last_seen, date_fired, date_hired, working_status, termination_reason, username, password, enabled2fa) 
+        VALUES(:position, :first_name, :full_name, :last_seen, :date_fired, :date_hired, :working_status, :termination_reason, :username, :password, :enabled2fa)";
         $statement = $this->dbConnection->prepare($query);
         $hashedPassword = password_hash($this->password, PASSWORD_DEFAULT);
 
-        return $statement->execute(['position' => $this->position, 'username' => $this->username, 'password' => $hashedPassword, 'enabled2fa' => $this->enabled2fa]);
+        return $statement->execute(['position' => $this->position, 'first_name' => $this->first_name,'full_name' => $this->full_name,
+        'last_seen' => $this->last_seen,'date_fired' => $this->date_fired,'date_hired' => $this->date_hired,'working_status' => $this->working_status,
+        'termination_reason' => $this->termination_reason, 'username' => $this->username, 'password' => $hashedPassword, 'enabled2fa' => $this->enabled2fa]);
     }
 
     function login()
@@ -226,13 +236,17 @@ class User
 
     function update(){
 
-            $query = "UPDATE users SET position = :position, username = :username, password = :password, enabled2fa = :enabled2fa WHERE id = :id";
+        //:position, :first_name, :full_name, :last_seen, :date_fired, :date_hired, :working_status, :termination_reason, :username, :password, :enabled2fa
+            $query = "UPDATE users SET position = :position, first_name=:first_name, full_name=:full_name, last_seen=:last_seen, date_fired=:date_fired, date_hired=:date_hired, working_status=:working_status, termination_reason=:termination_reason, 
+            username = :username, password = :password, enabled2fa = :enabled2fa WHERE id = :id";
 
             $statement = $this->dbConnection->prepare($query);
 
             $hashedPassword = password_hash($this->password, PASSWORD_DEFAULT);
 
-            return $statement->execute(['position' => $this->position, 'username' => $this->username, 'password' => $hashedPassword, 'enabled2fa' => $this->enabled2fa, 'id' => $this->id]);
+            return $statement->execute(['position' => $this->position, 'first_name' => $this->first_name,'full_name' => $this->full_name,
+            'last_seen' => $this->last_seen,'date_fired' => $this->date_fired,'date_hired' => $this->date_hired,'working_status' => $this->working_status,
+            'termination_reason' => $this->termination_reason, 'username' => $this->username, 'password' => $hashedPassword, 'enabled2fa' => $this->enabled2fa]);
 
     }
 
