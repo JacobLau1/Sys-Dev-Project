@@ -161,6 +161,62 @@ class User
 
     }
 
+    public function getFirstName() {
+        return $this->first_name;
+    }
+
+    public function setFirstName($first_name) {
+        $this->first_name = $first_name;
+    }
+
+    public function getFullName() {
+        return $this->full_name;
+    }
+
+    public function setFullName($full_name) {
+        $this->full_name = $full_name;
+    }
+
+    public function getLastSeen() {
+        return $this->last_seen;
+    }
+
+    public function setLastSeen($last_seen) {
+        $this->last_seen = $last_seen;
+    }
+
+    public function getDateFired() {
+        return $this->date_fired;
+    }
+
+    public function setDateFired($date_fired) {
+        $this->date_fired = $date_fired;
+    }
+
+    public function getDateHired() {
+        return $this->date_hired;
+    }
+
+    public function setDateHired($date_hired) {
+        $this->date_hired = $date_hired;
+    }
+
+    public function getWorkingStatus() {
+        return $this->working_status;
+    }
+
+    public function setWorkingStatus($working_status) {
+        $this->working_status = $working_status;
+    }
+
+    public function getTerminationReason() {
+        return $this->termination_reason;
+    }
+
+    public function setTerminationReason($termination_reason) {
+        $this->termination_reason = $termination_reason;
+    }
+
     public function setUsername($username)
     {
 
@@ -236,17 +292,16 @@ class User
 
     function update(){
 
-        //:position, :first_name, :full_name, :last_seen, :date_fired, :date_hired, :working_status, :termination_reason, :username, :password, :enabled2fa
-            $query = "UPDATE users SET position = :position, first_name=:first_name, full_name=:full_name, last_seen=:last_seen, date_fired=:date_fired, date_hired=:date_hired, working_status=:working_status, termination_reason=:termination_reason, 
-            username = :username, password = :password, enabled2fa = :enabled2fa WHERE id = :id";
+        $query = "UPDATE users SET position = :position, first_name=:first_name, full_name=:full_name, last_seen=:last_seen, date_fired=:date_fired, date_hired=:date_hired, working_status=:working_status, termination_reason=:termination_reason, 
+        username = :username, password = :password, enabled2fa = :enabled2fa WHERE id = :id";
 
-            $statement = $this->dbConnection->prepare($query);
+        $statement = $this->dbConnection->prepare($query);
 
-            $hashedPassword = password_hash($this->password, PASSWORD_DEFAULT);
+        $hashedPassword = password_hash($this->password, PASSWORD_DEFAULT);
 
-            return $statement->execute(['position' => $this->position, 'first_name' => $this->first_name,'full_name' => $this->full_name,
-            'last_seen' => $this->last_seen,'date_fired' => $this->date_fired,'date_hired' => $this->date_hired,'working_status' => $this->working_status,
-            'termination_reason' => $this->termination_reason, 'username' => $this->username, 'password' => $hashedPassword, 'enabled2fa' => $this->enabled2fa]);
+        return $statement->execute(['position' => $this->position, 'first_name' => $this->first_name,'full_name' => $this->full_name,
+        'last_seen' => $this->last_seen,'date_fired' => $this->date_fired,'date_hired' => $this->date_hired,'working_status' => $this->working_status,
+        'termination_reason' => $this->termination_reason, 'username' => $this->username, 'password' => $hashedPassword, 'enabled2fa' => $this->enabled2fa]);
 
     }
 

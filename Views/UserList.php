@@ -49,28 +49,65 @@ class UserList{
 
         echo '<br/>';
 
-        $html = '<table id="employeesTable">';
-        $html .= "<th>ID</th>
-              <th>Position</th>
-              <th>Username</th>
-              <th>2FA Enabled</th>
-              <th>Edit</th>
-      ";
+    //     $html = '<table id="employeesTable">';
+    //     $html .= "<th>ID</th>
+    //           <th>Position</th>
+    //           <th>Username</th>
+    //           <th>2FA Enabled</th>
+    //           <th>Edit</th>
+    //   ";
 
-        // Loop and fill the table with data from the database
-        foreach ($users as $user) {
-            $html .=  "<tr>
-            <td>".$user['id']."</td>
-            <td>".$user['position']."</td>
-            <td>".$user['username']."</td>
-            <td>".$user['enabled2fa']."</td>
-            <td><a href='http://localhost/Sys-Dev-Project/index.php?resource=user&action=edit&id=".$user['id']."'>Edit</a></td>
-        </tr>";
-        }
+    //     // Loop and fill the table with data from the database
+    //     foreach ($users as $user) {
+    //         $html .=  "<tr>
+    //         <td>".$user['id']."</td>
+    //         <td>".$user['position']."</td>
+    //         <td>".$user['username']."</td>
+    //         <td>".$user['enabled2fa']."</td>
+    //         <td><a href='http://localhost/Sys-Dev-Project/index.php?resource=user&action=edit&id=".$user['id']."'>Edit</a></td>
+    //     </tr>";
+    //     }
 
-        $html .= "</table>";
+    //     $html .= "</table>";
 
-        echo $html;
+    //     echo $html;
+
+    $html = '<table id="employeesTable">';
+    $html .= "<th>ID</th>
+            <th>Position</th>
+            <th>Username</th>
+            <th>2FA Enabled</th>
+            <th>First Name</th>
+            <th>Full Name</th>
+            <th>Last Seen</th>
+            <th>Date Hired</th>
+            <th>Working Status</th>
+            <th>Date Fired</th>
+            <th>Termination Reason</th>
+            <th>Edit</th>";
+
+// Loop and fill the table with data from the database
+foreach ($users as $user) {
+    $html .=  "<tr>
+        <td>".$user['id']."</td>
+        <td>".$user['position']."</td>
+        <td>".$user['username']."</td>
+        <td>".$user['enabled2fa']."</td>
+        <td>".$user['first_name']."</td>
+        <td>".$user['full_name']."</td>
+        <td>".$user['last_seen']."</td>
+        <td>".$user['date_hired']."</td>
+        <td>".$user['working_status']."</td>
+        <td>".$user['date_fired']."</td>
+        <td>".$user['termination_reason']."</td>
+        <td><a href='http://localhost/Sys-Dev-Project/index.php?resource=user&action=edit&id=".$user['id']."'>Edit</a></td>
+    </tr>";
+}
+
+$html .= "</table>";
+
+echo $html;
+
     }
 
 
