@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 29, 2023 at 01:32 AM
+-- Generation Time: May 04, 2023 at 05:28 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 7.4.33
 
@@ -20,6 +20,22 @@ SET time_zone = "+00:00";
 --
 -- Database: `moda`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `drinks`
+--
+
+CREATE TABLE `drinks` (
+  `drink_id` int(11) NOT NULL,
+  `alcohol_type` int(11) NOT NULL,
+  `inventory_id` int(11) NOT NULL,
+  `current_location` int(11) NOT NULL,
+  `last_moved_by` int(11) NOT NULL,
+  `last_moved_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `image` blob NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -41,6 +57,46 @@ CREATE TABLE `employees` (
 INSERT INTO `employees` (`id`, `name`, `phone`, `email`) VALUES
 (1, 'John Smith', '123456789', 'john@gmail.com'),
 (2, 'Julie Jones', '987456123', 'julie@gmail.com');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `inventory`
+--
+
+CREATE TABLE `inventory` (
+  `inventory_id` int(11) NOT NULL,
+  `drink_id` int(11) NOT NULL,
+  `date_aquired` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `last_updated` timestamp NULL DEFAULT NULL,
+  `quantity` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `liquor`
+--
+
+CREATE TABLE `liquor` (
+  `SAQ_Code` varchar(50) NOT NULL,
+  `Type` varchar(25) NOT NULL,
+  `Name` varchar(50) NOT NULL,
+  `Format` int(11) NOT NULL,
+  `Price` float NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `location`
+--
+
+CREATE TABLE `location` (
+  `location_id` int(11) NOT NULL,
+  `room` varchar(25) NOT NULL,
+  `storage_no` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -102,10 +158,34 @@ INSERT INTO `wine` (`id`, `type`, `name`, `format`, `price`) VALUES
 --
 
 --
+-- Indexes for table `drinks`
+--
+ALTER TABLE `drinks`
+  ADD PRIMARY KEY (`drink_id`);
+
+--
 -- Indexes for table `employees`
 --
 ALTER TABLE `employees`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `inventory`
+--
+ALTER TABLE `inventory`
+  ADD PRIMARY KEY (`inventory_id`);
+
+--
+-- Indexes for table `liquor`
+--
+ALTER TABLE `liquor`
+  ADD PRIMARY KEY (`SAQ_Code`);
+
+--
+-- Indexes for table `location`
+--
+ALTER TABLE `location`
+  ADD PRIMARY KEY (`location_id`);
 
 --
 -- Indexes for table `users`
@@ -124,10 +204,28 @@ ALTER TABLE `wine`
 --
 
 --
+-- AUTO_INCREMENT for table `drinks`
+--
+ALTER TABLE `drinks`
+  MODIFY `drink_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `employees`
 --
 ALTER TABLE `employees`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `inventory`
+--
+ALTER TABLE `inventory`
+  MODIFY `inventory_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `location`
+--
+ALTER TABLE `location`
+  MODIFY `location_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `users`
