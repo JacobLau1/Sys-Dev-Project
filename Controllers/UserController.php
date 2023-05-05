@@ -103,22 +103,6 @@ private function handleLogin()
             $this->user->login();
         }
     }
-/*
-    private function handleCreate()
-    {
-        if (isset($_POST['position'], $_POST['username'], $_POST['password'])) {
-            $this->user->setPosition($_POST['position']);
-            $this->user->setUsername($_POST['username']);
-            $this->user->setPassword($_POST['password']);
-
-            if (isset($_POST['enable2fa'])) {
-                $this->user->setEnabled2FA($_POST['enable2fa'] == 'true');
-            }
-
-            $this->user->create();
-        }
-    }
-*/
 
 private function handleCreate()
 {
