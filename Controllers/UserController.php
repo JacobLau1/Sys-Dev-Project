@@ -203,52 +203,6 @@ private function handleCreate()
         echo "logout";
         $this->user->logout();
     }
-/*
-    private function handleEdit()
-    {
-
-        //check if the form has been submitted
-        if (isset($_POST['id'])&&isset($_POST['position'])&&isset($_POST['username'])) {
-            //get the user id from the form
-            $id = $_POST['id'];
-
-            //get the user properties from the form
-            $userModel = (new \Models\User())->getUserByID($id)[0];
-
-            $userModel->setPosition($_POST['position']);
-            $userModel->setUsername($_POST['username']);
-
-            //update the user in the database
-            $success = $userModel->update();
-
-            //if the update was successful, redirect to the list menu
-            if ($success) {
-                header("Location: index.php?resource=user&action=list");
-                exit;
-            } else {
-                //if the update failed, display an error message
-                echo "Update failed";
-            }
-        } else {
-
-            //if the form has not been submitted, render the edit view
-            $id = $_GET['id'];
-            $userModel = (new \Models\User())->getUserByID($id)[0];
-
-            //constructs a userModel object from the database base on the id
-            $userModel->setPosition($userModel->getPosition());
-            $userModel->setUsername($userModel->getUsername());
-            $userModel->setPassword($userModel->getPassword());
-            $userModel->setEnabled2FA($userModel->getEnabled2FA());
-
-
-
-            $viewClass = "\\Views\\" . "UserEdit";
-            $view = new $viewClass($this->user);
-            $view->render($userModel);
-        }
-    }
-*/
 
 private function handleEdit()
 {
