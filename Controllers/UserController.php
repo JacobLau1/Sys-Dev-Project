@@ -1,7 +1,7 @@
 <?php
 namespace controllers;
 
-require(dirname(__DIR__) . DIRECTORY_SEPARATOR . "Models" . DIRECTORY_SEPARATOR . "User.php");
+require_once(dirname(__DIR__) . DIRECTORY_SEPARATOR . "Models" . DIRECTORY_SEPARATOR . "User.php");
 
 class UserController
 {

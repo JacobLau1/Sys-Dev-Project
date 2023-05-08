@@ -11,6 +11,13 @@ class User
 
     private $id;
     private $position;
+    private $firstName;
+    private $lastName;
+    private $lastSeen;
+    private $dateFired;
+    private $dateHired;
+    private $workingStatus;
+    private $terminationReason;
     private $username;
     private $password;
     private $enabled2fa = false;
@@ -231,6 +238,76 @@ class User
 
     }
 
+    public function setFirstName($firstName)
+    {
+        $this->firstName = $firstName;
+    }
+
+    public function getFirstName()
+    {
+        return $this->firstName;
+    }
+
+    public function setLastName($lastName)
+    {
+        $this->lastName = $lastName;
+    }
+
+    public function getLastName()
+    {
+        return $this->lastName;
+    }
+
+    public function setLastSeen($lastSeen)
+    {
+        $this->lastSeen = $lastSeen;
+    }
+
+    public function getLastSeen()
+    {
+        return $this->lastSeen;
+    }
+
+    public function setDateFired($dateFired)
+    {
+        $this->dateFired = $dateFired;
+    }
+
+    public function getDateFired()
+    {
+        return $this->dateFired;
+    }
+
+    public function setDateHired($dateHired)
+    {
+        $this->dateHired = $dateHired;
+    }
+
+    public function getDateHired()
+    {
+        return $this->dateHired;
+    }
+
+    public function setWorkingStatus($workingStatus)
+    {
+        $this->workingStatus = $workingStatus;
+    }
+
+    public function getWorkingStatus()
+    {
+        return $this->workingStatus;
+    }
+
+    public function setTerminationReason($terminationReason)
+    {
+        $this->terminationReason = $terminationReason;
+    }
+
+    public function getTerminationReason()
+    {
+        return $this->terminationReason;
+    }
+
     function getAll()
     {
 
@@ -277,6 +354,18 @@ class User
             $statement = $this->dbConnection->prepare($query);
 
             return $statement->execute(['id' => $id]);
+    }
+
+    public function serialize(){
+        return json_encode([
+            'id' => $this->id,
+            'position' => $this->position,
+            'username' => $this->username,
+            'password' => $this->password,
+            'enabled2fa' => $this->enabled2fa,
+            'otpsecretkey' => $this->otpsecretkey,
+            'otpcodeisvalid' => $this->otpcodeisvalid
+        ]);
     }
 
 }
