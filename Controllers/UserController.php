@@ -63,6 +63,7 @@ class UserController
         $view = new $viewClass($this->user);
     }
 
+    /*
     private function handleLogin()
     {
         if (isset($_POST['username'], $_POST['password'])) {
@@ -77,10 +78,10 @@ class UserController
             $this->user->login();
         }
     }
+    */
 
-<<<<<<< Updated upstream
-=======
-private function handleLogin()
+
+    private function handleLogin()
     {
         echo "handleLogin called <br/>";
 
@@ -109,8 +110,7 @@ private function handleLogin()
             $this->user->login();
         }
     }
-/*
->>>>>>> Stashed changes
+
     private function handleCreate()
     {
         if (isset($_POST['position'], $_POST['username'], $_POST['password'])) {
@@ -192,7 +192,7 @@ private function handleLogin()
     {
 
         //check if the form has been submitted
-        if (isset($_POST['id'])&&isset($_POST['position'])&&isset($_POST['username'])) {
+        if (isset($_POST['id']) && isset($_POST['position']) && isset($_POST['username'])) {
             //get the user id from the form
             $id = $_POST['id'];
 
@@ -224,7 +224,6 @@ private function handleLogin()
             $userModel->setUsername($userModel->getUsername());
             $userModel->setPassword($userModel->getPassword());
             $userModel->setEnabled2FA($userModel->getEnabled2FA());
-
 
 
             $viewClass = "\\Views\\" . "UserEdit";
