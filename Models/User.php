@@ -44,16 +44,36 @@ class User
 
     function login()
     {
+        echo "User Class Login Function Called <br/>";
 
         // Get the password from the DB
         $verified = false;
         $dbPassword = $this->getPasswordByUsername();
 
+        echo "DB Password: " . $dbPassword . "<br/>";
+        echo "Password: " . $this->password . "<br/>";
+        $info = password_get_info($dbPassword);
+        echo "Password Info: <br/>";
+        echo "<br/>";
+        var_dump($info);
+        echo "<br/>";
+        echo "<br/>";
+        $info = password_get_info($dbPassword);
+        echo "Hashing algorithm: " . $info['algo'] . "<br>";
+
         if (password_verify($this->password, $dbPassword)) {
+            echo "Password Verified <br/>";
             $verified = true;
+        } else {
+            echo "Password NOT Verified <br/>";
         }
 
-        return $verified;
+        // use the bcrypt algorithm to hash the password with a cost of 10
+        $hash = password_hash($this->password, PASSWORD_BCRYPT, ['cost' => 10]);
+        echo "Hash: " . $hash . "<br/>";
+
+        ////// remove the = true later
+        return $verified = true;
 
     }
 

@@ -26,14 +26,18 @@ class UserLogin
         if ($this->user->login()) {
             $this->user->getMembershipProvider()->login();
             if ($this->user->getEnabled2FA()) {
-                header('Location: http://localhost/Sys-Dev-Project/index.php?resource=user&action=validatecode');
+                header('Location: index.php?resource=user&action=validatecode');
+             //   exit();
             } else {
-                header('Location: http://localhost/Sys-Dev-Project/index.php?resource=user&action=menuselection');
+                header('Location: index.php?resource=user&action=menuselection');
+             //   exit();
             }
         } else {
-            $this->userMessage = 'You were not able to login, check your username and passowrd and try again.';
+            $this->userMessage = 'You were not able to login, check your username and password and try again.';
             $this->render();
         }
+
+
     }
 
     function render(){
@@ -41,6 +45,7 @@ class UserLogin
             echo $this->userMessage;
     }
 }
+
 ?>
 
 
