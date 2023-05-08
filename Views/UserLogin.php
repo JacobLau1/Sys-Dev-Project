@@ -30,10 +30,13 @@ class UserLogin
             } else {
                 header('Location: http://localhost/Sys-Dev-Project/index.php?resource=user&action=menuselection');
             }
-        } else {
+        } 
+        
+        else {
             $this->userMessage = 'You were not able to login, check your username and passowrd and try again.';
             $this->render();
         }
+        
     }
 
     function render(){

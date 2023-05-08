@@ -62,31 +62,18 @@ class UserController
 
         $view = new $viewClass($this->user);
     }
-/*
-    private function handleLogin()
-    {
-        if (isset($_POST['username'], $_POST['password'])) {
-            $this->user->setUsername($_POST['username']);
-            $this->user = $this->user->getUserByUsername($_POST['username'])[0];
-            $this->user->setPassword($_POST['password']);
-
-            if (isset($_POST['enable2fa'])) {
-                $this->user->setEnabled2FA($_POST['enable2fa'] == 'true');
-            }
-
-            $this->user->login();
-        }
-    }
-*/
 
 private function handleLogin()
-    {
-        if (isset($_POST['username'], $_POST['password'])) {
-            $this->user->setUsername($_POST['username']);
-            $this->user = $this->user->getUserByUsername($_POST['username'])[0];
-            $this->user->setPassword($_POST['password']);
+{
+    if (isset($_POST['username'], $_POST['password'])) {
+        $this->user->setUsername($_POST['username']);
+        $this->user = $this->user->getUserByUsername($_POST['username'])[0];
+        $this->user->setPassword($_POST['password']);
 
-            // Set the new properties from the POST data
+        // Set the new properties from the POST data
+        if (isset($_POST['position'], $_POST['first_name'], $_POST['full_name'], 
+        $_POST['last_seen'], $_POST['date_fired'], $_POST['date_hired'], 
+        $_POST['working_status'], $_POST['termination_reason'], $_POST['enable2fa'])) {
             $this->user->setPosition($_POST['position']);
             $this->user->setFirstName($_POST['first_name']);
             $this->user->setFullName($_POST['full_name']);
@@ -95,14 +82,12 @@ private function handleLogin()
             $this->user->setDateHired($_POST['date_hired']);
             $this->user->setWorkingStatus($_POST['working_status']);
             $this->user->setTerminationReason($_POST['termination_reason']);
-
-            if (isset($_POST['enable2fa'])) {
-                $this->user->setEnabled2FA($_POST['enable2fa'] == 'true');
-            }
-
-            $this->user->login();
+            $this->user->setEnabled2FA($_POST['enable2fa'] == 'true');
         }
+
+        $this->user->login();
     }
+}
 
 private function handleCreate()
 {
