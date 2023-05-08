@@ -87,14 +87,18 @@ private function handleLogin()
             $this->user->setPassword($_POST['password']);
 
             // Set the new properties from the POST data
-            $this->user->setPosition($_POST['position']);
-            $this->user->setFirstName($_POST['first_name']);
-            $this->user->setFullName($_POST['full_name']);
-            $this->user->setLastSeen($_POST['last_seen']);
-            $this->user->setDateFired($_POST['date_fired']);
-            $this->user->setDateHired($_POST['date_hired']);
-            $this->user->setWorkingStatus($_POST['working_status']);
-            $this->user->setTerminationReason($_POST['termination_reason']);
+            if (isset($_POST['position'], $_POST['first_name'], $_POST['full_name'], 
+            $_POST['last_seen'], $_POST['date_fired'], $_POST['date_hired'], 
+            $_POST['working_status'], $_POST['termination_reason'])) {
+                $this->user->setPosition($_POST['position']);
+                $this->user->setFirstName($_POST['first_name']);
+                $this->user->setFullName($_POST['full_name']);
+                $this->user->setLastSeen($_POST['last_seen']);
+                $this->user->setDateFired($_POST['date_fired']);
+                $this->user->setDateHired($_POST['date_hired']);
+                $this->user->setWorkingStatus($_POST['working_status']);
+                $this->user->setTerminationReason($_POST['termination_reason']);
+            }
 
             if (isset($_POST['enable2fa'])) {
                 $this->user->setEnabled2FA($_POST['enable2fa'] == 'true');

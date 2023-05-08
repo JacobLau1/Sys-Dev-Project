@@ -17,7 +17,7 @@ class DBConnectionManager{
         $this->username = "root";
         $this->password = "";
         $this->server = "localhost";
-        $this->dbname = "modavie";
+        $this->dbname = "moda";
 
         try{
 
