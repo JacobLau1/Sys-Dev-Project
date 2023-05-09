@@ -4,7 +4,7 @@
 
 <h1>User Login</h1>
 <form action="" method="post">
-    <label for="username">Username:</label><br>
+    <label for="username">username:</label><br>
     <input type="text" id="username" name="username"><br>
     <label for="password">Password:</label><br>
     <input type="password" id="password" name="password"><br><br>
@@ -21,22 +21,27 @@ class UserLogin
 
     function __construct($user)
     {
+
         $this->user = $user;
 
         if ($this->user->login()) {
             $this->user->getMembershipProvider()->login();
-            if ($this->user->getEnabled2FA()) {
-                header('Location: http://localhost/Sys-Dev-Project/index.php?resource=user&action=validatecode');
-            } else {
-                header('Location: http://localhost/Sys-Dev-Project/index.php?resource=user&action=menuselection');
+            if ($this->user->getMembershipProvider()->isLoggedIn()) {
+                if ($this->user->getEnabled2FA()) {
+                    header('Location: index.php?resource=user&action=validatecode');
+                    //   exit();
+                } else {
+                       header('Location: index.php?resource=user&action=menuselection');
+                    //   exit();
+                }
             }
-        } 
-        
-        else {
-            $this->userMessage = 'You were not able to login, check your username and passowrd and try again.';
+        } else {
+            $this->userMessage = 'You were not able to login, check your username and password and try again.';
             $this->render();
         }
-        
+
+
+
     }
 
     function render(){
@@ -44,6 +49,7 @@ class UserLogin
             echo $this->userMessage;
     }
 }
+
 ?>
 
 

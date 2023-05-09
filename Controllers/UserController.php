@@ -1,7 +1,7 @@
 <?php
 namespace controllers;
 
-require(dirname(__DIR__) . "/Models/User.php");
+require_once(dirname(__DIR__) . DIRECTORY_SEPARATOR . "Models" . DIRECTORY_SEPARATOR . "User.php");
 
 class UserController
 {
@@ -64,16 +64,17 @@ class UserController
     }
 
 private function handleLogin()
-{
-    if (isset($_POST['username'], $_POST['password'])) {
-        $this->user->setUsername($_POST['username']);
-        $this->user = $this->user->getUserByUsername($_POST['username'])[0];
-        $this->user->setPassword($_POST['password']);
+    {
+        echo "handleLogin called <br/>";
 
-        // Set the new properties from the POST data
-        if (isset($_POST['position'], $_POST['first_name'], $_POST['full_name'], 
-        $_POST['last_seen'], $_POST['date_fired'], $_POST['date_hired'], 
-        $_POST['working_status'], $_POST['termination_reason'], $_POST['enable2fa'])) {
+
+        if (isset($_POST['username'], $_POST['password'])) {
+            $this->user->setUsername($_POST['username']);
+            $this->user = $this->user->getUserByUsername($_POST['username'])[0];
+            $this->user->setPassword($_POST['password']);
+
+            // Set the new properties from the POST data
+            /*
             $this->user->setPosition($_POST['position']);
             $this->user->setFirstName($_POST['first_name']);
             $this->user->setFullName($_POST['full_name']);
@@ -82,34 +83,62 @@ private function handleLogin()
             $this->user->setDateHired($_POST['date_hired']);
             $this->user->setWorkingStatus($_POST['working_status']);
             $this->user->setTerminationReason($_POST['termination_reason']);
-            $this->user->setEnabled2FA($_POST['enable2fa'] == 'true');
+            */
+
+            if (isset($_POST['enable2fa'])) {
+                $this->user->setEnabled2FA($_POST['enable2fa'] == 'true');
+            }
+
+            $this->user->login();
+        }
+    }
+
+    private function handleCreate()
+    {
+        echo "handleCreate called <br/>";
+        echo "Username: " . $_POST['username'] . "<br/>";
+
+        if (isset($_COOKIE['userRegistration'])) {
+            $userRegistration = json_decode($_COOKIE['userRegistration'], true);
+            $this->user->setUsername($userRegistration['username']);
+            $this->user->setPassword($userRegistration['password']);
+            $this->user->setPosition($userRegistration['position']);
+            $this->user->setFirstName($userRegistration['first_name']);
+            $this->user->setlastName($userRegistration['last_name']);
+            $this->user->setDateHired($userRegistration['date_hired']);
+            $this->user->setWorkingStatus($userRegistration['working_status']);
+            $this->user->setEnabled2FA($userRegistration['enable2fa']);
+            $this->user->create();
+            //delete the cookie
+            setcookie('userRegistration', '', time() - 3600, '/');
+            echo "User created <br/>";
         }
 
-        $this->user->login();
-    }
-}
 
-private function handleCreate()
-{
-    if (isset($_POST['position'], $_POST['first_name'], $_POST['full_name'], $_POST['last_seen'], $_POST['date_fired'], $_POST['date_hired'], $_POST['working_status'], $_POST['termination_reason'], $_POST['username'], $_POST['password'])) {
-        $this->user->setPosition($_POST['position']);
-        $this->user->setFirstName($_POST['first_name']);
-        $this->user->setFullName($_POST['full_name']);
-        $this->user->setLastSeen($_POST['last_seen']);
-        $this->user->setDateFired($_POST['date_fired']);
-        $this->user->setDateHired($_POST['date_hired']);
-        $this->user->setWorkingStatus($_POST['working_status']);
-        $this->user->setTerminationReason($_POST['termination_reason']);
-        $this->user->setUsername($_POST['username']);
-        $this->user->setPassword($_POST['password']);
 
-        if (isset($_POST['enable2fa'])) {
-            $this->user->setEnabled2FA($_POST['enable2fa'] == 'true');
+
+
+        /*
+        // Use $_POST instead of reading raw data
+        if (isset($_POST['username'], $_POST['password'], $_POST['position'], $_POST['first_name'], $_POST['last_name'])) {
+            $this->user->setUsername($_POST['username']);
+            $this->user->setPassword($_POST['password']);
+            $this->user->setPosition($_POST['position']);
+            $this->user->setFirstName($_POST['first_name']);
+            $this->user->setlast_name($_POST['last_name']);
+            $this->user->setEnabled2FA(isset($_POST['enable2fa']) && $_POST['enable2fa'] == '1');
+
+            $this->user->create();
+            echo "User created <br/>";
         }
 
-        $this->user->create();
+        if (isset($_POST['username'])){
+            echo "username is set <br/>";
+        }
+        */
     }
-}
+
+
 
     private function handleSetUpTwoFA()
     {
@@ -173,6 +202,7 @@ private function handleCreate()
         $this->user->logout();
     }
 
+
 private function handleEdit()
 {
     if (isset($_POST['id'], $_POST['position'], $_POST['first_name'], $_POST['full_name'], $_POST['last_seen'], $_POST['date_fired'], $_POST['date_hired'], $_POST['working_status'], $_POST['termination_reason'], $_POST['username'])) {
@@ -222,6 +252,7 @@ private function handleEdit()
         $view->render($userModel);
     }
 }
+
 
 
     private function handleDelete()

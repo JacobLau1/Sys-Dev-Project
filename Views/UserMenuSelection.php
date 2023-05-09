@@ -36,7 +36,8 @@ Class UserMenuselection{
         }else{//user not logged in
             echo "not logged in";
             header('HTTP/1.1 401 Unauthorized');
-            header('Location: http://localhost/Sys-Dev-Projectt/index.php?resource=user&action=login');
+            header('Location: http://localhost/Sys-Dev-Project/index.php?resource=user&action=login');
+            exit();
 
         }
     }
