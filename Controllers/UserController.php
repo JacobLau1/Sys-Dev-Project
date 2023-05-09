@@ -110,7 +110,7 @@ private function handleLogin()
             $this->user->setEnabled2FA($userRegistration['enable2fa']);
             $this->user->create();
             //delete the cookie
-            setcookie('userRegistration', '', time() - 3600, '/');
+            setcookie('userRegistration', '', time() - 3600, DIRECTORY_SEPARATOR);
             echo "User created <br/>";
         }
 
