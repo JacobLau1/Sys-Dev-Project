@@ -11,13 +11,13 @@ class User
 
     private $id;
     private $position;
-    private $firstName;
-    private $lastName;
-    private $lastSeen;
-    private $dateFired;
-    private $dateHired;
-    private $workingStatus;
-    private $terminationReason;
+    private $first_name;
+    private $last_name;
+    private $last_seen;
+    private $date_fired;
+    private $date_hired;
+    private $working_status;
+    private $termination_reason;
     private $username;
     private $password;
     private $enabled2fa = false;
@@ -42,11 +42,21 @@ class User
 
     function create()
     {
-        $query = "INSERT INTO users (position, username, password, enabled2fa) VALUES(:position, :username, :password, :enabled2fa)";
+        $query = "INSERT INTO users (
+                        position, first_name, last_name, last_seen, date_fired, date_hired,
+                        working_status, termination_reason, username, password, enabled2fa) 
+                    VALUES (
+                        :position, :first_name, :last_name, :last_seen, :date_fired, :date_hired,
+                        :working_status, :termination_reason, :username, :password, :enabled2fa)";
         $statement = $this->dbConnection->prepare($query);
         $hashedPassword = password_hash($this->password, PASSWORD_DEFAULT);
 
-        return $statement->execute(['position' => $this->position, 'username' => $this->username, 'password' => $hashedPassword, 'enabled2fa' => $this->enabled2fa]);
+        return $statement->execute([
+            'position' => $this->position, 'first_name' => $this->first_name,
+            'last_name' => $this->last_name, 'last_seen' => $this->last_seen,
+            'date_fired' => $this->date_fired, 'date_hired' => $this->date_hired,
+            'working_status' => $this->working_status, 'termination_reason' => $this->termination_reason,
+            'username' => $this->username, 'password' => $hashedPassword, 'enabled2fa' => $this->enabled2fa]);
     }
 
     function login()
@@ -80,7 +90,7 @@ class User
         echo "Hash: " . $hash . "<br/>";
 
         ////// remove the = true later
-        return $verified = true;
+        return $verified;
 
     }
 
@@ -238,74 +248,74 @@ class User
 
     }
 
-    public function setFirstName($firstName)
+    public function setFirstName($first_name)
     {
-        $this->firstName = $firstName;
+        $this->first_name = $first_name;
     }
 
     public function getFirstName()
     {
-        return $this->firstName;
+        return $this->first_name;
     }
 
-    public function setLastName($lastName)
+    public function setLastName($last_name)
     {
-        $this->lastName = $lastName;
+        $this->last_name = $last_name;
     }
 
     public function getLastName()
     {
-        return $this->lastName;
+        return $this->last_name;
     }
 
     public function setLastSeen($lastSeen)
     {
-        $this->lastSeen = $lastSeen;
+        $this->last_seen = $lastSeen;
     }
 
     public function getLastSeen()
     {
-        return $this->lastSeen;
+        return $this->last_seen;
     }
 
     public function setDateFired($dateFired)
     {
-        $this->dateFired = $dateFired;
+        $this->date_fired = $dateFired;
     }
 
     public function getDateFired()
     {
-        return $this->dateFired;
+        return $this->date_fired;
     }
 
     public function setDateHired($dateHired)
     {
-        $this->dateHired = $dateHired;
+        $this->date_hired = $dateHired;
     }
 
     public function getDateHired()
     {
-        return $this->dateHired;
+        return $this->date_hired;
     }
 
     public function setWorkingStatus($workingStatus)
     {
-        $this->workingStatus = $workingStatus;
+        $this->working_status = $workingStatus;
     }
 
     public function getWorkingStatus()
     {
-        return $this->workingStatus;
+        return $this->working_status;
     }
 
     public function setTerminationReason($terminationReason)
     {
-        $this->terminationReason = $terminationReason;
+        $this->termination_reason = $terminationReason;
     }
 
     public function getTerminationReason()
     {
-        return $this->terminationReason;
+        return $this->termination_reason;
     }
 
     function getAll()
@@ -321,42 +331,44 @@ class User
 
     }
 
-    function update(){
+    function update()
+    {
 
-            $query = "UPDATE users SET position = :position, username = :username, password = :password, enabled2fa = :enabled2fa WHERE id = :id";
+        $query = "UPDATE users SET position = :position, username = :username, password = :password, enabled2fa = :enabled2fa WHERE id = :id";
 
-            $statement = $this->dbConnection->prepare($query);
+        $statement = $this->dbConnection->prepare($query);
 
-            $hashedPassword = password_hash($this->password, PASSWORD_DEFAULT);
+        $hashedPassword = password_hash($this->password, PASSWORD_DEFAULT);
 
-            return $statement->execute(['position' => $this->position, 'username' => $this->username, 'password' => $hashedPassword, 'enabled2fa' => $this->enabled2fa, 'id' => $this->id]);
+        return $statement->execute(['position' => $this->position, 'username' => $this->username, 'password' => $hashedPassword, 'enabled2fa' => $this->enabled2fa, 'id' => $this->id]);
 
     }
 
     public function getUserByID($id)
     {
 
-            $query = "SELECT * FROM users WHERE id = :id";
+        $query = "SELECT * FROM users WHERE id = :id";
 
-            $statement = $this->dbConnection->prepare($query);
+        $statement = $this->dbConnection->prepare($query);
 
-            $statement->execute(['id' => $id]);
+        $statement->execute(['id' => $id]);
 
-            return $statement->fetchAll(\PDO::FETCH_CLASS, User::class);
+        return $statement->fetchAll(\PDO::FETCH_CLASS, User::class);
 
     }
 
     public function delete($id)
     {
 
-            $query = "DELETE FROM users WHERE id = :id";
+        $query = "DELETE FROM users WHERE id = :id";
 
-            $statement = $this->dbConnection->prepare($query);
+        $statement = $this->dbConnection->prepare($query);
 
-            return $statement->execute(['id' => $id]);
+        return $statement->execute(['id' => $id]);
     }
 
-    public function serialize(){
+    public function serialize()
+    {
         return json_encode([
             'id' => $this->id,
             'position' => $this->position,

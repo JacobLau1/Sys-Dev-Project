@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <title>PHP Object Injection</title>
 </head>
@@ -16,8 +16,8 @@
     </select><br>
     <label for="first_name">First Name:</label><br>
     <input type="text" id="first_name" name="first_name"><br>
-    <label for="full_name">Full Name:</label><br>
-    <input type="text" id="full_name" name="full_name"><br>
+    <label for="last_name">Last Name:</label><br>
+    <input type="text" id="last_name" name="full_name"><br>
     <label for="username">Username:</label><br>
     <input type="text" id="username" name="username"><br>
     <label for="password">Password:</label><br>
@@ -26,8 +26,31 @@
     <input type="checkbox" id="enable2fa" name="enable2fa" value="1"><br><br>
     <input type="submit" value="Register">
 </form>
-<script src="Serialize.js"></script>
+<script src="SerializeRegistration.js"></script>
 <?php
+
+class UserCreate
+{
+
+    private $user;
+
+    function __construct($user)
+    {
+
+        $this->user = $user;
+
+        if ($this->user->getEnabled2FA()) {
+
+            if ($this->user->login()) {
+
+                $this->user->getMembershipProvider()->login();
+
+                header("location: http://localhost/Sys-Dev-Project/index.php?resource=user&action=setuptwofa");
+
+            }
+        }
+    }
+}
 
 ?>
 </body>

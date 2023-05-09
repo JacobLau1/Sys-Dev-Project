@@ -21,21 +21,25 @@ class UserLogin
 
     function __construct($user)
     {
+
         $this->user = $user;
 
         if ($this->user->login()) {
             $this->user->getMembershipProvider()->login();
-            if ($this->user->getEnabled2FA()) {
-                header('Location: index.php?resource=user&action=validatecode');
-             //   exit();
-            } else {
-                header('Location: index.php?resource=user&action=menuselection');
-             //   exit();
+            if ($this->user->getMembershipProvider()->isLoggedIn()) {
+                if ($this->user->getEnabled2FA()) {
+                    header('Location: index.php?resource=user&action=validatecode');
+                    //   exit();
+                } else {
+                       header('Location: index.php?resource=user&action=menuselection');
+                    //   exit();
+                }
             }
         } else {
             $this->userMessage = 'You were not able to login, check your username and password and try again.';
             $this->render();
         }
+
 
 
     }

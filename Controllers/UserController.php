@@ -63,23 +63,6 @@ class UserController
         $view = new $viewClass($this->user);
     }
 
-    /*
-    private function handleLogin()
-    {
-        if (isset($_POST['username'], $_POST['password'])) {
-            $this->user->setUsername($_POST['username']);
-            $this->user = $this->user->getUserByUsername($_POST['username'])[0];
-            $this->user->setPassword($_POST['password']);
-
-            if (isset($_POST['enable2fa'])) {
-                $this->user->setEnabled2FA($_POST['enable2fa'] == 'true');
-            }
-
-            $this->user->login();
-        }
-    }
-    */
-
 
     private function handleLogin()
     {
@@ -113,18 +96,50 @@ class UserController
 
     private function handleCreate()
     {
-        if (isset($_POST['position'], $_POST['username'], $_POST['password'])) {
-            $this->user->setPosition($_POST['position']);
+        echo "handleCreate called <br/>";
+        echo "Username: " . $_POST['username'] . "<br/>";
+
+        if (isset($_COOKIE['userRegistration'])) {
+            $userRegistration = json_decode($_COOKIE['userRegistration'], true);
+            $this->user->setUsername($userRegistration['username']);
+            $this->user->setPassword($userRegistration['password']);
+            $this->user->setPosition($userRegistration['position']);
+            $this->user->setFirstName($userRegistration['first_name']);
+            $this->user->setlastName($userRegistration['last_name']);
+            $this->user->setDateHired($userRegistration['date_hired']);
+            $this->user->setWorkingStatus($userRegistration['working_status']);
+            $this->user->setEnabled2FA($userRegistration['enable2fa']);
+            $this->user->create();
+            //delete the cookie
+            setcookie('userRegistration', '', time() - 3600, '/');
+            echo "User created <br/>";
+        }
+
+
+
+
+
+        /*
+        // Use $_POST instead of reading raw data
+        if (isset($_POST['username'], $_POST['password'], $_POST['position'], $_POST['first_name'], $_POST['last_name'])) {
             $this->user->setUsername($_POST['username']);
             $this->user->setPassword($_POST['password']);
-
-            if (isset($_POST['enable2fa'])) {
-                $this->user->setEnabled2FA($_POST['enable2fa'] == 'true');
-            }
+            $this->user->setPosition($_POST['position']);
+            $this->user->setFirstName($_POST['first_name']);
+            $this->user->setlast_name($_POST['last_name']);
+            $this->user->setEnabled2FA(isset($_POST['enable2fa']) && $_POST['enable2fa'] == '1');
 
             $this->user->create();
+            echo "User created <br/>";
         }
+
+        if (isset($_POST['username'])){
+            echo "username is set <br/>";
+        }
+        */
     }
+
+
 
     private function handleSetUpTwoFA()
     {

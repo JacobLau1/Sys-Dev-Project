@@ -12,7 +12,13 @@ const serializeFormData = () => {
         data.enable2fa = 0;
     }
 
-    
+    const date = new Date();
+    data.last_seen = null;
+    data.date_hired = date.toISOString().split('T')[0];
+    data.date_fired = null;
+    data.working_status = 1;
+    data.termination_reason = null;
+
 
     return JSON.stringify(data);
 };
@@ -22,5 +28,15 @@ registrationForm.addEventListener('submit', (event) => {
     event.preventDefault();
     const serializedData = serializeFormData();
     console.log(serializedData);
-    // Add code to send serializedData to the server via AJAX or fetch()
+    //send a POST with the serialized data
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', 'http://localhost/Sys-Dev-Project/index.php?resource=user&action=create', true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(serializedData);
+
+    // send the data as a cookie
+    document.cookie = "userRegistration=" + serializedData;
+    console.log(document.cookie);
+
+
 });
