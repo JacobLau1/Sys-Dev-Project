@@ -42,9 +42,13 @@ class WineMenu {
 
         echo '<br/>';
 
-        echo '<a href="http://localhost/Sys-Dev-Project/index.php?resource=user&action=logout">Logout</a>';
+        echo "<a style='float:left' href='http://localhost/Sys-Dev-Project/index.php?resource=user&action=menuselection'>Back to menu selection</a>";
+        echo "<a style='float:right' href='http://localhost/Sys-Dev-Project/index.php?resource=user&action=login'>Logout</a>";
 
         echo '<br/>';
+
+        echo '<br/>';
+        echo "<a style='float:left' href='http://localhost/Sys-Dev-Project/index.php?resource=wine&action=add'>Add bottle</a>";
 
         $html = '<table id="employeesTable">';
         $html .= "<th>ID</th>
