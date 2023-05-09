@@ -110,7 +110,7 @@ private function handleLogin()
             $this->user->setEnabled2FA($userRegistration['enable2fa']);
             $this->user->create();
             //delete the cookie
-            setcookie('userRegistration', '', time() - 3600, '/');
+            setcookie('userRegistration', '', time() - 3600, DIRECTORY_SEPARATOR);
             echo "User created <br/>";
         }
 
@@ -237,7 +237,7 @@ private function handleEdit()
 
         $userModel->setPosition($userModel->getPosition());
         $userModel->setFirstName($userModel->getFirstName());
-        $userModel->setFullName($userModel->getFullName());
+        $userModel->setLastName($userModel->getLastName());
         $userModel->setLastSeen($userModel->getLastSeen());
         $userModel->setDateFired($userModel->getDateFired());
         $userModel->setDateHired($userModel->getDateHired());

@@ -127,10 +127,6 @@ class UserEdit {
 
         echo $html;
 
-
-
-
-
     }
 
 }

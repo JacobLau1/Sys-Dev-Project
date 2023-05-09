@@ -23,9 +23,6 @@ Class UserManagement{
                 $html .= "<a href='http://localhost/Sys-Dev-Project/index.php?resource=user&action=list'>Display</a>";
                 $html .= "</br>";
                 $html .= "<a href='http://localhost/Sys-Dev-Project/index.php?resource=user&action=create'>Add</a>";
-                $html .= "</br>";
-                $html .= "<a href='http://localhost/Sys-Dev-Project/index.php?resource=user&action=edit'>Edit</a>";
-                $html .= "</br>";
                 //  $html .= "<a href='http://localhost/Sys-Dev-Project/index.php?resource=user&action=delete'>Delete</a>";
             }
 
