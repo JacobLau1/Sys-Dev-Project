@@ -237,7 +237,7 @@ private function handleEdit()
 
         $userModel->setPosition($userModel->getPosition());
         $userModel->setFirstName($userModel->getFirstName());
-        $userModel->setFullName($userModel->getFullName());
+        $userModel->setLastName($userModel->getLastName());
         $userModel->setLastSeen($userModel->getLastSeen());
         $userModel->setDateFired($userModel->getDateFired());
         $userModel->setDateHired($userModel->getDateHired());
