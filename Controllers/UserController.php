@@ -65,7 +65,7 @@ class UserController
 
 private function handleLogin()
     {
-        echo "handleLogin called <br/>";
+       // echo "handleLogin called <br/>";
 
 
         if (isset($_POST['username'], $_POST['password'])) {
@@ -95,8 +95,8 @@ private function handleLogin()
 
     private function handleCreate()
     {
-        echo "handleCreate called <br/>";
-        echo "Username: " . $_POST['username'] . "<br/>";
+        //echo "handleCreate called <br/>";
+        //echo "Username: " . $_POST['username'] . "<br/>";
 
         if (isset($_COOKIE['userRegistration'])) {
             $userRegistration = json_decode($_COOKIE['userRegistration'], true);
@@ -111,7 +111,7 @@ private function handleLogin()
             $this->user->create();
             //delete the cookie
             setcookie('userRegistration', '', time() - 3600, DIRECTORY_SEPARATOR);
-            echo "User created <br/>";
+           // echo "User created <br/>";
         }
 
 
