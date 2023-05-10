@@ -20,8 +20,10 @@ spl_autoload_register(function ($class) {
 spl_autoload_register(function ($class) {
     if ($class === 'WineMenu') {
         require_once 'Views' . DIRECTORY_SEPARATOR . 'WineMenu.php';
-    } else if ($class === 'WineDisplay') {
-        require_once 'Views' . DIRECTORY_SEPARATOR . 'WineDisplay.php';
+    } else if ($class === 'BeerMenu') {
+        require_once 'Views' . DIRECTORY_SEPARATOR . 'BeerMenu.php';
+    }else if ($class === 'SpiritMenu') {
+        require_once 'Views' . DIRECTORY_SEPARATOR . 'SpiritMenu.php';
     } else {
         $class_file = str_replace('\\', DIRECTORY_SEPARATOR, $class) . '.php';
         require_once $class_file;
