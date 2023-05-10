@@ -2,9 +2,10 @@
 
 namespace models;
 
-require_once(dirname(__DIR__) . "/core/DBConnectionManager.php");
+require_once(dirname(__DIR__) . DIRECTORY_SEPARATOR . "core" . DIRECTORY_SEPARATOR . "DBConnectionManager.php");
 
-require(dirname(__DIR__) . "/core/membershipprovider.php");
+require(dirname(__DIR__) . DIRECTORY_SEPARATOR . "core" . DIRECTORY_SEPARATOR . "membershipprovider.php");
+
 
 class User
 {
