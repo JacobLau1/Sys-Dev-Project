@@ -3,6 +3,44 @@
 <html>
 <head>
     <style>
+
+        body {
+            background-color: #18332B;
+            display: flex;
+            flex-direction: column;
+            width: 100vw;
+            height: 100vh;
+            margin: 0;
+        }
+
+        a {
+            color: white;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: #eeeeee;
+            text-decoration: underline;
+        }
+
+        section {
+            background-color: #eeeeee;
+
+            /* Centers the section */
+            margin: auto;
+            /* Centers the contents */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+        }
+
+        h1 {
+            text-align: center;
+            color: #eeeeee;
+        }
+
         #employeesTable {
             font-family: Arial, Helvetica, sans-serif;
             border-collapse: collapse;
@@ -14,9 +52,13 @@
             padding: 8px;
         }
 
-        #employeesTable tr:nth-child(even){background-color: #f2f2f2;}
+        #employeesTable tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
 
-        #employeesTable tr:hover {background-color: #ddd;}
+        #employeesTable tr:hover {
+            background-color: #ddd;
+        }
 
         #employeesTable th {
             padding-top: 12px;
@@ -49,7 +91,8 @@ class WineEdit {
             return;
         }
 
-        $html = '<table id="employeesTable">';
+        $html = '<section>';
+        $html .= '<table id="employeesTable">';
         $html .= "<th>ID</th>
             <th>Type</th>
             <th>Name</th>
@@ -85,6 +128,9 @@ class WineEdit {
         $html .= '<form action="http://localhost/Sys-Dev-Project/index.php?resource=wine&action=delete" method="post">';
         $html .= '<input type="hidden" id="id" name="id" value="'.$wine['id'].'"><br>';
         $html .= '<input type="submit" value="Delete Wine">';
+        $html .= '</form>';
+
+        $html .= '</section>';
 
 
         echo $html;

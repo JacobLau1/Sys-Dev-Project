@@ -1,7 +1,39 @@
-<?php namespace views;?>
+<?php namespace views; ?>
 <html>
 <head>
     <style>
+
+        body {
+            background-color: #18332B;
+            display: flex;
+            flex-direction: column;
+            width: 100vw;
+            height: 100vh;
+            margin: 0;
+        }
+
+        a {
+            color: white;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: #eeeeee;
+            text-decoration: underline;
+        }
+
+        section {
+            background-color: #eeeeee;
+
+            /* Centers the section */
+            margin: auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #eeeeee;
+        }
+
         #employeesTable {
             font-family: Arial, Helvetica, sans-serif;
             border-collapse: collapse;
@@ -13,9 +45,13 @@
             padding: 8px;
         }
 
-        #employeesTable tr:nth-child(even){background-color: #f2f2f2;}
+        #employeesTable tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
 
-        #employeesTable tr:hover {background-color: #ddd;}
+        #employeesTable tr:hover {
+            background-color: #ddd;
+        }
 
         #employeesTable th {
             padding-top: 12px;
@@ -29,19 +65,22 @@
 <body>
 <?php
 
-class UserList{
+class UserList
+{
 
     private $user;
 
     private $welcomeMessage;
 
-    public function __construct($user){
+    public function __construct($user)
+    {
 
         $this->user = $user;
 
     }
 
-    public function render($users) {
+    public function render($users)
+    {
 
         echo '<br/>';
 
@@ -49,36 +88,40 @@ class UserList{
 
         echo '<br/>';
 
-    //     $html = '<table id="employeesTable">';
-    //     $html .= "<th>ID</th>
-    //           <th>Position</th>
-    //           <th>Username</th>
-    //           <th>2FA Enabled</th>
-    //           <th>Edit</th>
-    //   ";
+        echo '<h1>Employee List</h1>';
 
-    //     // Loop and fill the table with data from the database
-    //     foreach ($users as $user) {
-    //         $html .=  "<tr>
-    //         <td>".$user['id']."</td>
-    //         <td>".$user['position']."</td>
-    //         <td>".$user['username']."</td>
-    //         <td>".$user['enabled2fa']."</td>
-    //         <td><a href='http://localhost/Sys-Dev-Project/index.php?resource=user&action=edit&id=".$user['id']."'>Edit</a></td>
-    //     </tr>";
-    //     }
+        //     $html = '<table id="employeesTable">';
+        //     $html .= "<th>ID</th>
+        //           <th>Position</th>
+        //           <th>Username</th>
+        //           <th>2FA Enabled</th>
+        //           <th>Edit</th>
+        //   ";
 
-    //     $html .= "</table>";
+        //     // Loop and fill the table with data from the database
+        //     foreach ($users as $user) {
+        //         $html .=  "<tr>
+        //         <td>".$user['id']."</td>
+        //         <td>".$user['position']."</td>
+        //         <td>".$user['username']."</td>
+        //         <td>".$user['enabled2fa']."</td>
+        //         <td><a href='http://localhost/Sys-Dev-Project/index.php?resource=user&action=edit&id=".$user['id']."'>Edit</a></td>
+        //     </tr>";
+        //     }
 
-    //     echo $html;
+        //     $html .= "</table>";
 
-    $html = '<table id="employeesTable">';
-    $html .= "<th>ID</th>
+        //     echo $html;
+
+        $html = '';
+        $html .= '<section>';
+        $html .= '<table id="employeesTable">';
+        $html .= "<th>ID</th>
             <th>Position</th>
             <th>Username</th>
             <th>2FA Enabled</th>
             <th>First Name</th>
-            <th>Full Name</th>
+            <th>Last Name</th>
             <th>Last Seen</th>
             <th>Date Hired</th>
             <th>Working Status</th>
@@ -87,32 +130,33 @@ class UserList{
             <th>Edit</th>";
 
 // Loop and fill the table with data from the database
-foreach ($users as $user) {
-    $html .=  "<tr>
-        <td>".$user['id']."</td>
-        <td>".$user['position']."</td>
-        <td>".$user['username']."</td>
-        <td>".$user['enabled2fa']."</td>
-        <td>".$user['first_name']."</td>
-        <td>".$user['full_name']."</td>
-        <td>".$user['last_seen']."</td>
-        <td>".$user['date_hired']."</td>
-        <td>".$user['working_status']."</td>
-        <td>".$user['date_fired']."</td>
-        <td>".$user['termination_reason']."</td>
-        <td><a href='http://localhost/Sys-Dev-Project/index.php?resource=user&action=edit&id=".$user['id']."'>Edit</a></td>
+
+        foreach ($users as $user) {
+            $html .= "<tr>
+        <td>" . $user['id'] . "</td>
+        <td>" . $user['position'] . "</td>
+        <td>" . $user['username'] . "</td>
+        <td>" . $user['enabled2fa'] . "</td>
+        <td>" . $user['first_name'] . "</td>
+        <td>" . $user['last_name'] . "</td>
+        <td>" . $user['last_seen'] . "</td>
+        <td>" . $user['date_hired'] . "</td>
+        <td>" . $user['working_status'] . "</td>
+        <td>" . $user['date_fired'] . "</td>
+        <td>" . $user['termination_reason'] . "</td>
+        <td><a href='http://localhost/Sys-Dev-Project/index.php?resource=user&action=edit&id=" . $user['id'] . "'>Edit</a></td>
     </tr>";
-}
+        }
 
-$html .= "</table>";
+        $html .= "</table>";
+        $html .= '</section>';
 
-echo $html;
+        echo $html;
 
     }
 
 
 }
-
 
 
 ?>
