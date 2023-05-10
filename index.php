@@ -22,6 +22,14 @@ spl_autoload_register(function ($class) {
         require_once 'Views' . DIRECTORY_SEPARATOR . 'WineMenu.php';
     } else if ($class === 'WineDisplay') {
         require_once 'Views' . DIRECTORY_SEPARATOR . 'WineDisplay.php';
+    }else if ($class === 'BeerMenu') {
+        require_once 'Views' . DIRECTORY_SEPARATOR . 'BeerMenu.php';
+    }else if ($class === 'BeerDisplay') {
+        require_once 'Views' . DIRECTORY_SEPARATOR . 'BeerDisplay.php';
+    }else if ($class === 'SpiritMenu') {
+        require_once 'Views' . DIRECTORY_SEPARATOR . 'SpiritMenu.php';
+    }else if ($class === 'SpiritDisplay') {
+        require_once 'Views' . DIRECTORY_SEPARATOR . 'SpiritDisplay.php';
     } else {
         $class_file = str_replace('\\', DIRECTORY_SEPARATOR, $class) . '.php';
         require_once $class_file;
