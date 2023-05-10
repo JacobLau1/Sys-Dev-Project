@@ -84,8 +84,8 @@ class UserList
 
         echo '<br/>';
 
-        echo '<a href="http://localhost/Sys-Dev-Project/index.php?resource=user&action=logout">Logout</a>';
-
+        echo '<a href="http://localhost/Sys-Dev-Project/index.php?resource=user&action=login">Logout</a>';
+        echo "<a style='float:left' href='http://localhost/Sys-Dev-Project/index.php?resource=user&action=management'>Back to user management</a>";
         echo '<br/>';
 
         echo '<h1>Employee List</h1>';
