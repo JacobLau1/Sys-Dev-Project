@@ -96,16 +96,19 @@ class BeerMenu {
 
         echo '<br/>';
 
-        echo "<a style='float:left' href='http://localhost/Sys-Dev-Project/index.php?resource=user&action=menuselection'>Back to menu selection</a>";
+        echo '<header>';
         echo "<a style='float:right' href='http://localhost/Sys-Dev-Project/index.php?resource=user&action=login'>Logout</a>";
+        echo "<a style='float:left' href='http://localhost/Sys-Dev-Project/index.php?resource=user&action=menuselection'>Back to menu selection</a>";
 
         echo '<br/>';
 
         echo '<br/>';
         echo "<a style='float:left' href='http://localhost/Sys-Dev-Project/index.php?resource=beer&action=add'>Add bottle</a>";
 
-        echo '<section>';
-        $html = '<table id="employeesTable">';
+        echo '</header>';
+        $html = '<h1>Beer Menu</h1>';
+        $html .= '<section>';
+        $html .= '<table id="employeesTable">';
         $html .= "<th>ID</th>
             <th>Type</th>
             <th>Name</th>
@@ -127,7 +130,6 @@ class BeerMenu {
         }
 
         $html .= "</table>";
-
         $html .= '</section>';
 
         echo $html;
