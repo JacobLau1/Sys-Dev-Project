@@ -126,7 +126,7 @@ class Beer{
 
     public function delete($id)
     {
-        $query = "DELETE FROM beer WHERE ID = :id";
+        $query = "delete from beer where ID = :id";
         $statement = $this->dbConnection->prepare($query);
         $statement->bindParam(":id", $id);
         try {
@@ -136,12 +136,15 @@ class Beer{
             echo "Delete failed: " . $e->getMessage();
             return false;
         }
-    
+
         // Print the executed SQL query
         echo "Executed query: " . $query . "<br/>";
         echo "With parameters: id={$id}<br/>";
-    
+
         return $success;
     }
-    
+
+
 }
+
+?>
