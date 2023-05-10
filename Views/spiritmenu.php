@@ -6,6 +6,6 @@
         <a style='float:left' href='http://localhost/Sys-Dev-Project/index.php?resource=user&action=menuselection'>Back to menu selection</a>
         <br>
         <h2>Spirits Page</h2>
-        <a href="http://localhost/modavie/index.php?resource=user&action=spiritsdisplay">Display</a>
-        <a href="http://localhost/modavie/index.php?resource=user&action=spiritsedit">Edit</a>
+        <a href="http://localhost/modavie/index.php?resource=spirit&action=display">Display</a>
+        <a href="http://localhost/modavie/index.php?resource=spirit&action=edit">Edit</a>
 </html>
