@@ -1,5 +1,76 @@
 <?php namespace views;?>
 <html>
+<head>
+    <style>
+body, a, h1, #employeesTable td, #employeesTable th {
+    color: white;
+}
+
+        body {
+            background-color: #18332B;
+            display: flex;
+            flex-direction: column;
+            width: 100vw;
+            height: 100vh;
+            margin: 0;
+        }
+
+        a {
+            color: white;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: #eeeeee;
+            text-decoration: underline;
+        }
+
+        section {
+            background-color: #eeeeee;
+
+            /* Centers the section */
+            margin: auto;
+            /* Centers the contents */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+        }
+
+        h1 {
+            text-align: center;
+            color: #eeeeee;
+        }
+
+        #employeesTable {
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        #employeesTable td, #employeesTable th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        #employeesTable tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        #employeesTable tr:hover {
+            background-color: #ddd;
+        }
+
+        #employeesTable th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #04AA6D;
+            color: white;
+        }
+    </style>
+</head>
 <body>
 
 <!--
@@ -20,6 +91,9 @@
     <input type="submit" value="Register">
 </form>
 -->
+
+<a style='float:left' href='http://localhost/Sys-Dev-Project/index.php?resource=user&action=login'>Logout</a>
+<a style='float:right' href='http://localhost/Sys-Dev-Project/index.php?resource=user&action=management'>Back to user management</a>
 
 <h2>User Registration</h2>
 <form id="registration-form" action="" method="POST">

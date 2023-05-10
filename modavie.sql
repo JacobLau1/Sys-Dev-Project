@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 10, 2023 at 07:20 AM
+-- Generation Time: May 10, 2023 at 07:31 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 7.4.33
 
@@ -34,6 +34,13 @@ CREATE TABLE `beer` (
   `format` varchar(50) NOT NULL,
   `price` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `beer`
+--
+
+INSERT INTO `beer` (`id`, `type`, `name`, `format`, `price`) VALUES
+(2, 'beer1', 'beer1', 'beer1', 123);
 
 -- --------------------------------------------------------
 
@@ -125,6 +132,13 @@ CREATE TABLE `spirit` (
   `format` varchar(50) NOT NULL,
   `price` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `spirit`
+--
+
+INSERT INTO `spirit` (`id`, `type`, `name`, `format`, `price`) VALUES
+(1, 'spirit1', 'spirit1', 'spirit1', 123);
 
 -- --------------------------------------------------------
 
@@ -243,7 +257,7 @@ ALTER TABLE `wine`
 -- AUTO_INCREMENT for table `beer`
 --
 ALTER TABLE `beer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `drinks`
@@ -273,7 +287,7 @@ ALTER TABLE `location`
 -- AUTO_INCREMENT for table `spirit`
 --
 ALTER TABLE `spirit`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `users`
