@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: May 04, 2023 at 05:28 AM
--- Server version: 10.4.27-MariaDB
--- PHP Version: 7.4.33
+-- Host: localhost
+-- Generation Time: May 10, 2023 at 05:39 AM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `moda`
+-- Database: `modavie`
 --
 
 -- --------------------------------------------------------
@@ -108,14 +108,14 @@ CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `position` varchar(50) NOT NULL,
   `first_name` varchar(50) NOT NULL,
-  `full_name` varchar(50) NOT NULL,
+  `last_name` varchar(50) NOT NULL,
   `last_seen` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `date_fired` date DEFAULT NULL,
   `date_hired` date NOT NULL DEFAULT '2000-01-01',
   `working_status` int(11) NOT NULL,
   `termination_reason` varchar(255) DEFAULT NULL,
   `username` varchar(50) NOT NULL,
-  `password` varchar(50) NOT NULL,
+  `password` varchar(255) NOT NULL,
   `enabled2fa` tinyint(1) DEFAULT NULL,
   `otpsecretkey` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -124,12 +124,16 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `position`, `first_name`, `full_name`, `last_seen`, `date_fired`, `date_hired`, `working_status`, `termination_reason`, `username`, `password`, `enabled2fa`, `otpsecretkey`) VALUES
+INSERT INTO `users` (`id`, `position`, `first_name`, `last_name`, `last_seen`, `date_fired`, `date_hired`, `working_status`, `termination_reason`, `username`, `password`, `enabled2fa`, `otpsecretkey`) VALUES
 (9, 'waiter', 'bob', 'bobby', '2023-04-28 23:30:51', NULL, '2000-01-01', 0, NULL, 'user1', '$2y$10$g7ZcTre1VvkSIciiXPyIKukrWdhhHxFvR/VABp1dY5S', 1, '6OYAJXM2ULNATRIK'),
 (10, 'admin', 'rob', 'robby', '2023-04-28 23:31:01', NULL, '2000-01-01', 0, NULL, 'user2', '$2y$10$XvlFkPkmXG7wUZw/bMXAVOFT2aT0T7UM.TWVfRs50me', 0, NULL),
 (11, 'admin', 'sob', 'sobby', '2023-04-28 23:31:11', NULL, '2000-01-01', 0, NULL, 'bob', '$2y$10$hnXAYRar1TENHlkJngdKou8zLFJuPLpAelgkXDkfcHD', 1, 'GXT5BOHUGJKMCECJ'),
 (12, 'admin', 'dob', 'dobby', '2023-04-28 23:31:23', NULL, '2000-01-01', 0, NULL, 'user3', '$2y$10$mqPscVoqS0Lx4rPO8Yt6nOpGi.U/TQ1ZVeHXgLozFbi', 0, NULL),
-(13, 'waiter', 'walt', 'walter', '2023-04-28 23:31:38', NULL, '2000-01-01', 0, NULL, 'waiter', '$2y$10$IrJ8IiPDTEuSP/oQ6Miz..dQalUPolvMIXr7QxgGfvw', 0, NULL);
+(13, 'waiter', 'walt', 'walter', '2023-04-28 23:31:38', NULL, '2000-01-01', 0, NULL, 'waiter', '$2y$10$IrJ8IiPDTEuSP/oQ6Miz..dQalUPolvMIXr7QxgGfvw', 0, NULL),
+(16, 'admin', 'Bob', 'Ross', '2023-05-09 23:13:15', NULL, '2023-05-09', 1, NULL, 'ross', '$2y$10$9P7y4P2qRVLk5BVMzwv6leHhP0rNhGHO9lDE.XKsKJFoTCNB6wmNu', 0, NULL),
+(17, 'admin', 'Bob', 'Ross', '2023-05-09 23:13:30', NULL, '2023-05-09', 1, NULL, 'ross', '$2y$10$WCtnnKiejULHyyU5laK0iuQRo5Rv2Ia5BYmwg2ydUN3.fusaoSScu', 0, NULL),
+(18, 'admin', 'Bob', 'Ross', '2023-05-09 23:14:20', NULL, '2023-05-09', 1, NULL, 'ross', '$2y$10$GeC9s.AKxfisBEfPfMikleSZaPyF.OfzrB3swN.17zpbPkc7YHFLy', 0, NULL),
+(19, 'admin', 'Bob', 'Ross', '2023-05-10 02:58:30', NULL, '2023-05-09', 1, NULL, 'ross', '$2y$10$p9m78Tjbv5DlqNLTOWCijOQJSVd76ZITA.CuUS16TS/Qd2xYWwXKy', 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -150,8 +154,8 @@ CREATE TABLE `wine` (
 --
 
 INSERT INTO `wine` (`id`, `type`, `name`, `format`, `price`) VALUES
-(1, 'winetype', 'winename', 'wineformat', 9090),
-(3, 'fine', 'bird', '22ml', 2147483647);
+(3, 'fine', 'bird', '22ml', 2147483647),
+(6, 'bour', 'bee', '12', 1);
 
 --
 -- Indexes for dumped tables
@@ -231,13 +235,13 @@ ALTER TABLE `location`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `wine`
 --
 ALTER TABLE `wine`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
