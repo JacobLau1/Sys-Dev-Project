@@ -4,7 +4,7 @@ namespace models;
 
 require_once(dirname(__DIR__) . DIRECTORY_SEPARATOR . "Core" . DIRECTORY_SEPARATOR . "DBConnectionManager.php");
 
-require(dirname(__DIR__) . DIRECTORY_SEPARATOR . "Core" . DIRECTORY_SEPARATOR . "membershipprovider.php");
+require(dirname(__DIR__) . DIRECTORY_SEPARATOR . "Core" . DIRECTORY_SEPARATOR . "MembershipProvider.php");
 
 
 class User
