@@ -2,9 +2,10 @@
 
 <html>
 <head>
-    <link rel="stylesheet" href="./Styles/Menu.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-teal.css">
 </head>
-<body>
+<body class="w3-theme-d5">
 <?php
 
 class BeerEdit {
@@ -16,24 +17,34 @@ class BeerEdit {
     }
 
     public function render($beer = null) {
-        echo '<br/>';
-        echo "<a style='float:left' href='http://localhost/Sys-Dev-Project/index.php?resource=beer&action=menu'>Back to beer</a>";
-        echo "<a style='float:right' href='http://localhost/Sys-Dev-Project/index.php?resource=user&action=login'>Logout</a>";
-        echo '<br/>';
+        /* Nav Bar */
+        echo '<nav>';
+        echo '<div class="w3-bar w3-theme-d4 w3-top w3-left-align w3-large">';
+        echo '<a href="" class="w3-bar-item w3-button w3-theme-d3">Modavie</a>';
+        echo '<a href="http://localhost/Sys-Dev-Project/index.php?resource=beer&action=menu" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Back to menu</a>';
+        echo '</div>';
+        echo '</nav>';
+
 
         if ($beer === null) {
             echo 'No beer to display.';
             return;
         }
 
-        $html = '<section>';
-        $html .= '<table id="employeesTable">';
-        $html .= "<th>ID</th>
+        /* Table */
+        $html = '';
+        $html .= '<div class="w3-container w3-center" style="padding: 4rem" id="main">';
+        $html .= '<h1 class="center white-text">Wine Menu</h1>';
+        $html .= '<section class="w3-card w3-white">';
+        $html .= '<table id="employeesTable" class="w3-table w3-striped w3-hoverable w3-text-black">';
+        $html .= '<tr class="w3-theme-d3">';
+        $html .= '<th class="">ID</th>
             <th>Type</th>
             <th>Name</th>
             <th>Format</th>
             <th>Price</th>
-            ";
+            ';
+        $html .= '</tr>';
 
         $html .=  "<tr>
             <td>".$beer['id']."</td>
@@ -64,6 +75,7 @@ class BeerEdit {
         $html .= '<input type="hidden" id="id" name="id" value="'.$beer['id'].'"><br>';
         $html .= '<input type="submit" value="Delete Beer">';
         $html .= '</form>';
+
 
         $html .= '</section>';
 

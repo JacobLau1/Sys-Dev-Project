@@ -2,9 +2,10 @@
 
 <html>
 <head>
-    <link rel="stylesheet" href="./Styles/Menu.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-teal.css">
 </head>
-<body>
+<body class="w3-theme-d5">
 <?php
 
 class SpiritMenu {
@@ -17,16 +18,15 @@ class SpiritMenu {
 
     public function render($spirits) {
 
-        echo '<br/>';
+        /* Nav Bar */
+        echo '<nav>';
+        echo '<div class="w3-bar w3-theme-d4 w3-top w3-left-align w3-large">';
+        echo '<a href="" class="w3-bar-item w3-button w3-theme-d3">Modavie</a>';
+        echo '<a href="http://localhost/Sys-Dev-Project/index.php?resource=user&action=menuselection" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Back to menu selection</a>';
+        echo '<a href="http://localhost/Sys-Dev-Project/index.php?resource=spirit&action=add" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Add bottle</a>';
+        echo '</div>';
+        echo '</nav>';
 
-        echo '<header>';
-        echo "<a style='float:right' href='http://localhost/Sys-Dev-Project/index.php?resource=user&action=login'>Logout</a>";
-        echo "<a style='float:left' href='http://localhost/Sys-Dev-Project/index.php?resource=user&action=menuselection'>Back to menu selection</a>";
-
-        echo '<br/>';
-
-        echo '<br/>';
-        echo "<a style='float:left' href='http://localhost/Sys-Dev-Project/index.php?resource=spirit&action=add'>Add bottle</a>";
 
         echo '</header>';
         $html = '<h1>Spirit Menu</h1>';

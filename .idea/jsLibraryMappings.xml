@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="JavaScriptLibraryMappings">
+    <file url="PROJECT" libraries="{99c47d5f92, jquery-3.2.1, materialize, w3, w3-theme-teal}" />
+  </component>
+</project>
