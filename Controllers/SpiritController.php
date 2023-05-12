@@ -2,7 +2,7 @@
 
 namespace controllers;
 
-require(dirname(__DIR__)."/Models/Spirit.php");
+require(dirname(__DIR__) . DIRECTORY_SEPARATOR. "Models" . DIRECTORY_SEPARATOR . "Spirit.php");
 
 
 class SpiritController{

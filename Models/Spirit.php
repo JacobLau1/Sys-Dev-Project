@@ -1,11 +1,11 @@
 <?php
 namespace models;
 
-require_once(dirname(__DIR__)."/core/dbconnectionmanager.php");
+require_once(dirname(__DIR__). DIRECTORY_SEPARATOR . "Core" . DIRECTORY_SEPARATOR . "DBConnectionManager.php");
 
-require(dirname(__DIR__)."/core/membershipprovider.php");
+require(dirname(__DIR__). DIRECTORY_SEPARATOR . "Core" . DIRECTORY_SEPARATOR . "MembershipProvider.php");
 
-class Beer{
+class Spirit{
 
     private $id;
     private $type;
@@ -29,7 +29,7 @@ class Beer{
 
     function create(){
 
-        $query = "INSERT INTO beer (type, name, format, price) VALUES(:type, :name, :format, :price)";
+        $query = "INSERT INTO spirit (type, name, format, price) VALUES(:type, :name, :format, :price)";
 
         $statement = $this->dbConnection->prepare($query);
 
@@ -37,8 +37,8 @@ class Beer{
 
     }
 
-    function getBeerByID($id){
-        $query = "select * from beer where ID = :id";
+    function getSpiritByID($id){
+        $query = "select * from spirit where ID = :id";
 
         $statement = $this->dbConnection->prepare($query);
 
@@ -51,7 +51,7 @@ class Beer{
 
     function getAll(){
 
-        $query = "select * from beer";
+        $query = "select * from spirit";
 
         $statement = $this->dbConnection->prepare($query);
 
@@ -102,7 +102,7 @@ class Beer{
     }
 
     function update() {
-        $query = "update beer set type = :type, name = :name, format = :format, price = :price where ID = :id";
+        $query = "update spirit set type = :type, name = :name, format = :format, price = :price where ID = :id";
         $statement = $this->dbConnection->prepare($query);
         $statement->bindParam(":type", $this->type);
         $statement->bindParam(":name", $this->name);
@@ -126,7 +126,7 @@ class Beer{
 
     public function delete($id)
     {
-        $query = "delete from beer where ID = :id";
+        $query = "DELETE FROM spirit WHERE ID = :id";
         $statement = $this->dbConnection->prepare($query);
         $statement->bindParam(":id", $id);
         try {
@@ -136,15 +136,12 @@ class Beer{
             echo "Delete failed: " . $e->getMessage();
             return false;
         }
-
+    
         // Print the executed SQL query
         echo "Executed query: " . $query . "<br/>";
         echo "With parameters: id={$id}<br/>";
-
+    
         return $success;
     }
-
-
+    
 }
-
-?>

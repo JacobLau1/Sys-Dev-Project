@@ -2,7 +2,7 @@
 
 namespace controllers;
 
-require(dirname(__DIR__)."/Models/Wine.php");
+require(dirname(__DIR__). DIRECTORY_SEPARATOR ."Models" . DIRECTORY_SEPARATOR ."Wine.php");
 
 
 class WineController{
