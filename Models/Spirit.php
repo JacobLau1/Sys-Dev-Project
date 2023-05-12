@@ -1,11 +1,11 @@
 <?php
 namespace models;
 
-require_once(dirname(__DIR__). DIRECTORY_SEPARATOR ."Core" . DIRECTORY_SEPARATOR ."DBConnectionManager.php");
+require_once(dirname(__DIR__). DIRECTORY_SEPARATOR . "Core" . DIRECTORY_SEPARATOR . "DBConnectionManager.php");
 
 require(dirname(__DIR__). DIRECTORY_SEPARATOR . "Core" . DIRECTORY_SEPARATOR . "MembershipProvider.php");
 
-class Wine{
+class Spirit{
 
     private $id;
     private $type;
@@ -29,7 +29,7 @@ class Wine{
 
     function create(){
 
-        $query = "INSERT INTO wine (type, name, format, price) VALUES(:type, :name, :format, :price)";
+        $query = "INSERT INTO spirit (type, name, format, price) VALUES(:type, :name, :format, :price)";
 
         $statement = $this->dbConnection->prepare($query);
 
@@ -37,8 +37,8 @@ class Wine{
 
     }
 
-    function getWineByID($id){
-        $query = "select * from wine where ID = :id";
+    function getSpiritByID($id){
+        $query = "select * from spirit where ID = :id";
 
         $statement = $this->dbConnection->prepare($query);
 
@@ -51,7 +51,7 @@ class Wine{
 
     function getAll(){
 
-        $query = "select * from wine";
+        $query = "select * from spirit";
 
         $statement = $this->dbConnection->prepare($query);
 
@@ -102,7 +102,7 @@ class Wine{
     }
 
     function update() {
-        $query = "update wine set type = :type, name = :name, format = :format, price = :price where ID = :id";
+        $query = "update spirit set type = :type, name = :name, format = :format, price = :price where ID = :id";
         $statement = $this->dbConnection->prepare($query);
         $statement->bindParam(":type", $this->type);
         $statement->bindParam(":name", $this->name);
@@ -126,7 +126,7 @@ class Wine{
 
     public function delete($id)
     {
-        $query = "delete from wine where ID = :id";
+        $query = "DELETE FROM spirit WHERE ID = :id";
         $statement = $this->dbConnection->prepare($query);
         $statement->bindParam(":id", $id);
         try {
@@ -136,15 +136,12 @@ class Wine{
             echo "Delete failed: " . $e->getMessage();
             return false;
         }
-
+    
         // Print the executed SQL query
         echo "Executed query: " . $query . "<br/>";
         echo "With parameters: id={$id}<br/>";
-
+    
         return $success;
     }
-
-
+    
 }
-
-?>

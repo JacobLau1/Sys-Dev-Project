@@ -7,7 +7,7 @@
 <body>
 <?php
 
-class WineMenu {
+class SpiritMenu {
     private $user;
 
     public function __construct($user) {
@@ -15,7 +15,7 @@ class WineMenu {
 
     }
 
-    public function render($wines) {
+    public function render($spirits) {
 
         echo '<br/>';
 
@@ -26,10 +26,10 @@ class WineMenu {
         echo '<br/>';
 
         echo '<br/>';
-        echo "<a style='float:left' href='http://localhost/Sys-Dev-Project/index.php?resource=wine&action=add'>Add bottle</a>";
+        echo "<a style='float:left' href='http://localhost/Sys-Dev-Project/index.php?resource=spirit&action=add'>Add bottle</a>";
 
         echo '</header>';
-        $html = '<h1>Wine Menu</h1>';
+        $html = '<h1>Spirit Menu</h1>';
         $html .= '<section>';
         $html .= '<table id="employeesTable">';
         $html .= "<th>ID</th>
@@ -41,14 +41,14 @@ class WineMenu {
             ";
 
         // Loop and fill the table with data from the database
-        foreach ($wines as $wine) {
+        foreach ($spirits as $spirit) {
             $html .=  "<tr>
-                <td>".$wine['id']."</td>
-                <td>".$wine['type']."</td>
-                <td>".$wine['name']."</td>
-                <td>".$wine['format']."</td>
-                <td>".$wine['price']."</td>
-                <td><a href='http://localhost/Sys-Dev-Project/index.php?resource=wine&action=edit&id=".$wine['id']."'>Edit</a></td>
+                <td>".$spirit['id']."</td>
+                <td>".$spirit['type']."</td>
+                <td>".$spirit['name']."</td>
+                <td>".$spirit['format']."</td>
+                <td>".$spirit['price']."</td>
+                <td><a href='http://localhost/Sys-Dev-Project/index.php?resource=spirit&action=edit&id=".$spirit['id']."'>Edit</a></td>
             </tr>";
         }
 

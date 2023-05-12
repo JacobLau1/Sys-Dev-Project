@@ -1,11 +1,11 @@
 <?php
 namespace models;
 
-require_once(dirname(__DIR__). DIRECTORY_SEPARATOR ."Core" . DIRECTORY_SEPARATOR ."DBConnectionManager.php");
+require_once(dirname(__DIR__). DIRECTORY_SEPARATOR . "Core". DIRECTORY_SEPARATOR ."DBConnectionManager.php");
 
-require(dirname(__DIR__). DIRECTORY_SEPARATOR . "Core" . DIRECTORY_SEPARATOR . "MembershipProvider.php");
+require(dirname(__DIR__). DIRECTORY_SEPARATOR  ."Core" . DIRECTORY_SEPARATOR . "MembershipProvider.php");
 
-class Wine{
+class Beer{
 
     private $id;
     private $type;
@@ -29,7 +29,7 @@ class Wine{
 
     function create(){
 
-        $query = "INSERT INTO wine (type, name, format, price) VALUES(:type, :name, :format, :price)";
+        $query = "INSERT INTO beer (type, name, format, price) VALUES(:type, :name, :format, :price)";
 
         $statement = $this->dbConnection->prepare($query);
 
@@ -37,8 +37,8 @@ class Wine{
 
     }
 
-    function getWineByID($id){
-        $query = "select * from wine where ID = :id";
+    function getBeerByID($id){
+        $query = "select * from beer where ID = :id";
 
         $statement = $this->dbConnection->prepare($query);
 
@@ -51,7 +51,7 @@ class Wine{
 
     function getAll(){
 
-        $query = "select * from wine";
+        $query = "select * from beer";
 
         $statement = $this->dbConnection->prepare($query);
 
@@ -102,7 +102,7 @@ class Wine{
     }
 
     function update() {
-        $query = "update wine set type = :type, name = :name, format = :format, price = :price where ID = :id";
+        $query = "update beer set type = :type, name = :name, format = :format, price = :price where ID = :id";
         $statement = $this->dbConnection->prepare($query);
         $statement->bindParam(":type", $this->type);
         $statement->bindParam(":name", $this->name);
@@ -126,7 +126,7 @@ class Wine{
 
     public function delete($id)
     {
-        $query = "delete from wine where ID = :id";
+        $query = "delete from beer where ID = :id";
         $statement = $this->dbConnection->prepare($query);
         $statement->bindParam(":id", $id);
         try {

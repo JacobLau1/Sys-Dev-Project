@@ -2,30 +2,7 @@
 
 <html>
 <head>
-    <style>
-        #employeesTable {
-            font-family: Arial, Helvetica, sans-serif;
-            border-collapse: collapse;
-            width: 100%;
-        }
-
-        #employeesTable td, #employeesTable th {
-            border: 1px solid #ddd;
-            padding: 8px;
-        }
-
-        #employeesTable tr:nth-child(even){background-color: #f2f2f2;}
-
-        #employeesTable tr:hover {background-color: #ddd;}
-
-        #employeesTable th {
-            padding-top: 12px;
-            padding-bottom: 12px;
-            text-align: left;
-            background-color: #04AA6D;
-            color: white;
-        }
-    </style>
+    <link rel="stylesheet" href="./Styles/Menu.css">
 </head>
 <body>
 <?php
@@ -40,7 +17,8 @@ class WineEdit {
 
     public function render($wine = null) {
         echo '<br/>';
-        echo '<a href="http://localhost/Sys-Dev-Project/index.php?resource=user&action=logout">Logout</a>';
+        echo "<a style='float:left' href='http://localhost/Sys-Dev-Project/index.php?resource=wine&action=menu'>Back to wine</a>";
+        echo "<a style='float:right' href='http://localhost/Sys-Dev-Project/index.php?resource=user&action=login'>Logout</a>";
         echo '<br/>';
 
         if ($wine === null) {
@@ -48,7 +26,8 @@ class WineEdit {
             return;
         }
 
-        $html = '<table id="employeesTable">';
+        $html = '<section>';
+        $html .= '<table id="employeesTable">';
         $html .= "<th>ID</th>
             <th>Type</th>
             <th>Name</th>
@@ -84,6 +63,9 @@ class WineEdit {
         $html .= '<form action="http://localhost/Sys-Dev-Project/index.php?resource=wine&action=delete" method="post">';
         $html .= '<input type="hidden" id="id" name="id" value="'.$wine['id'].'"><br>';
         $html .= '<input type="submit" value="Delete Wine">';
+        $html .= '</form>';
+
+        $html .= '</section>';
 
 
         echo $html;

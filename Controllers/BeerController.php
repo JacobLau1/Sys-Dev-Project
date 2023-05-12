@@ -2,13 +2,13 @@
 
 namespace controllers;
 
-require(dirname(__DIR__). DIRECTORY_SEPARATOR ."Models" . DIRECTORY_SEPARATOR ."Wine.php");
+require(dirname(__DIR__) . DIRECTORY_SEPARATOR . "Models" . DIRECTORY_SEPARATOR . "Beer.php");
 
 
-class WineController{
+class BeerController{
 
     private $user;
-    private $wine;
+    private $beer;
 
     function __construct(){
         if(!isset($_GET['action'])) {
@@ -18,14 +18,14 @@ class WineController{
 
         $action = $_GET['action'];
 
-        $viewClass = "\\Views\\" . "Wine" . ucfirst($action);
+        $viewClass = "\\Views\\" . "Beer" . ucfirst($action);
 
         if(!class_exists($viewClass)) {
             return;
         }
 
         //  $this->user = new \models\User();
-        $this->wine = new \Models\Wine();
+        $this->beer = new \Models\Beer();
 
         if(isset($_POST)) {
             switch($action) {
@@ -49,40 +49,40 @@ class WineController{
 
     function handleMenu(){
 
-        $wineModel = new \Models\Wine();
-        $wines = $wineModel->getAll();
+        $beerModel = new \Models\Beer();
+        $beers = $beerModel->getAll();
 
-        $viewClass = "\\Views\\" . "WineMenu";
+        $viewClass = "\\Views\\" . "BeerMenu";
         if(class_exists($viewClass)) {
-            $view = new $viewClass($this->wine);
-            $view->render($wines);
+            $view = new $viewClass($this->beer);
+            $view->render($beers);
         }
     }
 
     function handleEdit() {
         //check if the form has been submitted
         if (isset($_POST['id'])&&isset($_POST['type'])&&isset($_POST['name'])&&isset($_POST['format'])&&isset($_POST['price'])) {
-            //get the wine id from the form
+            //get the beer id from the form
             $id = $_POST['id'];
-            //get the wine properties from the form
+            //get the beer properties from the form
             $type = $_POST['type'];
             $name = $_POST['name'];
             $format = $_POST['format'];
             $price = $_POST['price'];
 
-            // Update the wine object properties
-            $this->wine->setID($id);
-            $this->wine->setType($type);
-            $this->wine->setName($name);
-            $this->wine->setFormat($format);
-            $this->wine->setPrice($price);
+            // Update the beer object properties
+            $this->beer->setID($id);
+            $this->beer->setType($type);
+            $this->beer->setName($name);
+            $this->beer->setFormat($format);
+            $this->beer->setPrice($price);
 
-            //update the wine in the database
-            $success = $this->wine->update();
+            //update the beer in the database
+            $success = $this->beer->update();
 
-            //if the update was successful, redirect to the wine menu
+            //if the update was successful, redirect to the beer menu
             if ($success) {
-                header("Location: index.php?resource=wine&action=menu");
+                header("Location: index.php?resource=beer&action=menu");
                 exit;
             } else {
                 //if the update failed, display an error message
@@ -91,16 +91,16 @@ class WineController{
         } else {
             //if the form has not been submitted, render the edit view
             $id = $_GET['id'];
-            $wineModel = new \Models\Wine();
-            $wine = $wineModel->getWineByID($id);
-            $this->wine->setID($wine['id']);
-            $this->wine->setType($wine['type']);
-            $this->wine->setName($wine['name']);
-            $this->wine->setFormat($wine['format']);
-            $this->wine->setPrice($wine['price']);
-            $viewClass = "\\views\\" . "WineEdit";
-            $view = new $viewClass($this->wine);
-            $view->render($wine);
+            $beerModel = new \Models\Beer();
+            $beer = $beerModel->getBeerByID($id);
+            $this->beer->setID($beer['id']);
+            $this->beer->setType($beer['type']);
+            $this->beer->setName($beer['name']);
+            $this->beer->setFormat($beer['format']);
+            $this->beer->setPrice($beer['price']);
+            $viewClass = "\\views\\" . "BeerEdit";
+            $view = new $viewClass($this->beer);
+            $view->render($beer);
         }
     }
 
@@ -115,22 +115,22 @@ class WineController{
     
             // Validate the submitted values (e.g. check if the price is a number)
     
-            // Create a new wine object and save it to the database
-            $this->wine = new \models\Wine();
-            $this->wine->setType($type);
-            $this->wine->setName($name);
-            $this->wine->setFormat($format);
-            $this->wine->setPrice($price);
-            $this->wine->create();
+            // Create a new beer object and save it to the database
+            $this->beer = new \models\Beer();
+            $this->beer->setType($type);
+            $this->beer->setName($name);
+            $this->beer->setFormat($format);
+            $this->beer->setPrice($price);
+            $this->beer->create();
     
-            // Redirect to the wine menu after adding a new wine
-            header("Location: index.php?resource=wine&action=menu");
+            // Redirect to the beer menu after adding a new beer
+            header("Location: index.php?resource=beer&action=menu");
             exit;
         } else {
             // display the add form
-            $viewClass = "\\views\\" . "WineAdd";
+            $viewClass = "\\views\\" . "BeerAdd";
             if(class_exists($viewClass)) {
-                $view = new $viewClass($this->wine);
+                $view = new $viewClass($this->beer);
                 $view->render();
             }
         }   
@@ -138,15 +138,15 @@ class WineController{
 
     private function handleDelete()
     {
-        //get the id of the wine to delete
+        //get the id of the beer to delete
         $id = $_POST['id'];
 
-        //delete the wine from the database
-        $success = $this->wine->delete($id);
+        //delete the beer from the database
+        $success = $this->beer->delete($id);
 
-        //if the delete was successful, redirect to the wine list
+        //if the delete was successful, redirect to the beer list
         if ($success) {
-            header("Location: index.php?resource=wine&action=menu");
+            header("Location: index.php?resource=beer&action=menu");
             exit;
         }
     }

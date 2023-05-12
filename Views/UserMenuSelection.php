@@ -1,6 +1,10 @@
 <?php namespace views;?>
 
 <html>
+<head>
+    <title>User Management</title>
+    <link rel="stylesheet" href="./Styles/MenuSelection.css">
+</head>
 <body>
 <?php
 Class UserMenuselection{
@@ -16,28 +20,33 @@ Class UserMenuselection{
 
         if($membershipProvider->isLoggedIn()){
             $this->welcomeMessage = 'Welcome '.$this->user->getUsername();
-            echo $this->welcomeMessage;
-            $html = "";
-            $html .= "<a style='float:right' href='http://localhost/Sys-Dev-Project/index.php?resource=user&action=logout'>Logout</a>";
-
-            //if the position is admin, display admin
+            $html = "<header>";
+            $html .= "<a style='float:right' href='http://localhost/Sys-Dev-Project/index.php?resource=user&action=login'>Logout</a>";
             if($this->user->getPosition() == 'admin'){
                 $html .= "<a style='float:left' href='http://localhost/Sys-Dev-Project/index.php?resource=user&action=management'>Waiter Registration</a>";
-                $html .= "<a href='http://localhost/Sys-Dev-Project/index.php?resource=user&action=list'>User List</a>";
             }
-
+            $html .= "<a href='http://localhost/Sys-Dev-Project/index.php?resource=wine&action=menu'>Wine</a>";
+            $html .= "<a href='http://localhost/Sys-Dev-Project/index.php?resource=beer&action=menu'>Beer</a>";
+            $html .= "<a href='http://localhost/Sys-Dev-Project/index.php?resource=spirit&action=menu'>Spirits</a>";
+            $html .= "</header>";
             $html .= "<br>";
             $html .= "<h1>Menu Selection</h1>";
-            $html .= "<a href='http://localhost/Sys-Dev-Project/index.php?resource=wine&action=menu'>Wine</a>";
-            $html .= "<a href='http://localhost/Sys-Dev-Project/index.php?resource=user&action=beer'>Beer</a>";
-            $html .= "<a href='http://localhost/Sys-Dev-Project/index.php?resource=user&action=spirits'>Spirits</a>";
             $html .= "<br>";
+            $html .= "<h2>$this->welcomeMessage</h2>";
+
+
+
+            //if the position is admin, display admin
+
+
 
             echo $html;
+
         }else{//user not logged in
             echo "not logged in";
             header('HTTP/1.1 401 Unauthorized');
             header('Location: http://localhost/Sys-Dev-Project/index.php?resource=user&action=login');
+            exit();
 
         }
     }

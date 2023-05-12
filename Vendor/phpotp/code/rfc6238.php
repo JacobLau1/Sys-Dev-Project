@@ -1,6 +1,6 @@
 <?php
   // http://www.faqs.org/rfcs/rfc6238.html   
-	require_once(dirname(__FILE__).'/base32static.php');
+	require_once(dirname(__FILE__). DIRECTORY_SEPARATOR .'base32static.php');
 
 	class TokenAuth6238 {
 		
