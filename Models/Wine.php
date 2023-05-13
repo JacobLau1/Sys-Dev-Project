@@ -144,6 +144,17 @@ class Wine{
         return $success;
     }
 
+    function getWineByName($name){
+        $query = "select * from wine where name = :name";
+
+        $statement = $this->dbConnection->prepare($query);
+
+        $statement->bindParam(":name", $name);
+
+        $statement->execute();
+
+        return $statement->fetchAll();
+    }
 
 }
 
