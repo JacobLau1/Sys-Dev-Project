@@ -48,9 +48,14 @@ class SpiritController{
     }
 
     function handleMenu(){
-
-        $spiritModel = new \Models\Spirit();
-        $spirits = $spiritModel->getAll();
+        $this->spirit = new \Models\Spirit();
+        $name = isset($_POST['name']) ? $_POST['name'] : null;
+        $spirits = null;
+        if(isset($name)){
+            $spirits = $this->spirit->getSpiritByName($name);
+        }else{
+            $spirits = $this->spirit->getAll();
+        }
 
         $viewClass = "\\Views\\" . "SpiritMenu";
         if(class_exists($viewClass)) {

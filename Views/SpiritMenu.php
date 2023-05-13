@@ -40,6 +40,14 @@ class SpiritMenu {
             <th>Edit</th>
             ";
 
+        // Add the search form
+        $html .=     '<form method="post" action="http://localhost/Sys-Dev-Project/index.php?resource=spirit&action=menu">';
+            $html .= '<input type="text" name="name" placeholder="Search by spirit name...">';
+            $html .= '<input type="hidden" name="resource" value="spirit">';
+            $html .= '<input type="hidden" name="action" value="menu">';
+            $html .= '<input type="submit" value="Search">';
+            $html .= '</form>';
+
         // Loop and fill the table with data from the database
         foreach ($spirits as $spirit) {
             $html .=  "<tr>

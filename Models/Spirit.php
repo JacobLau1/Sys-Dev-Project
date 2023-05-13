@@ -143,5 +143,17 @@ class Spirit{
     
         return $success;
     }
+
+    function getSpiritByName($name){
+        $query = "select * from spirit where name = :name";
+
+        $statement = $this->dbConnection->prepare($query);
+
+        $statement->bindParam(":name", $name);
+
+        $statement->execute();
+
+        return $statement->fetchAll();
+    }
     
 }
