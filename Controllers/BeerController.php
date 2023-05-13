@@ -49,8 +49,15 @@ class BeerController{
 
     function handleMenu(){
 
-        $beerModel = new \Models\Beer();
-        $beers = $beerModel->getAll();
+        $this->beer = new \Models\Beer();
+        //$beers = $this->beer->getAll();
+        $name = isset($_POST['name']) ? $_POST['name'] : null;
+        $beers = null;
+        if(isset($name)){
+            $beers = $this->beer->getBeerByName($name);
+        }else{
+            $beers = $this->beer->getAll();
+        }
 
         $viewClass = "\\Views\\" . "BeerMenu";
         if(class_exists($viewClass)) {

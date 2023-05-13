@@ -144,6 +144,18 @@ class Beer{
         return $success;
     }
 
+    function getBeerByName($name){
+        $query = "select * from beer where name = :name";
+
+        $statement = $this->dbConnection->prepare($query);
+
+        $statement->bindParam(":name", $name);
+
+        $statement->execute();
+
+        return $statement->fetchAll();
+    }
+
 
 }
 
