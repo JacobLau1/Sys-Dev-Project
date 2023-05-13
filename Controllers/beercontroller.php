@@ -49,15 +49,23 @@ class BeerController{
 
     function handleMenu(){
 
-        $beerModel = new \Models\Beer();
-        $beers = $beerModel->getAll();
-
+        $this->beer = new \Models\Beer();
+        $name = isset($_POST['name']) ? $_POST['name'] : null;
+        $beers = null;
+        if(isset($name)){
+            $beers = $this->beer->getBeerByName($name);
+        }else{
+            $beers = $this->beer->getAll();
+        }
+        
         $viewClass = "\\Views\\" . "BeerMenu";
         if(class_exists($viewClass)) {
             $view = new $viewClass($this->beer);
             $view->render($beers);
         }
     }
+    
+    
 
     function handleEdit() {
         //check if the form has been submitted
@@ -91,8 +99,8 @@ class BeerController{
         } else {
             //if the form has not been submitted, render the edit view
             $id = $_GET['id'];
-            $beerModel = new \Models\Beer();
-            $beer = $beerModel->getBeerByID($id);
+            $beer = new \Models\Beer();
+            $beer = $beer->getBeerByID($id);
             $this->beer->setID($beer['id']);
             $this->beer->setType($beer['type']);
             $this->beer->setName($beer['name']);

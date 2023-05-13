@@ -5,17 +5,7 @@ ini_set("auto_detect_line_endings", true);
 
 error_reporting(E_ALL);
 
-/*
-spl_autoload_register(function ($class) {
-    if ($class === 'WineMenu') {
-        require_once 'Views/WineMenu.php';
-    } else if ($class === 'WineDisplay') {
-        require_once 'Views/WineDisplay.php';
-    } else {
-        require($class . ".php");
-    }
-});
-*/
+
 
 spl_autoload_register(function ($class) {
     if ($class === 'WineMenu') {
