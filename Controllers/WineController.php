@@ -49,8 +49,14 @@ class WineController{
 
     function handleMenu(){
 
-        $wineModel = new \Models\Wine();
-        $wines = $wineModel->getAll();
+        $this->wine = new \Models\Wine();
+        $name = isset($_POST['name']) ? $_POST['name'] : null;
+        $wines = null;
+        if(isset($name)){
+            $wines = $this->wine->getWineByName($name);
+        }else{
+            $wines = $this->wine->getAll();
+        }
 
         $viewClass = "\\Views\\" . "WineMenu";
         if(class_exists($viewClass)) {
