@@ -31,6 +31,10 @@ class SpiritAdd {
         echo '<h1>Add Spirit</h1>';
         echo '<section>';
         $html = '<form method="POST" action="http://localhost/Sys-Dev-Project/index.php?resource=spirit&action=add">';
+
+        $html .= '<label for="saq_code">SAQ Code:</label><br/>';
+        $html .= '<input type="text" name="saq_code" required><br/><br/>';
+
         $html .= '<label for="type">Type:</label><br/>';
         $html .= '<input type="text" name="type" required><br/><br/>';
         

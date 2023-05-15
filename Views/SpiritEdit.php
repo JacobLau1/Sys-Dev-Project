@@ -51,6 +51,7 @@ class SpiritEdit {
         // Form to edit the spirit
         $html .= '<form action="" method="post">';
         $html .= '<input type="hidden" id="id" name="id" value="'.$spirit['id'].'"><br>';
+        $html .= '<input type="hidden" id="saq_code" name="saq_code" value="'.$spirit['saq_code'].'"><br>';
         $html .= '<label for="type">Type:</label><br>';
         $html .= '<input type="text" id="type" name="type" value="'.$spirit['type'].'"><br>';
         $html .= '<label for="name">Name:</label><br>';

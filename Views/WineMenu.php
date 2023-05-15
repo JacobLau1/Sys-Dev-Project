@@ -32,7 +32,6 @@ class WineMenu
         echo '</div>';
         echo '</nav>';
 
-
         /* Table */
         $html = '';
         $html .= '<div class="w3-container w3-center w3-round" style="padding: 4rem" id="main">';
@@ -41,14 +40,6 @@ class WineMenu
         $html .= '<table id="employeesTable" class="w3-table w3-striped w3-text-black">';
         $html .= '<tr class="w3-theme-d3">';
         $html .= '<th class="">ID</th>
-        echo '<br/>';
-        echo "<a style='float:left' href='http://localhost/Sys-Dev-Project/index.php?resource=wine&action=add'>Add bottle</a>";
-
-        echo '</header>';
-        $html = '<h1>Wine Menu</h1>';
-        $html .= '<section>';
-        $html .= '<table id="employeesTable">';
-        $html .= "<th>ID</th>
             <th>SAQ Code</th>
             <th>Type</th>
             <th>Name</th>
@@ -57,20 +48,20 @@ class WineMenu
             <th>Actions</th>';
         $html .= '</tr>';
 
-                    // Add the search form
+        // Add the search form
         $html .=     '<form method="post" action="http://localhost/Sys-Dev-Project/index.php?resource=wine&action=menu">';
-            $html .= '<input type="text" name="name" placeholder="Search by wine name...">';
-            $html .= '<input type="hidden" name="resource" value="wine">';
-            $html .= '<input type="hidden" name="action" value="menu">';
-            $html .= '<input type="submit" value="Search">';
-            $html .= '</form>';
+        $html .= '<input type="text" name="name" placeholder="Search by wine name...">';
+        $html .= '<input type="hidden" name="resource" value="wine">';
+        $html .= '<input type="hidden" name="action" value="menu">';
+        $html .= '<input type="submit" value="Search">';
+        $html .= '</form>';
+
 
         // Loop and fill the table with data from the database
         foreach ($wines as $wine) {
-
             $html .= "<tr>
                 <td>" . $wine['id'] . "</td>
-                <td>".$wine['saq_code']."</td>
+                <td>" . $wine['saq_code'] . "</td>
                 <td>" . $wine['type'] . "</td>
                 <td>" . $wine['name'] . "</td>
                 <td>" . $wine['format'] . "</td>
@@ -81,7 +72,6 @@ class WineMenu
                 </a>
                 <button onclick=$deleteModalFunction class='w3-button w3-hover-blue-gray w3-round wine-deletion'><i class='fas fa-trash'></i></button>
                 </td>
-
             </tr>";
         }
 
