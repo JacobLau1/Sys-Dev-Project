@@ -25,6 +25,7 @@ Class UserMenuselection{
             if($this->user->getPosition() == 'admin'){
                 $html .= "<a style='float:left' href='http://localhost/Sys-Dev-Project/index.php?resource=user&action=management'>Waiter Registration</a>";
             }
+            $html .= "<a href='http://localhost/Sys-Dev-Project/index.php?resource=drink&action=menu'>Drinks</a>";
             $html .= "<a href='http://localhost/Sys-Dev-Project/index.php?resource=wine&action=menu'>Wine</a>";
             $html .= "<a href='http://localhost/Sys-Dev-Project/index.php?resource=beer&action=menu'>Beer</a>";
             $html .= "<a href='http://localhost/Sys-Dev-Project/index.php?resource=spirit&action=menu'>Spirits</a>";

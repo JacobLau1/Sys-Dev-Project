@@ -24,6 +24,8 @@ spl_autoload_register(function ($class) {
         require_once 'Views' . DIRECTORY_SEPARATOR . 'BeerMenu.php';
     }else if ($class === 'SpiritMenu') {
         require_once 'Views' . DIRECTORY_SEPARATOR . 'SpiritMenu.php';
+    }else if ($class === 'DrinkMenu') {
+        require_once 'Views' . DIRECTORY_SEPARATOR . 'DrinkMenu.php';
     } else {
         $class_file = str_replace('\\', DIRECTORY_SEPARATOR, $class) . '.php';
         require_once $class_file;
