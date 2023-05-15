@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 15, 2023 at 04:55 PM
+-- Generation Time: May 15, 2023 at 05:09 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -71,20 +71,6 @@ CREATE TABLE `inventory` (
   `date_aquired` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `last_updated` timestamp NULL DEFAULT NULL,
   `quantity` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `liquor`
---
-
-CREATE TABLE `liquor` (
-  `SAQ_Code` varchar(50) NOT NULL,
-  `Type` varchar(25) NOT NULL,
-  `Name` varchar(50) NOT NULL,
-  `Format` int(11) NOT NULL,
-  `Price` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -202,12 +188,6 @@ ALTER TABLE `inventory`
   ADD UNIQUE KEY `drink_id` (`drink_id`);
 
 --
--- Indexes for table `liquor`
---
-ALTER TABLE `liquor`
-  ADD PRIMARY KEY (`SAQ_Code`);
-
---
 -- Indexes for table `location`
 --
 ALTER TABLE `location`
@@ -271,7 +251,9 @@ ALTER TABLE `drinks`
   ADD CONSTRAINT `drinks_ibfk_1` FOREIGN KEY (`inventory_id`) REFERENCES `inventory` (`inventory_id`),
   ADD CONSTRAINT `drinks_ibfk_2` FOREIGN KEY (`current_location`) REFERENCES `location` (`location_id`),
   ADD CONSTRAINT `drinks_ibfk_3` FOREIGN KEY (`last_moved_by`) REFERENCES `users` (`id`),
-  ADD CONSTRAINT `drinks_ibfk_4` FOREIGN KEY (`alcohol_type`) REFERENCES `wine` (`saq_code`);
+  ADD CONSTRAINT `drinks_ibfk_4` FOREIGN KEY (`alcohol_type`) REFERENCES `wine` (`saq_code`),
+  ADD CONSTRAINT `drinks_ibfk_5` FOREIGN KEY (`alcohol_type`) REFERENCES `beer` (`saq_code`),
+  ADD CONSTRAINT `drinks_ibfk_6` FOREIGN KEY (`alcohol_type`) REFERENCES `spirit` (`saq_code`);
 
 --
 -- Constraints for table `inventory`
