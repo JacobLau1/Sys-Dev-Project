@@ -2,9 +2,10 @@
 
 <html>
 <head>
-    <link rel="stylesheet" href="./Styles/Menu.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-teal.css">
 </head>
-<body>
+<body class="w3-theme-d5">
 <?php
 
 class BeerAdd {
@@ -17,16 +18,13 @@ class BeerAdd {
 
     public function render() {
 
-        echo '<br/>';
-
-        echo '<header>';
-        echo "<a style='float:left' href='http://localhost/Sys-Dev-Project/index.php?resource=beer&action=menu'>Back to beer</a>";
-        echo "<a style='float:right' href='http://localhost/Sys-Dev-Project/index.php?resource=user&action=login'>Logout</a>";
-
-        echo '</header>';
-        echo '<br/>';
-        
-        echo '<br/>';
+        /* Nav Bar */
+        echo '<nav>';
+        echo '<div class="w3-bar w3-theme-d4 w3-top w3-left-align w3-large">';
+        echo '<a href="" class="w3-bar-item w3-button w3-theme-d3">Modavie</a>';
+        echo '<a href="http://localhost/Sys-Dev-Project/index.php?resource=beer&action=menu" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Back to menu</a>';
+        echo '</div>';
+        echo '</nav>';
 
 
 

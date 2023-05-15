@@ -4,5 +4,10 @@
     <content url="file://$MODULE_DIR$" />
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="materialize" level="application" />
+    <orderEntry type="library" name="jquery-3.2.1" level="application" />
+    <orderEntry type="library" name="w3" level="application" />
+    <orderEntry type="library" name="w3-theme-teal" level="application" />
+    <orderEntry type="library" name="99c47d5f92" level="application" />
   </component>
 </module>
