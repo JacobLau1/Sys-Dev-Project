@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 15, 2023 at 05:09 PM
+-- Generation Time: May 15, 2023 at 05:39 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -41,7 +41,8 @@ CREATE TABLE `beer` (
 --
 
 INSERT INTO `beer` (`id`, `saq_code`, `type`, `name`, `format`, `price`) VALUES
-(3, 'a', '123', 'Beer', '12', 1001);
+(3, 'a', '123', 'Beer', '12', 1001),
+(0, 'beer1saqcode', 'beer1', 'beer1', '500', 100);
 
 -- --------------------------------------------------------
 
@@ -105,7 +106,8 @@ CREATE TABLE `spirit` (
 --
 
 INSERT INTO `spirit` (`id`, `saq_code`, `type`, `name`, `format`, `price`) VALUES
-(2, 'a', '123', 'Bea', '12', 0);
+(2, 'a', '123', 'Bea', '12', 0),
+(0, 'spirit1saqcode', 'spirit1', 'spirit1', '500', 100);
 
 -- --------------------------------------------------------
 
@@ -156,7 +158,8 @@ CREATE TABLE `wine` (
 --
 
 INSERT INTO `wine` (`id`, `saq_code`, `type`, `name`, `format`, `price`) VALUES
-(7, 'a', 'white', 'bourg', '12', 20);
+(7, 'a', 'white', 'bourg', '12', 20),
+(0, 'wine1saqcode', 'wine1', 'wine1', '500', 100);
 
 --
 -- Indexes for dumped tables
@@ -176,8 +179,6 @@ ALTER TABLE `drinks`
   ADD UNIQUE KEY `inventory_id` (`inventory_id`),
   ADD UNIQUE KEY `current_location` (`current_location`),
   ADD UNIQUE KEY `last_moved_by` (`last_moved_by`),
-  ADD KEY `alcohol_type2` (`alcohol_type`),
-  ADD KEY `alcohol_type3` (`alcohol_type`),
   ADD KEY `alcohol_type` (`alcohol_type`) USING BTREE;
 
 --
