@@ -67,10 +67,13 @@ class WineController{
 
     function handleEdit() {
         //check if the form has been submitted
-        if (isset($_POST['id'])&&isset($_POST['type'])&&isset($_POST['name'])&&isset($_POST['format'])&&isset($_POST['price'])) {
+        if (isset($_POST['id'])&&isset($POST['saq_code'])&&
+            isset($_POST['type'])&&isset($_POST['name'])&&
+            isset($_POST['format'])&&isset($_POST['price'])) {
             //get the wine id from the form
             $id = $_POST['id'];
             //get the wine properties from the form
+            $saq_code = $_POST['saq_code'];
             $type = $_POST['type'];
             $name = $_POST['name'];
             $format = $_POST['format'];
@@ -78,6 +81,7 @@ class WineController{
 
             // Update the wine object properties
             $this->wine->setID($id);
+            $this->wine->setSaqCode($saq_code);
             $this->wine->setType($type);
             $this->wine->setName($name);
             $this->wine->setFormat($format);
@@ -100,6 +104,7 @@ class WineController{
             $wineModel = new \Models\Wine();
             $wine = $wineModel->getWineByID($id);
             $this->wine->setID($wine['id']);
+            $this->wine->setSaqCode($wine['saq_code']);
             $this->wine->setType($wine['type']);
             $this->wine->setName($wine['name']);
             $this->wine->setFormat($wine['format']);
@@ -114,6 +119,7 @@ class WineController{
         // Check if the form has been submitted
         if(isset($_POST['submit'])) {
             // Retrieve the submitted values
+            $saq_code = $_POST['saq_code'];
             $type = $_POST['type'];
             $name = $_POST['name'];
             $format = $_POST['format'];
@@ -123,6 +129,7 @@ class WineController{
     
             // Create a new wine object and save it to the database
             $this->wine = new \models\Wine();
+            $this->wine->setSaqCode($saq_code);
             $this->wine->setType($type);
             $this->wine->setName($name);
             $this->wine->setFormat($format);

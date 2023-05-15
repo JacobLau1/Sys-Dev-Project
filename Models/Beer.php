@@ -8,6 +8,7 @@ require(dirname(__DIR__). DIRECTORY_SEPARATOR  ."Core" . DIRECTORY_SEPARATOR . "
 class Beer{
 
     private $id;
+    private $saq_code;
     private $type;
     private $name;
     private $format;
@@ -29,11 +30,11 @@ class Beer{
 
     function create(){
 
-        $query = "INSERT INTO beer (type, name, format, price) VALUES(:type, :name, :format, :price)";
+        $query = "INSERT INTO beer (saq_code, type, name, format, price) VALUES(:saq_code, :type, :name, :format, :price)";
 
         $statement = $this->dbConnection->prepare($query);
 
-        return $statement->execute(['type' => $this->type,'name' => $this->name, 'format' => $this->format,'price' => $this->price]);
+        return $statement->execute(['saq_code' => $this->saq_code,'type' => $this->type,'name' => $this->name, 'format' => $this->format,'price' => $this->price]);
 
     }
 
@@ -81,6 +82,10 @@ class Beer{
         $this->price = $price;
     }
 
+    function setSaqCode($saq_code){
+        $this->saq_code = $saq_code;
+    }
+
     function getID(){
         return $this->id;
     }
@@ -101,9 +106,14 @@ class Beer{
         return $this->price;
     }
 
+    function getSaqCode(){
+        return $this->saq_code;
+    }
+
     function update() {
-        $query = "update beer set type = :type, name = :name, format = :format, price = :price where ID = :id";
+        $query = "update beer set saq_code = :saq_code, type = :type, name = :name, format = :format, price = :price where ID = :id";
         $statement = $this->dbConnection->prepare($query);
+        $statement->bindParam(":saq_code", $this->saq_code);
         $statement->bindParam(":type", $this->type);
         $statement->bindParam(":name", $this->name);
         $statement->bindParam(":format", $this->format);
@@ -119,7 +129,7 @@ class Beer{
 
         // Print the executed SQL query
         echo "Executed query: " . $query . "<br/>";
-        echo "With parameters: type={$this->type}, name={$this->name}, format={$this->format}, price={$this->price}, id={$this->id}<br/>";
+        echo "With parameters: saq_code={$this->saq_code} ,type={$this->type}, name={$this->name}, format={$this->format}, price={$this->price}, id={$this->id}<br/>";
 
         return $success;
     }

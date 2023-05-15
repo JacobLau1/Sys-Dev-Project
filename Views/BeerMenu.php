@@ -33,6 +33,7 @@ class BeerMenu {
         $html .= '<section>';
         $html .= '<table id="employeesTable">';
         $html .= "<th>ID</th>
+            <th>SAQ Code</th>
             <th>Type</th>
             <th>Name</th>
             <th>Format</th>
@@ -53,6 +54,7 @@ class BeerMenu {
         foreach ($beers as $beer) {
             $html .=  "<tr>
                 <td>".$beer['id']."</td>
+                <td>".$beer['saq_code']."</td>
                 <td>".$beer['type']."</td>
                 <td>".$beer['name']."</td>
                 <td>".$beer['format']."</td>
