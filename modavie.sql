@@ -271,7 +271,7 @@ ALTER TABLE `drinks`
   ADD CONSTRAINT `drinks_ibfk_1` FOREIGN KEY (`inventory_id`) REFERENCES `inventory` (`inventory_id`),
   ADD CONSTRAINT `drinks_ibfk_2` FOREIGN KEY (`current_location`) REFERENCES `location` (`location_id`),
   ADD CONSTRAINT `drinks_ibfk_3` FOREIGN KEY (`last_moved_by`) REFERENCES `users` (`id`),
-  ADD CONSTRAINT `drinks_ibfk_4` FOREIGN KEY (`alcohol_type`) REFERENCES `wine` (`saq_code`), `spirit` (`saq_code`), `beer` (`saq_code`);
+  ADD CONSTRAINT `drinks_ibfk_4` FOREIGN KEY (`alcohol_type`) REFERENCES `wine` (`saq_code`);
 
 --
 -- Constraints for table `inventory`
