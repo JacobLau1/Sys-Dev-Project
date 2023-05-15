@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 15, 2023 at 07:09 AM
--- Server version: 10.4.27-MariaDB
--- PHP Version: 8.1.12
+-- Generation Time: May 15, 2023 at 04:55 PM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.0.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -51,7 +51,7 @@ INSERT INTO `beer` (`id`, `saq_code`, `type`, `name`, `format`, `price`) VALUES
 
 CREATE TABLE `drinks` (
   `drink_id` int(11) NOT NULL,
-  `alcohol_type` int(11) NOT NULL,
+  `alcohol_type` varchar(255) NOT NULL,
   `inventory_id` int(11) NOT NULL,
   `current_location` int(11) NOT NULL,
   `last_moved_by` int(11) NOT NULL,
@@ -180,19 +180,26 @@ INSERT INTO `wine` (`id`, `saq_code`, `type`, `name`, `format`, `price`) VALUES
 -- Indexes for table `beer`
 --
 ALTER TABLE `beer`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`saq_code`) USING BTREE;
 
 --
 -- Indexes for table `drinks`
 --
 ALTER TABLE `drinks`
-  ADD PRIMARY KEY (`drink_id`);
+  ADD PRIMARY KEY (`drink_id`),
+  ADD UNIQUE KEY `inventory_id` (`inventory_id`),
+  ADD UNIQUE KEY `current_location` (`current_location`),
+  ADD UNIQUE KEY `last_moved_by` (`last_moved_by`),
+  ADD KEY `alcohol_type2` (`alcohol_type`),
+  ADD KEY `alcohol_type3` (`alcohol_type`),
+  ADD KEY `alcohol_type` (`alcohol_type`) USING BTREE;
 
 --
 -- Indexes for table `inventory`
 --
 ALTER TABLE `inventory`
-  ADD PRIMARY KEY (`inventory_id`);
+  ADD PRIMARY KEY (`inventory_id`),
+  ADD UNIQUE KEY `drink_id` (`drink_id`);
 
 --
 -- Indexes for table `liquor`
@@ -210,7 +217,7 @@ ALTER TABLE `location`
 -- Indexes for table `spirit`
 --
 ALTER TABLE `spirit`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`saq_code`) USING BTREE;
 
 --
 -- Indexes for table `users`
@@ -223,17 +230,11 @@ ALTER TABLE `users`
 -- Indexes for table `wine`
 --
 ALTER TABLE `wine`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`saq_code`) USING BTREE;
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
-
---
--- AUTO_INCREMENT for table `beer`
---
-ALTER TABLE `beer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `drinks`
@@ -254,22 +255,29 @@ ALTER TABLE `location`
   MODIFY `location_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `spirit`
---
-ALTER TABLE `spirit`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
--- AUTO_INCREMENT for table `wine`
+-- Constraints for dumped tables
 --
-ALTER TABLE `wine`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- Constraints for table `drinks`
+--
+ALTER TABLE `drinks`
+  ADD CONSTRAINT `drinks_ibfk_1` FOREIGN KEY (`inventory_id`) REFERENCES `inventory` (`inventory_id`),
+  ADD CONSTRAINT `drinks_ibfk_2` FOREIGN KEY (`current_location`) REFERENCES `location` (`location_id`),
+  ADD CONSTRAINT `drinks_ibfk_3` FOREIGN KEY (`last_moved_by`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `drinks_ibfk_4` FOREIGN KEY (`alcohol_type`) REFERENCES `wine` (`saq_code`), `spirit` (`saq_code`), `beer` (`saq_code`);
+
+--
+-- Constraints for table `inventory`
+--
+ALTER TABLE `inventory`
+  ADD CONSTRAINT `inventory_ibfk_1` FOREIGN KEY (`drink_id`) REFERENCES `drinks` (`drink_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
