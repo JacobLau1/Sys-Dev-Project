@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 10, 2023 at 07:31 AM
+-- Generation Time: May 15, 2023 at 07:09 AM
 -- Server version: 10.4.27-MariaDB
--- PHP Version: 7.4.33
+-- PHP Version: 8.1.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -29,6 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `beer` (
   `id` int(11) NOT NULL,
+  `saq_code` varchar(255) NOT NULL,
   `type` varchar(50) NOT NULL,
   `name` varchar(50) NOT NULL,
   `format` varchar(50) NOT NULL,
@@ -39,8 +40,8 @@ CREATE TABLE `beer` (
 -- Dumping data for table `beer`
 --
 
-INSERT INTO `beer` (`id`, `type`, `name`, `format`, `price`) VALUES
-(2, 'beer1', 'beer1', 'beer1', 123);
+INSERT INTO `beer` (`id`, `saq_code`, `type`, `name`, `format`, `price`) VALUES
+(3, 'a', '123', 'Beer', '12', 1001);
 
 -- --------------------------------------------------------
 
@@ -57,27 +58,6 @@ CREATE TABLE `drinks` (
   `last_moved_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `image` blob NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `employees`
---
-
-CREATE TABLE `employees` (
-  `id` int(11) NOT NULL,
-  `name` varchar(50) NOT NULL,
-  `phone` varchar(15) NOT NULL,
-  `email` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `employees`
---
-
-INSERT INTO `employees` (`id`, `name`, `phone`, `email`) VALUES
-(1, 'John Smith', '123456789', 'john@gmail.com'),
-(2, 'Julie Jones', '987456123', 'julie@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -127,6 +107,7 @@ CREATE TABLE `location` (
 
 CREATE TABLE `spirit` (
   `id` int(11) NOT NULL,
+  `saq_code` varchar(255) NOT NULL,
   `type` varchar(50) NOT NULL,
   `name` varchar(50) NOT NULL,
   `format` varchar(50) NOT NULL,
@@ -137,8 +118,8 @@ CREATE TABLE `spirit` (
 -- Dumping data for table `spirit`
 --
 
-INSERT INTO `spirit` (`id`, `type`, `name`, `format`, `price`) VALUES
-(1, 'spirit1', 'spirit1', 'spirit1', 123);
+INSERT INTO `spirit` (`id`, `saq_code`, `type`, `name`, `format`, `price`) VALUES
+(2, 'a', '123', 'Bea', '12', 0);
 
 -- --------------------------------------------------------
 
@@ -177,6 +158,7 @@ INSERT INTO `users` (`id`, `position`, `first_name`, `last_name`, `last_seen`, `
 
 CREATE TABLE `wine` (
   `id` int(11) NOT NULL,
+  `saq_code` varchar(255) NOT NULL,
   `type` varchar(50) NOT NULL,
   `name` varchar(50) NOT NULL,
   `format` varchar(50) NOT NULL,
@@ -187,9 +169,8 @@ CREATE TABLE `wine` (
 -- Dumping data for table `wine`
 --
 
-INSERT INTO `wine` (`id`, `type`, `name`, `format`, `price`) VALUES
-(3, 'fine', 'bird', '22ml', 2147483647),
-(6, 'bour', 'bee', '12', 1);
+INSERT INTO `wine` (`id`, `saq_code`, `type`, `name`, `format`, `price`) VALUES
+(7, 'a', 'white', 'bourg', '12', 20);
 
 --
 -- Indexes for dumped tables
@@ -206,12 +187,6 @@ ALTER TABLE `beer`
 --
 ALTER TABLE `drinks`
   ADD PRIMARY KEY (`drink_id`);
-
---
--- Indexes for table `employees`
---
-ALTER TABLE `employees`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `inventory`
@@ -241,7 +216,8 @@ ALTER TABLE `spirit`
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `username` (`username`);
 
 --
 -- Indexes for table `wine`
@@ -257,19 +233,13 @@ ALTER TABLE `wine`
 -- AUTO_INCREMENT for table `beer`
 --
 ALTER TABLE `beer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `drinks`
 --
 ALTER TABLE `drinks`
   MODIFY `drink_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `employees`
---
-ALTER TABLE `employees`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `inventory`
@@ -287,7 +257,7 @@ ALTER TABLE `location`
 -- AUTO_INCREMENT for table `spirit`
 --
 ALTER TABLE `spirit`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -299,7 +269,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `wine`
 --
 ALTER TABLE `wine`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
