@@ -31,6 +31,7 @@ class BeerMenu {
         $html .= '<section>';
         $html .= '<table id="employeesTable">';
         $html .= "<th>ID</th>
+            <th>SAQ Code</th>
             <th>Type</th>
             <th>Name</th>
             <th>Format</th>
@@ -38,10 +39,20 @@ class BeerMenu {
             <th>Edit</th>
             ";
 
+                // Add the search form
+        $html .=     '<form method="post" action="http://localhost/Sys-Dev-Project/index.php?resource=beer&action=menu">';
+            $html .= '<input type="text" name="name" placeholder="Search by beer name...">';
+            $html .= '<input type="hidden" name="resource" value="beer">';
+            $html .= '<input type="hidden" name="action" value="menu">';
+            $html .= '<input type="submit" value="Search">';
+            $html .= '</form>';
+    
+
         // Loop and fill the table with data from the database
         foreach ($beers as $beer) {
             $html .=  "<tr>
                 <td>".$beer['id']."</td>
+                <td>".$beer['saq_code']."</td>
                 <td>".$beer['type']."</td>
                 <td>".$beer['name']."</td>
                 <td>".$beer['format']."</td>

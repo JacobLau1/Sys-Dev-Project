@@ -49,8 +49,15 @@ class BeerController{
 
     function handleMenu(){
 
-        $beerModel = new \Models\Beer();
-        $beers = $beerModel->getAll();
+        $this->beer = new \Models\Beer();
+        //$beers = $this->beer->getAll();
+        $name = isset($_POST['name']) ? $_POST['name'] : null;
+        $beers = null;
+        if(isset($name)){
+            $beers = $this->beer->getBeerByName($name);
+        }else{
+            $beers = $this->beer->getAll();
+        }
 
         $viewClass = "\\Views\\" . "BeerMenu";
         if(class_exists($viewClass)) {
@@ -61,10 +68,12 @@ class BeerController{
 
     function handleEdit() {
         //check if the form has been submitted
-        if (isset($_POST['id'])&&isset($_POST['type'])&&isset($_POST['name'])&&isset($_POST['format'])&&isset($_POST['price'])) {
+        if (isset($_POST['id'])&&isset($_POST['saq_code'])&&
+            isset($_POST['type'])&&isset($_POST['name'])&&isset($_POST['format'])&&isset($_POST['price'])) {
             //get the beer id from the form
             $id = $_POST['id'];
             //get the beer properties from the form
+            $saq_code = $_POST['saq_code'];
             $type = $_POST['type'];
             $name = $_POST['name'];
             $format = $_POST['format'];
@@ -72,6 +81,7 @@ class BeerController{
 
             // Update the beer object properties
             $this->beer->setID($id);
+            $this->beer->setSaqCode($saq_code);
             $this->beer->setType($type);
             $this->beer->setName($name);
             $this->beer->setFormat($format);
@@ -94,6 +104,7 @@ class BeerController{
             $beerModel = new \Models\Beer();
             $beer = $beerModel->getBeerByID($id);
             $this->beer->setID($beer['id']);
+            $this->beer->setSaqCode($beer['saq_code']);
             $this->beer->setType($beer['type']);
             $this->beer->setName($beer['name']);
             $this->beer->setFormat($beer['format']);
@@ -108,6 +119,7 @@ class BeerController{
         // Check if the form has been submitted
         if(isset($_POST['submit'])) {
             // Retrieve the submitted values
+            $saq_code = $_POST['saq_code'];
             $type = $_POST['type'];
             $name = $_POST['name'];
             $format = $_POST['format'];
@@ -117,6 +129,7 @@ class BeerController{
     
             // Create a new beer object and save it to the database
             $this->beer = new \models\Beer();
+            $this->beer->setSaqCode($saq_code);
             $this->beer->setType($type);
             $this->beer->setName($name);
             $this->beer->setFormat($format);

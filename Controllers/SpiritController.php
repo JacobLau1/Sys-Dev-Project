@@ -48,9 +48,14 @@ class SpiritController{
     }
 
     function handleMenu(){
-
-        $spiritModel = new \Models\Spirit();
-        $spirits = $spiritModel->getAll();
+        $this->spirit = new \Models\Spirit();
+        $name = isset($_POST['name']) ? $_POST['name'] : null;
+        $spirits = null;
+        if(isset($name)){
+            $spirits = $this->spirit->getSpiritByName($name);
+        }else{
+            $spirits = $this->spirit->getAll();
+        }
 
         $viewClass = "\\Views\\" . "SpiritMenu";
         if(class_exists($viewClass)) {
@@ -61,10 +66,13 @@ class SpiritController{
 
     function handleEdit() {
         //check if the form has been submitted
-        if (isset($_POST['id'])&&isset($_POST['type'])&&isset($_POST['name'])&&isset($_POST['format'])&&isset($_POST['price'])) {
+        if (isset($_POST['id'])&&isset($_POST['saq_code'])&&
+            isset($_POST['type'])&&isset($_POST['name'])&&
+            isset($_POST['format'])&&isset($_POST['price'])) {
             //get the spirit id from the form
             $id = $_POST['id'];
             //get the spirit properties from the form
+            $saq_code = $_POST['saq_code'];
             $type = $_POST['type'];
             $name = $_POST['name'];
             $format = $_POST['format'];
@@ -72,6 +80,7 @@ class SpiritController{
 
             // Update the spirit object properties
             $this->spirit->setID($id);
+            $this->spirit->setSaqCode($saq_code);
             $this->spirit->setType($type);
             $this->spirit->setName($name);
             $this->spirit->setFormat($format);
@@ -94,6 +103,7 @@ class SpiritController{
             $spiritModel = new \Models\Spirit();
             $spirit = $spiritModel->getSpiritByID($id);
             $this->spirit->setID($spirit['id']);
+            $this->spirit->setSaqCode($spirit['saq_code']);
             $this->spirit->setType($spirit['type']);
             $this->spirit->setName($spirit['name']);
             $this->spirit->setFormat($spirit['format']);
@@ -108,6 +118,7 @@ class SpiritController{
         // Check if the form has been submitted
         if(isset($_POST['submit'])) {
             // Retrieve the submitted values
+            $saq_code = $_POST['saq_code'];
             $type = $_POST['type'];
             $name = $_POST['name'];
             $format = $_POST['format'];
@@ -117,6 +128,7 @@ class SpiritController{
     
             // Create a new spirit object and save it to the database
             $this->spirit = new \models\Spirit();
+            $this->spirit->setSaqCode($saq_code);
             $this->spirit->setType($type);
             $this->spirit->setName($name);
             $this->spirit->setFormat($format);

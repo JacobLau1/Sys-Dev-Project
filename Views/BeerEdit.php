@@ -39,6 +39,11 @@ class BeerEdit {
         $html .= '<table id="employeesTable" class="w3-table w3-striped w3-hoverable w3-text-black">';
         $html .= '<tr class="w3-theme-d3">';
         $html .= '<th class="">ID</th>
+
+        $html = '<section>';
+        $html .= '<table id="employeesTable">';
+        $html .= "<th>ID</th>
+            <thSAQ Code</th>
             <th>Type</th>
             <th>Name</th>
             <th>Format</th>
@@ -48,6 +53,7 @@ class BeerEdit {
 
         $html .=  "<tr>
             <td>".$beer['id']."</td>
+            <td>".$beer['saq_code']."</td>
             <td>".$beer['type']."</td>
             <td>".$beer['name']."</td>
             <td>".$beer['format']."</td>
@@ -59,6 +65,8 @@ class BeerEdit {
         // Form to edit the beer
         $html .= '<form action="" method="post">';
         $html .= '<input type="hidden" id="id" name="id" value="'.$beer['id'].'"><br>';
+        $html .= '<label for="saq_code">SAQ Code:</label><br>';
+        $html .= '<input type="text" id="saq_code" name="saq_code" value="'.$beer['saq_code'].'"><br>';
         $html .= '<label for="type">Type:</label><br>';
         $html .= '<input type="text" id="type" name="type" value="'.$beer['type'].'"><br>';
         $html .= '<label for="name">Name:</label><br>';
