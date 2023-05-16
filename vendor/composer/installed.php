@@ -3,7 +3,7 @@
         'name' => '__root__',
         'pretty_version' => 'dev-Main',
         'version' => 'dev-Main',
-        'reference' => '794128abfabe20de090793bd975d9ccff3d9e078',
+        'reference' => '0eefe8f5e1088f00d4b4ad62fdfb56ac5f4c23e9',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         '__root__' => array(
             'pretty_version' => 'dev-Main',
             'version' => 'dev-Main',
-            'reference' => '794128abfabe20de090793bd975d9ccff3d9e078',
+            'reference' => '0eefe8f5e1088f00d4b4ad62fdfb56ac5f4c23e9',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -118,6 +118,15 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+        'monolog/monolog' => array(
+            'pretty_version' => '3.3.1',
+            'version' => '3.3.1.0',
+            'reference' => '9b5daeaffce5b926cac47923798bba91059e60e2',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../monolog/monolog',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'paragonie/random_compat' => array(
             'pretty_version' => 'v9.99.100',
             'version' => '9.99.100.0',
@@ -179,6 +188,21 @@
             'dev_requirement' => false,
             'provided' => array(
                 0 => '1.0',
+            ),
+        ),
+        'psr/log' => array(
+            'pretty_version' => '3.0.0',
+            'version' => '3.0.0.0',
+            'reference' => 'fe5ea303b0887d5caefd3d431c3e61ad47037001',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../psr/log',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'psr/log-implementation' => array(
+            'dev_requirement' => false,
+            'provided' => array(
+                0 => '3.0.0',
             ),
         ),
         'ralouphie/getallheaders' => array(

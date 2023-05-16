@@ -2,15 +2,25 @@
 namespace controllers;
 
 require_once(dirname(__DIR__) . DIRECTORY_SEPARATOR . "Models" . DIRECTORY_SEPARATOR . "User.php");
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
+
 
 class UserController
 {
 
+    private $log;
     private $user;
     private $userModel;
 
+
+
+
     public function __construct()
     {
+        $this->log = new Logger('user_login');
+        $this->log->pushHandler(new StreamHandler('path/to/login.log', Logger::INFO));
+
         if (!isset($_GET['action'])) {
             return;
         }
@@ -66,25 +76,12 @@ class UserController
 
     private function handleLogin()
     {
-        // echo "handleLogin called <br/>";
-
-
         if (isset($_POST['username'], $_POST['password'])) {
             $this->user->setUsername($_POST['username']);
             $this->user = $this->user->getUserByUsername($_POST['username'])[0];
             $this->user->setPassword($_POST['password']);
 
-            // Set the new properties from the POST data
-            /*
-            $this->user->setPosition($_POST['position']);
-            $this->user->setFirstName($_POST['first_name']);
-            $this->user->setFullName($_POST['full_name']);
-            $this->user->setLastSeen($_POST['last_seen']);
-            $this->user->setDateFired($_POST['date_fired']);
-            $this->user->setDateHired($_POST['date_hired']);
-            $this->user->setWorkingStatus($_POST['working_status']);
-            $this->user->setTerminationReason($_POST['termination_reason']);
-            */
+            $this->log->info('Attempting login', ['username' => $_POST['username']]);
 
             if (isset($_POST['enable2fa'])) {
                 $this->user->setEnabled2FA($_POST['enable2fa'] == 'true');
