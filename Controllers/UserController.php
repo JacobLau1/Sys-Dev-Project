@@ -61,11 +61,12 @@ class UserController
         }
 
         $view = new $viewClass($this->user);
+
     }
 
-private function handleLogin()
+    private function handleLogin()
     {
-       // echo "handleLogin called <br/>";
+        // echo "handleLogin called <br/>";
 
 
         if (isset($_POST['username'], $_POST['password'])) {
@@ -104,14 +105,14 @@ private function handleLogin()
             $this->user->setPassword($userRegistration['password']);
             $this->user->setPosition($userRegistration['position']);
             $this->user->setFirstName($userRegistration['first_name']);
-            $this->user->setlastName($userRegistration['last_name']);
+            $this->user->setLastName($userRegistration['last_name']);
             $this->user->setDateHired($userRegistration['date_hired']);
             $this->user->setWorkingStatus($userRegistration['working_status']);
             $this->user->setEnabled2FA($userRegistration['enable2fa']);
             $this->user->create();
             //delete the cookie
             setcookie('userRegistration', '', time() - 3600, DIRECTORY_SEPARATOR);
-           // echo "User created <br/>";
+            // echo "User created <br/>";
         }
 
 
@@ -142,8 +143,8 @@ private function handleLogin()
 
     private function handleSetUpTwoFA()
     {
-        if (isset($_COOKIE['UserSession'])) {
-            $username = $_COOKIE['UserSession'];
+        if (isset($_COOKIE['UserSessionUser'])) {
+            $username = $_COOKIE['UserSessionUser'];
             $this->user = $this->user->getUserByUsername($username)[0];
         }
 
@@ -152,8 +153,8 @@ private function handleLogin()
 
     private function handleValidateCode()
     {
-        if (isset($_COOKIE['UserSession'])) {
-            $username = $_COOKIE['UserSession'];
+        if (isset($_COOKIE['UserSessionUser'])) {
+            $username = $_COOKIE['UserSessionUser'];
             $this->user = $this->user->getUserByUsername($username)[0];
         }
 
@@ -165,50 +166,39 @@ private function handleLogin()
 
     private function handleMenuSelection()
     {
-        if (isset($_COOKIE['UserSession'])) {
-            $username = $_COOKIE['UserSession'];
+        if (isset($_COOKIE['UserSessionUser'])) {
+            $username = $_COOKIE['UserSessionUser'];
             $this->user = $this->user->getUserByUsername($username)[0];
+        } else{
+            echo "UserSession cookie not set";
         }
     }
 
     private function handleUserManagement()
     {
-        if (isset($_COOKIE['UserSession'])) {
-            $username = $_COOKIE['UserSession'];
+        if (isset($_COOKIE['UserSessionUser'])) {
+            $username = $_COOKIE['UserSessionUser'];
             $this->user = $this->user->getUserByUsername($username)[0];
         }
     }
 
-    // private function handleUserList()
-    // {
-    //     if (isset($_COOKIE['UserSession'])) {
-    //         $username = $_COOKIE['UserSession'];
-    //         $this->user = $this->user->getUserByUsername($username)[0];
-
-    //         $userModel = new \Models\User();
-    //         $users = $userModel->getAll();
-
-    //         $viewClass = "\\views\\" . "UserList";
-    //         if (class_exists($viewClass)) {
-    //             $view = new $viewClass($this->user);
-    //             $view->render($users);
-    //         }
-    //     }
-    // }
-
     private function handleUserList()
     {
-        if (isset($_COOKIE['UserSession'])) {
+        if (isset($_COOKIE['UserSessionUser'])) {
+
+
             $userModel = new \Models\User();
+
             if (isset($_POST['usernamesearch'])) {
                 $usernamesearch = $_POST['usernamesearch'];
                 $users = [$userModel->getUserByUsername($usernamesearch)[0]];
             } else {
                 $users = $userModel->getAll();
             }
-            $username = $_COOKIE['UserSession'];
+            $username = $_COOKIE['UserSessionUser'];
             $this->user = $userModel->getUserByUsername($username)[0];
-    
+
+
             $viewClass = "\\views\\" . "UserList";
             if (class_exists($viewClass)) {
                 $view = new $viewClass($this->user);
@@ -216,7 +206,6 @@ private function handleLogin()
             }
         }
     }
-    
 
     private function handleLogout()
     {
@@ -225,55 +214,72 @@ private function handleLogin()
     }
 
 
-private function handleEdit()
-{
-    if (isset($_POST['id'], $_POST['position'], $_POST['first_name'], $_POST['full_name'], $_POST['last_seen'], $_POST['date_fired'], $_POST['date_hired'], $_POST['working_status'], $_POST['termination_reason'], $_POST['username'])) {
-        $id = $_POST['id'];
-        $userModel = (new \Models\User())->getUserByID($id)[0];
+    private function handleEdit()
+    {
+        if (isset($_POST['id'], $_POST['position'],
+            $_POST['first_name'], $_POST['last_name'],
+            $_POST['last_seen'], $_POST['date_fired'],
+            $_POST['date_hired'], $_POST['working_status'],
+            $_POST['termination_reason'], $_POST['username'])) {
 
-        $userModel->setPosition($_POST['position']);
-        $userModel->setFirstName($_POST['first_name']);
-        $userModel->setFullName($_POST['full_name']);
-        $userModel->setLastSeen($_POST['last_seen']);
-        $userModel->setDateFired($_POST['date_fired']);
-        $userModel->setDateHired($_POST['date_hired']);
-        $userModel->setWorkingStatus($_POST['working_status']);
-        $userModel->setTerminationReason($_POST['termination_reason']);
-        $userModel->setUsername($_POST['username']);
+            $id = $_POST['id'];
 
-        if (isset($_POST['enable2fa'])) {
-            $userModel->setEnabled2FA($_POST['enable2fa'] == 'true');
-        }
+            //get the user properties from the form
+            $position = $_POST['position'];
+            $first_name = $_POST['first_name'];
+            $last_name = $_POST['last_name'];
+            $last_seen = $_POST['last_seen'];
+            $date_fired = $_POST['date_fired'];
+            $date_hired = $_POST['date_hired'];
+            $working_status = $_POST['working_status'];
+            $termination_reason = $_POST['termination_reason'];
+            $username = $_POST['username'];
 
-        $success = $userModel->update();
+            $userModel = (new \Models\User())->getUserByID($id)[0];
 
-        if ($success) {
-            header("Location: index.php?resource=user&action=list");
-            exit;
+            $userModel->setPosition($position);
+            $userModel->setFirstName($first_name);
+            $userModel->setLastName($last_name);
+            $userModel->setLastSeen($last_seen);
+            $userModel->setDateFired($date_fired);
+            $userModel->setDateHired($date_hired);
+            $userModel->setWorkingStatus($working_status);
+            $userModel->setTerminationReason($termination_reason);
+            $userModel->setUsername($username);
+
+            if (isset($_POST['enable2fa'])) {
+                $userModel->setEnabled2FA($_POST['enable2fa'] == 'true');
+            }
+
+            $success = $userModel->update();
+
+            if ($success) {
+                header("Location: index.php?resource=user&action=list");
+                exit;
+            } else {
+                echo "Update failed";
+            }
         } else {
-            echo "Update failed";
+            $id = $_GET['id'];
+            $userModel = (new \Models\User())->getUserByID($id)[0];
+
+            $userModel->setPosition($userModel->getPosition());
+            $userModel->setFirstName($userModel->getFirstName());
+            $userModel->setLastName($userModel->getLastName());
+            $userModel->setLastSeen($userModel->getLastSeen());
+            $userModel->setDateFired($userModel->getDateFired());
+            $userModel->setDateHired($userModel->getDateHired());
+            $userModel->setWorkingStatus($userModel->getWorkingStatus());
+            $userModel->setTerminationReason($userModel->getTerminationReason());
+            $userModel->setUsername($userModel->getUsername());
+            $userModel->setPassword($userModel->getPassword());
+            $userModel->setEnabled2FA($userModel->getEnabled2FA());
+
+            $viewClass = "\\Views\\" . "UserEdit";
+            $view = new $viewClass($this->user);
+            $view->render($userModel);
         }
-    } else {
-        $id = $_GET['id'];
-        $userModel = (new \Models\User())->getUserByID($id)[0];
-
-        $userModel->setPosition($userModel->getPosition());
-        $userModel->setFirstName($userModel->getFirstName());
-        $userModel->setLastName($userModel->getLastName());
-        $userModel->setLastSeen($userModel->getLastSeen());
-        $userModel->setDateFired($userModel->getDateFired());
-        $userModel->setDateHired($userModel->getDateHired());
-        $userModel->setWorkingStatus($userModel->getWorkingStatus());
-        $userModel->setTerminationReason($userModel->getTerminationReason());
-        $userModel->setUsername($userModel->getUsername());
-        $userModel->setPassword($userModel->getPassword());
-        $userModel->setEnabled2FA($userModel->getEnabled2FA());
-
-        $viewClass = "\\Views\\" . "UserEdit";
-        $view = new $viewClass($this->user);
-        $view->render($userModel);
     }
-}
 
 
 

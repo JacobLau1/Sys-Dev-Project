@@ -67,10 +67,9 @@ class WineController{
 
     function handleEdit() {
         //check if the form has been submitted
-        if (isset($_POST['id'])&&isset($POST['saq_code'])&&
-            isset($_POST['type'])&&isset($_POST['name'])&&
-            isset($_POST['format'])&&isset($_POST['price'])) {
-            //get the wine id from the form
+        if (isset($_POST['id'])&&isset($_POST['saq_code'])&&
+            isset($_POST['type'])&&isset($_POST['name'])&&isset($_POST['format'])&&isset($_POST['price'])) {
+            //get the winer id from the form
             $id = $_POST['id'];
             //get the wine properties from the form
             $saq_code = $_POST['saq_code'];
@@ -90,7 +89,7 @@ class WineController{
             //update the wine in the database
             $success = $this->wine->update();
 
-            //if the update was successful, redirect to the wine menu
+            //if the update was successful, redirect to the beer menu
             if ($success) {
                 header("Location: index.php?resource=wine&action=menu");
                 exit;

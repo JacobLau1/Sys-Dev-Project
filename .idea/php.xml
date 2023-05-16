@@ -10,6 +10,37 @@
     <option name="highlightLevel" value="WARNING" />
     <option name="transferred" value="true" />
   </component>
+  <component name="PhpIncludePathManager">
+    <include_path>
+      <path value="$PROJECT_DIR$/Vendor/guzzlehttp/promises" />
+      <path value="$PROJECT_DIR$/Vendor/guzzlehttp/psr7" />
+      <path value="$PROJECT_DIR$/Vendor/paragonie/random_compat" />
+      <path value="$PROJECT_DIR$/Vendor/phpoption/phpoption" />
+      <path value="$PROJECT_DIR$/Vendor/delight-im/auth" />
+      <path value="$PROJECT_DIR$/Vendor/phpotp/code" />
+      <path value="$PROJECT_DIR$/Vendor/delight-im/base64" />
+      <path value="$PROJECT_DIR$/Vendor/delight-im/cookie" />
+      <path value="$PROJECT_DIR$/Vendor/delight-im/db" />
+      <path value="$PROJECT_DIR$/Vendor/delight-im/http" />
+      <path value="$PROJECT_DIR$/Vendor/graham-campbell/result-type" />
+      <path value="$PROJECT_DIR$/Vendor/psr/http-client" />
+      <path value="$PROJECT_DIR$/Vendor/psr/http-factory" />
+      <path value="$PROJECT_DIR$/Vendor/psr/http-message" />
+      <path value="$PROJECT_DIR$/Vendor/vlucas/phpdotenv" />
+      <path value="$PROJECT_DIR$/Vendor/symfony/deprecation-contracts" />
+      <path value="$PROJECT_DIR$/Vendor/symfony/polyfill-ctype" />
+      <path value="$PROJECT_DIR$/Vendor/league/oauth2-client" />
+      <path value="$PROJECT_DIR$/Vendor/symfony/polyfill-mbstring" />
+      <path value="$PROJECT_DIR$/Vendor/symfony/polyfill-php80" />
+      <path value="$PROJECT_DIR$/Vendor/composer" />
+      <path value="$PROJECT_DIR$/Vendor/ralouphie/getallheaders" />
+      <path value="$PROJECT_DIR$/Vendor/guzzlehttp/guzzle" />
+      <path value="$PROJECT_DIR$/Vendor/aura/auth" />
+    </include_path>
+  </component>
+  <component name="PhpProjectSharedConfiguration" php_language_level="8.0">
+    <option name="suggestChangeDefaultLanguageLevel" value="false" />
+  </component>
   <component name="PhpStanOptionsConfiguration">
     <option name="transferred" value="true" />
   </component>

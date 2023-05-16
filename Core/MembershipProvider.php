@@ -15,21 +15,19 @@ class MembershipProvider{
 
     function login(){
 
-        session_name("hrapp");
+        session_name("UserSession");
 
         session_start();
 
         $_SESSION['username'] = $this->user->getUsername();
 
-        setcookie('UserSession', $this->user->getUsername(), time()+3600);
-
-        echo 'You are logged in as: '.$this->user->getUsername();
+        setcookie('UserSessionUser', $this->user->getUsername(), time()+3600);
 
     }
 
     function isLoggedIn(){
 
-        session_name("hrapp");
+        session_name("UserSession");
 
         session_start();
 
@@ -49,7 +47,7 @@ class MembershipProvider{
     }
 
     function logout(){
-        session_name("hrapp");
+        session_name("UserSession");
 
         session_start();
         $_SESSION = array();

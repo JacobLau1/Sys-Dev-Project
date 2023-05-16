@@ -1,6 +1,7 @@
 <?php namespace views; ?>
 <html>
 <head>
+    <title>User List</title>
     <style>
 
         body {

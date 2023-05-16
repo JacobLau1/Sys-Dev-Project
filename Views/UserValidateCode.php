@@ -1,5 +1,8 @@
 <?php namespace views;?>
     <html>
+    <head>
+        <title>Validate Code</title>
+    </head>
     <body>
     <h1>Enter your 2FA OTP code</h1>
     <form action="" method="post">

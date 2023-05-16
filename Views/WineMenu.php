@@ -6,6 +6,8 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-teal.css">
     <script src="https://kit.fontawesome.com/99c47d5f92.js" crossorigin="anonymous"></script>
+    <title>Wine Menu</title>
+    <link rel="icon" type="image/x-icon" href="../favicon.ico" />
 </head>
 <body class="w3-theme-d5">
 <?php
@@ -60,20 +62,23 @@ class WineMenu
         // Loop and fill the table with data from the database
         foreach ($wines as $wine) {
             $html .= "<tr>
-                <td>" . $wine['id'] . "</td>
-                <td>" . $wine['saq_code'] . "</td>
-                <td>" . $wine['type'] . "</td>
-                <td>" . $wine['name'] . "</td>
-                <td>" . $wine['format'] . "</td>
-                <td>" . $wine['price'] . "</td>
-                <td>
-                <a class='w3-button w3-hover-blue-gray w3-round' href='http://localhost/Sys-Dev-Project/index.php?resource=wine&action=edit&id=" . $wine['id'] . "'>
-                    <i class='fas fa-pen-fancy'></i>
-                </a>
-                <button onclick=$deleteModalFunction class='w3-button w3-hover-blue-gray w3-round wine-deletion'><i class='fas fa-trash'></i></button>
-                </td>
-            </tr>";
+        <td>" . $wine['id'] . "</td>
+        <td>" . $wine['saq_code'] . "</td>
+        <td>" . $wine['type'] . "</td>
+        <td>" . $wine['name'] . "</td>
+        <td>" . $wine['format'] . "</td>
+        <td>" . $wine['price'] . "</td>
+        <td>
+            <a class='w3-button w3-hover-blue-gray w3-round' href='http://localhost/Sys-Dev-Project/index.php?resource=wine&action=edit&id=" . $wine['id'] . "'>
+                <i class='fas fa-pen-fancy'></i>
+            </a>
+            <button onclick='openDeleteModal(" . $wine['id'] . ")' class='w3-button w3-hover-blue-gray w3-round wine-deletion'>
+                <i class='fas fa-trash'></i>
+            </button>
+        </td>
+    </tr>";
         }
+
 
         $html .= "</table>";
         $html .= '</section>';
@@ -87,13 +92,32 @@ class WineMenu
 <div id="id01" class="w3-modal">
     <div class="w3-modal-content w3-theme-d3">
         <div class="w3-container">
-            <p>Some text in the Modal..</p>
-            <p>Some text in the Modal..</p>
+
+            <p>Are you sure you want to delete Wine ID: <span id="wineIdSpan"></span>?</p>
+            <form action="http://localhost/Sys-Dev-Project/index.php?resource=wine&action=delete" method="post">
+                <input type="hidden" name="id" id="wine_deletion" value="wine_id_value"><br>
+                <input type="submit" value="Delete Wine">
+            </form>
+
             <button class="w3-button w3-round w3-theme-d4" onclick="document.getElementById('id01').style.display='none'">Cancel</button>
-            <button class="w3-button w3-round w3-theme-d4" onclick="document.getElementById('id01').style.display='none'">Delete</button>
         </div>
     </div>
 </div>
+<script>
+    function openDeleteModal(wineId) {
+        var modal = document.getElementById('id01');
+        modal.style.display = 'block';
+
+        var wineIdSpan = document.getElementById('wineIdSpan');
+        wineIdSpan.textContent = wineId;
+
+        var wineIdVal = document.getElementById('wine_deletion');
+        wineIdVal.value = wineId;
+
+    }
+</script>
+
+
 <!--<script src="./Modals.js"></script>-->
 
 </body>

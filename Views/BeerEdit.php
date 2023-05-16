@@ -2,6 +2,7 @@
 
 <html>
 <head>
+    <title>Beer Edit</title>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-teal.css">
 </head>
@@ -34,7 +35,7 @@ class BeerEdit {
         /* Table */
         $html = '';
         $html .= '<div class="w3-container w3-center" style="padding: 4rem" id="main">';
-        $html .= '<h1 class="center white-text">Wine Menu</h1>';
+        $html .= '<h1 class="center white-text">Beer Menu</h1>';
         $html .= '<section class="w3-card w3-white">';
         $html .= '<table id="employeesTable" class="w3-table w3-striped w3-hoverable w3-text-black">';
         $html .= '<tr class="w3-theme-d3">';
@@ -72,11 +73,6 @@ class BeerEdit {
         $html .= '<input type="submit" value="Submit">';
         $html .= '</form>';
 
-        // Button to delete the beer
-        $html .= '<form action="http://localhost/Sys-Dev-Project/index.php?resource=beer&action=delete" method="post">';
-        $html .= '<input type="hidden" id="id" name="id" value="'.$beer['id'].'"><br>';
-        $html .= '<input type="submit" value="Delete Beer">';
-        $html .= '</form>';
 
 
         $html .= '</section>';

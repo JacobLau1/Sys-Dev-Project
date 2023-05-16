@@ -2,6 +2,11 @@
 
 namespace models;
 
+use Delight\Auth\AuthError;
+use Delight\Auth\DuplicateUsernameException;
+$auth_factory = new \Aura\Auth\AuthFactory($_COOKIE);
+$auth = $auth_factory->newInstance();
+
 require_once(dirname(__DIR__) . DIRECTORY_SEPARATOR . "Core" . DIRECTORY_SEPARATOR . "DBConnectionManager.php");
 
 require(dirname(__DIR__) . DIRECTORY_SEPARATOR . "Core" . DIRECTORY_SEPARATOR . "MembershipProvider.php");
@@ -9,6 +14,7 @@ require(dirname(__DIR__) . DIRECTORY_SEPARATOR . "Core" . DIRECTORY_SEPARATOR . 
 
 class User
 {
+
 
     private $id;
     private $position;
@@ -30,6 +36,7 @@ class User
 
     private $membershipProvider;
 
+
     function __construct()
     {
 
@@ -43,6 +50,8 @@ class User
 
     function create()
     {
+
+
         $query = "INSERT INTO users (
                         position, first_name, last_name, last_seen, date_fired, date_hired,
                         working_status, termination_reason, username, password, enabled2fa) 
@@ -50,6 +59,8 @@ class User
                         :position, :first_name, :last_name, :last_seen, :date_fired, :date_hired,
                         :working_status, :termination_reason, :username, :password, :enabled2fa)";
         $statement = $this->dbConnection->prepare($query);
+
+
         $hashedPassword = password_hash($this->password, PASSWORD_DEFAULT);
 
         return $statement->execute([
@@ -58,40 +69,19 @@ class User
             'date_fired' => $this->date_fired, 'date_hired' => $this->date_hired,
             'working_status' => $this->working_status, 'termination_reason' => $this->termination_reason,
             'username' => $this->username, 'password' => $hashedPassword, 'enabled2fa' => $this->enabled2fa]);
+        
     }
 
     function login()
     {
-      //  echo "User Class Login Function Called <br/>";
-
         // Get the password from the DB
-        $verified = false;
         $dbPassword = $this->getPasswordByUsername();
 
-      //  echo "DB Password: " . $dbPassword . "<br/>";
-      //  echo "Password: " . $this->password . "<br/>";
-        $info = password_get_info($dbPassword);
-     //   echo "Password Info: <br/>";
-      //  echo "<br/>";
-      //  var_dump($info);
-      // echo "<br/>";
-      //  echo "<br/>";
-        $info = password_get_info($dbPassword);
-      //  echo "Hashing algorithm: " . $info['algo'] . "<br>";
+        if(password_verify($this->password, $dbPassword)){
 
-        if (password_verify($this->password, $dbPassword)) {
-      //      echo "Password Verified <br/>";
-            $verified = true;
-        } else {
-      //      echo "Password NOT Verified <br/>";
+            $this->membershipProvider->login();
+
         }
-
-        // use the bcrypt algorithm to hash the password with a cost of 10
-        $hash = password_hash($this->password, PASSWORD_BCRYPT, ['cost' => 10]);
-      //  echo "Hash: " . $hash . "<br/>";
-
-        ////// remove the = true later
-        return $verified;
 
     }
 
@@ -334,16 +324,26 @@ class User
 
     function update()
     {
-
-        $query = "UPDATE users SET position = :position, username = :username, password = :password, enabled2fa = :enabled2fa WHERE id = :id";
+        $query = "UPDATE users SET position = :position, first_name = :first_name, last_name = :last_name, last_seen = :last_seen, date_fired = :date_fired, date_hired = :date_hired, working_status = :working_status, termination_reason = :termination_reason, username = :username WHERE id = :id";
 
         $statement = $this->dbConnection->prepare($query);
 
         $hashedPassword = password_hash($this->password, PASSWORD_DEFAULT);
 
-        return $statement->execute(['position' => $this->position, 'username' => $this->username, 'password' => $hashedPassword, 'enabled2fa' => $this->enabled2fa, 'id' => $this->id]);
-
+        return $statement->execute([
+            'position' => $this->position,
+            'first_name' => $this->first_name,
+            'last_name' => $this->last_name,
+            'last_seen' => $this->last_seen,
+            'date_fired' => $this->date_fired,
+            'date_hired' => $this->date_hired,
+            'working_status' => $this->working_status,
+            'termination_reason' => $this->termination_reason,
+            'username' => $this->username,
+            'id' => $this->id
+        ]);
     }
+
 
     public function getUserByID($id)
     {
@@ -380,6 +380,7 @@ class User
             'otpcodeisvalid' => $this->otpcodeisvalid
         ]);
     }
+
 
 }
 

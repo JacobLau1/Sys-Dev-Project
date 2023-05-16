@@ -18,6 +18,7 @@ spl_autoload_register(function ($class) {
 */
 
 spl_autoload_register(function ($class) {
+    require_once __DIR__ . '/vendor/autoload.php';
     if ($class === 'WineMenu') {
         require_once 'Views' . DIRECTORY_SEPARATOR . 'WineMenu.php';
     } else if ($class === 'BeerMenu') {
