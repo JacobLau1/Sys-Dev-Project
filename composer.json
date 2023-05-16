@@ -1,0 +1,7 @@
+{
+    "require": {
+        "league/oauth2-client": "^2.7",
+        "delight-im/auth": "^8.3",
+        "vlucas/phpdotenv": "^5.5"
+    }
+}

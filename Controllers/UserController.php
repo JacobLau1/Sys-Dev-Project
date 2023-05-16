@@ -100,6 +100,7 @@ private function handleLogin()
 
         if (isset($_COOKIE['userRegistration'])) {
             $userRegistration = json_decode($_COOKIE['userRegistration'], true);
+            $this->user->setEmail($userRegistration['email']);
             $this->user->setUsername($userRegistration['username']);
             $this->user->setPassword($userRegistration['password']);
             $this->user->setPosition($userRegistration['position']);

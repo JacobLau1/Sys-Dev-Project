@@ -118,6 +118,7 @@ class UserEdit {
 
         $html .= "<th>ID</th>
                 <th>Position</th>
+                <th>Email</th>
                 <th>Username</th>
                 <th>Last Seen</th>
                 <th>Date Hired</th>
@@ -129,6 +130,7 @@ class UserEdit {
         $html .= "<tr>
                 <td>".$userModel->getID()."</td>
                 <td>".$userModel->getPosition()."</td>
+                <td>".$userModel->getEmail()."</td>
                 <td>".$userModel->getUsername()."</td>
                 <td>".$userModel->getLastSeen()."</td>
                 <td>".$userModel->getDateHired()."</td>
@@ -149,6 +151,8 @@ class UserEdit {
                         <option value="manager">Manager</option>
                         <option value="admin">Admin</option>
                     </select><br>';
+        $html .= '<label for="email">Email:</label><br>';
+        $html .= '<input type="text" id="email" name="email" value="'.$userModel->getEmail().'"><br>';
         $html .= '<label for="username">Username:</label><br>';
         $html .= '<input type="text" id="username" name="username" value="'.$userModel->getUsername().'"><br>';
         $html .= '<input type="hidden" id="last_seen" name="last_seen" value="'.$userModel->getLastSeen().'"><br>';

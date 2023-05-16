@@ -2,6 +2,9 @@
 
 namespace models;
 
+use Delight\Auth\AuthError;
+use Delight\Auth\DuplicateUsernameException;
+
 require_once(dirname(__DIR__) . DIRECTORY_SEPARATOR . "Core" . DIRECTORY_SEPARATOR . "DBConnectionManager.php");
 
 require(dirname(__DIR__) . DIRECTORY_SEPARATOR . "Core" . DIRECTORY_SEPARATOR . "MembershipProvider.php");
@@ -29,6 +32,7 @@ class User
     private $dbConnection;
 
     private $membershipProvider;
+    private $email;
 
     function __construct()
     {
@@ -43,6 +47,8 @@ class User
 
     function create()
     {
+
+
         $query = "INSERT INTO users (
                         position, first_name, last_name, last_seen, date_fired, date_hired,
                         working_status, termination_reason, username, password, enabled2fa) 
@@ -58,6 +64,7 @@ class User
             'date_fired' => $this->date_fired, 'date_hired' => $this->date_hired,
             'working_status' => $this->working_status, 'termination_reason' => $this->termination_reason,
             'username' => $this->username, 'password' => $hashedPassword, 'enabled2fa' => $this->enabled2fa]);
+        
     }
 
     function login()
@@ -264,6 +271,11 @@ class User
         $this->last_name = $last_name;
     }
 
+    public function setEmail($email)
+    {
+        $this->email = $email;
+    }
+
     public function getLastName()
     {
         return $this->last_name;
@@ -319,6 +331,11 @@ class User
         return $this->termination_reason;
     }
 
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
     function getAll()
     {
 
@@ -335,13 +352,13 @@ class User
     function update()
     {
 
-        $query = "UPDATE users SET position = :position, username = :username, password = :password, enabled2fa = :enabled2fa WHERE id = :id";
+        $query = "UPDATE users SET position = :position, email = :email ,username = :username, password = :password, enabled2fa = :enabled2fa WHERE id = :id";
 
         $statement = $this->dbConnection->prepare($query);
 
         $hashedPassword = password_hash($this->password, PASSWORD_DEFAULT);
 
-        return $statement->execute(['position' => $this->position, 'username' => $this->username, 'password' => $hashedPassword, 'enabled2fa' => $this->enabled2fa, 'id' => $this->id]);
+        return $statement->execute(['position' => $this->position, 'email' => $this->email,'username' => $this->username, 'password' => $hashedPassword, 'enabled2fa' => $this->enabled2fa, 'id' => $this->id]);
 
     }
 
@@ -373,6 +390,7 @@ class User
         return json_encode([
             'id' => $this->id,
             'position' => $this->position,
+            'email' => $this->email,
             'username' => $this->username,
             'password' => $this->password,
             'enabled2fa' => $this->enabled2fa,
@@ -380,6 +398,7 @@ class User
             'otpcodeisvalid' => $this->otpcodeisvalid
         ]);
     }
+
 
 }
 

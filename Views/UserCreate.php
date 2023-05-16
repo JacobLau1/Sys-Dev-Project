@@ -107,6 +107,8 @@ body, a, h1, #employeesTable td, #employeesTable th {
     <input type="text" id="first_name" name="first_name"><br>
     <label for="last_name">Last Name:</label><br>
     <input type="text" id="last_name" name="last_name"><br>
+    <label for="email">Email:</label><br>
+    <input type="text" id="email" name="email"><br>
     <label for="username">Username:</label><br>
     <input type="text" id="username" name="username"><br>
     <label for="password">Password:</label><br>
