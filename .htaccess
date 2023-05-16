@@ -1,0 +1,4 @@
+RewriteEngine On
+RewriteBase /
+
+RewriteRule ^index\.php$ index.php?resource=user&action=login [QSA,L]
