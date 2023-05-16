@@ -2,15 +2,21 @@
 
 namespace controllers;
 
+use Monolog\Handler\StreamHandler;
+use Monolog\Logger;
+
 require(dirname(__DIR__). DIRECTORY_SEPARATOR ."Models" . DIRECTORY_SEPARATOR ."Wine.php");
 
 
 class WineController{
+    private $log;
 
     private $user;
     private $wine;
 
     function __construct(){
+        $this->log = new Logger('wine');
+        $this->log->pushHandler(new StreamHandler('drinks.log', Logger::INFO));
         if(!isset($_GET['action'])) {
             return;
         }
@@ -71,6 +77,7 @@ class WineController{
             isset($_POST['type'])&&isset($_POST['name'])&&isset($_POST['format'])&&isset($_POST['price'])) {
             //get the winer id from the form
             $id = $_POST['id'];
+            $this->log->info('Editing', ['Wine ID' => $id]);
             //get the wine properties from the form
             $saq_code = $_POST['saq_code'];
             $type = $_POST['type'];
@@ -117,7 +124,9 @@ class WineController{
     public function handleAdd() {       //handle add
         // Check if the form has been submitted
         if(isset($_POST['submit'])) {
+            $this->log->info('Adding drink');
             // Retrieve the submitted values
+            $id = $_POST['id'];
             $saq_code = $_POST['saq_code'];
             $type = $_POST['type'];
             $name = $_POST['name'];
@@ -128,6 +137,7 @@ class WineController{
     
             // Create a new wine object and save it to the database
             $this->wine = new \models\Wine();
+            $this->wine->setID($id);
             $this->wine->setSaqCode($saq_code);
             $this->wine->setType($type);
             $this->wine->setName($name);
@@ -152,12 +162,14 @@ class WineController{
     {
         //get the id of the wine to delete
         $id = $_POST['id'];
+        $this->log->info('Deleting...', ['Wine ID' => $id]);
 
         //delete the wine from the database
         $success = $this->wine->delete($id);
 
         //if the delete was successful, redirect to the wine list
         if ($success) {
+            $this->log->info('Deletion successful', ['Wine ID' => $id]);
             header("Location: index.php?resource=wine&action=menu");
             exit;
         }

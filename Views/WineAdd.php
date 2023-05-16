@@ -34,25 +34,28 @@ class WineAdd {
         echo '<section>';
         $html = '<form method="POST" action="http://localhost/Sys-Dev-Project/index.php?resource=wine&action=add">';
 
+        $html .= '<label for="id">ID:</label><br/>';
+        $html .= '<input type="text" name="id" required><br/><br/>';
+
         $html .= '<label for="saq_code">SAQ Code:</label><br/>';
         $html .= '<input type="text" name="saq_code" required><br/><br/>';
 
         $html .= '<label for="type">Type:</label><br/>';
         $html .= '<input type="text" name="type" required><br/><br/>';
-        
+
         $html .= '<label for="name">Name:</label><br/>';
         $html .= '<input type="text" name="name" required><br/><br/>';
-        
+
         $html .= '<label for="format">Format:</label><br/>';
         $html .= '<input type="text" name="format" required><br/><br/>';
-        
+
         $html .= '<label for="price">Price:</label><br/>';
         $html .= '<input type="number" name="price" min="0" step="0.01" required><br/><br/>';
-        
+
         $html .= '<input type="submit" name="submit" value="Add"><br/><br/>';
         $html .= "</form>";
         $html .= '</section>';
-        
+
 
         echo $html;
     }

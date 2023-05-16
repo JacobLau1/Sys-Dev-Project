@@ -33,6 +33,9 @@ class BeerAdd {
         echo '<section>';
         $html = '<form method="POST" action="http://localhost/Sys-Dev-Project/index.php?resource=beer&action=add">';
 
+        $html .= '<label for="id">ID:</label><br/>';
+        $html .= '<input type="text" name="id" required><br/><br/>';
+
         $html .= '<label for="saq_code">SAQ Code:</label><br/>';
         $html .= '<input type="text" name="saq_code" required><br/><br/>';
 

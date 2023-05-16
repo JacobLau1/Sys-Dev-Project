@@ -83,7 +83,7 @@ class UserEdit {
 
     public function render($userModel = null) {
         echo '<br/>';
-        echo '<a href="http://localhost/Sys-Dev-Project/index.php?resource=user&action=logout">Logout</a>';
+        echo '<a href="http://localhost/Sys-Dev-Project/index.php?resource=user&action=list">Back</a>';
         echo '<br/>';
 
         if ($userModel === null) {
@@ -165,7 +165,10 @@ class UserEdit {
         $html .= '<label for="date_fired">Date Fired:</label><br>';
         $html .= '<input type="date" id="date_fired" name="date_fired" value="'.$userModel->getDateFired().'"><br>';
         $html .= '<label for="working_status">Working Status:</label><br>';
-        $html .= '<input type="text" id="working_status" name="working_status" value="'.$userModel->getWorkingStatus().'"><br>';
+        $html .= '<select id="working_status" name="working_status">';
+        $html .= '<option value="0" '.($userModel->getWorkingStatus() == 0 ? 'selected' : '').'>0</option>';
+        $html .= '<option value="1" '.($userModel->getWorkingStatus() == 1 ? 'selected' : '').'>1</option>';
+        $html .= '</select><br>';
         $html .= '<label for="termination_reason">Termination Reason:</label><br>';
         $html .= '<input type="text" id="termination_reason" name="termination_reason" value="'.$userModel->getTerminationReason().'"><br>';
         $html .= '<label for="enable2fa">Enable 2-FA?</label>';

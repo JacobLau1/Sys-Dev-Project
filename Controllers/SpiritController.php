@@ -2,6 +2,9 @@
 
 namespace controllers;
 
+use Monolog\Handler\StreamHandler;
+use Monolog\Logger;
+
 require(dirname(__DIR__) . DIRECTORY_SEPARATOR. "Models" . DIRECTORY_SEPARATOR . "Spirit.php");
 
 
@@ -9,8 +12,11 @@ class SpiritController{
 
     private $user;
     private $spirit;
+    private $log;
 
     function __construct(){
+        $this->log = new Logger('spirit');
+        $this->log->pushHandler(new StreamHandler('drinks.log', Logger::INFO));
         if(!isset($_GET['action'])) {
             return;
         }
@@ -71,6 +77,7 @@ class SpiritController{
             isset($_POST['format'])&&isset($_POST['price'])) {
             //get the spirit id from the form
             $id = $_POST['id'];
+            $this->log->info('Editing', ['Spirit ID' => $id]);
             //get the spirit properties from the form
             $saq_code = $_POST['saq_code'];
             $type = $_POST['type'];
@@ -117,7 +124,9 @@ class SpiritController{
     public function handleAdd() {       //handle add
         // Check if the form has been submitted
         if(isset($_POST['submit'])) {
+            $this->log->info('Adding drink');
             // Retrieve the submitted values
+            $id = $_POST['id'];
             $saq_code = $_POST['saq_code'];
             $type = $_POST['type'];
             $name = $_POST['name'];
@@ -128,6 +137,7 @@ class SpiritController{
     
             // Create a new spirit object and save it to the database
             $this->spirit = new \models\Spirit();
+            $this->spirit->setID($id);
             $this->spirit->setSaqCode($saq_code);
             $this->spirit->setType($type);
             $this->spirit->setName($name);
@@ -152,12 +162,14 @@ class SpiritController{
     {
         //get the id of the spirit to delete
         $id = $_POST['id'];
+        $this->log->info('Deleting...', ['Spirit ID' => $id]);
 
         //delete the spirit from the database
         $success = $this->spirit->delete($id);
 
         //if the delete was successful, redirect to the spirit list
         if ($success) {
+            $this->log->info('Deletion successful', ['Spirit ID' => $id]);
             header("Location: index.php?resource=spirit&action=menu");
             exit;
         }

@@ -30,11 +30,11 @@ class Wine{
 
     function create(){
 
-        $query = "INSERT INTO wine (saq_code, type, name, format, price) VALUES(:saq_code, :type, :name, :format, :price)";
+        $query = "INSERT INTO wine (id, saq_code, type, name, format, price) VALUES(:id, :saq_code, :type, :name, :format, :price)";
 
         $statement = $this->dbConnection->prepare($query);
 
-        return $statement->execute(['saq_code' => $this->saq_code,'type' => $this->type,'name' => $this->name, 'format' => $this->format,'price' => $this->price]);
+        return $statement->execute(['id' => $this->id,'saq_code' => $this->saq_code,'type' => $this->type,'name' => $this->name, 'format' => $this->format,'price' => $this->price]);
 
     }
 

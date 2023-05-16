@@ -2,6 +2,9 @@
 
 namespace controllers;
 
+use Monolog\Handler\StreamHandler;
+use Monolog\Logger;
+
 require(dirname(__DIR__). DIRECTORY_SEPARATOR ."Models" . DIRECTORY_SEPARATOR ."Drink.php");
 
 
@@ -9,8 +12,11 @@ class DrinkController{
 
     private $user;
     private $drink;
+    private $log;
 
     function __construct(){
+        $this->log = new Logger('user_login');
+        $this->log->pushHandler(new StreamHandler('drinks.log', Logger::INFO));
         if(!isset($_GET['action'])) {
             return;
         }

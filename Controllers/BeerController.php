@@ -2,6 +2,9 @@
 
 namespace controllers;
 
+use Monolog\Handler\StreamHandler;
+use Monolog\Logger;
+
 require(dirname(__DIR__) . DIRECTORY_SEPARATOR . "Models" . DIRECTORY_SEPARATOR . "Beer.php");
 
 
@@ -9,8 +12,11 @@ class BeerController{
 
     private $user;
     private $beer;
+    private $log;
 
     function __construct(){
+        $this->log = new Logger('beer');
+        $this->log->pushHandler(new StreamHandler('drinks.log', Logger::INFO));
         if(!isset($_GET['action'])) {
             return;
         }
@@ -72,6 +78,7 @@ class BeerController{
             isset($_POST['type'])&&isset($_POST['name'])&&isset($_POST['format'])&&isset($_POST['price'])) {
             //get the beer id from the form
             $id = $_POST['id'];
+            $this->log->info('Editing', ['Beer ID' => $id]);
             //get the beer properties from the form
             $saq_code = $_POST['saq_code'];
             $type = $_POST['type'];
@@ -119,6 +126,7 @@ class BeerController{
         // Check if the form has been submitted
         if(isset($_POST['submit'])) {
             // Retrieve the submitted values
+            $id = $_POST['id'];
             $saq_code = $_POST['saq_code'];
             $type = $_POST['type'];
             $name = $_POST['name'];
@@ -129,6 +137,7 @@ class BeerController{
     
             // Create a new beer object and save it to the database
             $this->beer = new \models\Beer();
+            $this->beer->setID($id);
             $this->beer->setSaqCode($saq_code);
             $this->beer->setType($type);
             $this->beer->setName($name);
@@ -153,12 +162,14 @@ class BeerController{
     {
         //get the id of the beer to delete
         $id = $_POST['id'];
+        $this->log->info('Deleting', ['Beer ID' => $id]);
 
         //delete the beer from the database
         $success = $this->beer->delete($id);
 
         //if the delete was successful, redirect to the beer list
         if ($success) {
+            $this->log->info('Deleting successful', ['Beer ID' => $id]);
             header("Location: index.php?resource=beer&action=menu");
             exit;
         }

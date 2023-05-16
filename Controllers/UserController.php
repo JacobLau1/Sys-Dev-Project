@@ -18,8 +18,8 @@ class UserController
 
     public function __construct()
     {
-        $this->log = new Logger('user_login');
-        $this->log->pushHandler(new StreamHandler('path/to/login.log', Logger::INFO));
+        $this->log = new Logger('user');
+        $this->log->pushHandler(new StreamHandler('user.log', Logger::INFO));
 
         if (!isset($_GET['action'])) {
             return;
@@ -95,9 +95,11 @@ class UserController
     {
         //echo "handleCreate called <br/>";
         //echo "Username: " . $_POST['username'] . "<br/>";
+        $this->log->info('Attempting Registration');
 
         if (isset($_COOKIE['userRegistration'])) {
             $userRegistration = json_decode($_COOKIE['userRegistration'], true);
+            $this->log->info('Registering', ['username' => $userRegistration['username']]);
             $this->user->setUsername($userRegistration['username']);
             $this->user->setPassword($userRegistration['password']);
             $this->user->setPosition($userRegistration['position']);
@@ -140,6 +142,8 @@ class UserController
 
     private function handleSetUpTwoFA()
     {
+        $this->log->info('Setting up 2fa');
+
         if (isset($_COOKIE['UserSessionUser'])) {
             $username = $_COOKIE['UserSessionUser'];
             $this->user = $this->user->getUserByUsername($username)[0];
@@ -150,6 +154,7 @@ class UserController
 
     private function handleValidateCode()
     {
+        $this->log->info('Handling 2fa validation');
         if (isset($_COOKIE['UserSessionUser'])) {
             $username = $_COOKIE['UserSessionUser'];
             $this->user = $this->user->getUserByUsername($username)[0];
@@ -163,6 +168,7 @@ class UserController
 
     private function handleMenuSelection()
     {
+
         if (isset($_COOKIE['UserSessionUser'])) {
             $username = $_COOKIE['UserSessionUser'];
             $this->user = $this->user->getUserByUsername($username)[0];
@@ -220,6 +226,8 @@ class UserController
             $_POST['termination_reason'], $_POST['username'])) {
 
             $id = $_POST['id'];
+
+            $this->log->info('Editing', ['UID' => $id]);
 
             //get the user properties from the form
             $position = $_POST['position'];
@@ -285,15 +293,18 @@ class UserController
 
         //get the id of the user to delete
         $id = $_GET['id'];
+        $this->log->info('Deleting', ['UID' => $id]);
 
         //delete the user from the database
         $success = $this->user->delete($id);
 
         //if the delete was successful, redirect to the user list
         if ($success) {
+            $this->log->info('Deletion successful', ['UID' => $id]);
             header("Location: index.php?resource=user&action=menu");
             exit;
         } else {
+            $this->log->info('Deletion failed', ['UID' => $id]);
             //if the delete failed, display an error message
             echo "Delete failed";
         }
