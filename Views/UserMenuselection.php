@@ -18,6 +18,7 @@ Class UserMenuselection{
 
         $membershipProvider = $this->user->getMembershipProvider();
 
+      
         if($membershipProvider->isLoggedIn()){
             $this->welcomeMessage = 'Welcome '.$this->user->getUsername();
             $html = "<header>";
@@ -36,6 +37,7 @@ Class UserMenuselection{
 
 
 
+
             //if the position is admin, display admin
 
 
@@ -44,11 +46,14 @@ Class UserMenuselection{
 
         }else{//user not logged in
             echo "not logged in";
+
             header('HTTP/1.1 401 Unauthorized');
             header('Location: http://localhost/Sys-Dev-Project/index.php?resource=user&action=login');
             exit();
 
+
         }
+
     }
 }
 ?>

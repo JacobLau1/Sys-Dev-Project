@@ -23,4 +23,6 @@ return array(
     'Delight\\Cookie\\' => array($vendorDir . '/delight-im/cookie/src'),
     'Delight\\Base64\\' => array($vendorDir . '/delight-im/base64/src'),
     'Delight\\Auth\\' => array($vendorDir . '/delight-im/auth/src'),
+    'Aura\\Auth\\_Config\\' => array($vendorDir . '/aura/auth/config'),
+    'Aura\\Auth\\' => array($vendorDir . '/aura/auth/src'),
 );

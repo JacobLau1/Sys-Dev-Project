@@ -49,6 +49,11 @@ class ComposerStaticInit3805921404cda1e743840777ebd382cf
             'Delight\\Base64\\' => 15,
             'Delight\\Auth\\' => 13,
         ),
+        'A' => 
+        array (
+            'Aura\\Auth\\_Config\\' => 18,
+            'Aura\\Auth\\' => 10,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
@@ -120,6 +125,14 @@ class ComposerStaticInit3805921404cda1e743840777ebd382cf
         'Delight\\Auth\\' => 
         array (
             0 => __DIR__ . '/..' . '/delight-im/auth/src',
+        ),
+        'Aura\\Auth\\_Config\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/aura/auth/config',
+        ),
+        'Aura\\Auth\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/aura/auth/src',
         ),
     );
 

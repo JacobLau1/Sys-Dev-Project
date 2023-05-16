@@ -90,20 +90,24 @@ class UserLogin
 
         $this->user = $user;
 
-        if ($this->user->login()) {
-            $this->user->getMembershipProvider()->login();
-            if ($this->user->getMembershipProvider()->isLoggedIn()) {
-                if ($this->user->getEnabled2FA()) {
-                    header('Location: index.php?resource=user&action=validatecode');
-                    //   exit();
-                } else {
-                       header('Location: index.php?resource=user&action=menuselection');
-                    //   exit();
-                }
-            }
-        } else {
+        $membershipProvider = $this->user->getMembershipProvider();
+
+        if($membershipProvider->isLoggedIn()){
+
+            // We could do an authorization check to validate that the user has access privileges to the resource or data
+
+            if($this->user->getEnabled2FA())
+                header('Location: http://localhost/UserSession/index.php?resource=user&action=validateCode');
+            else echo "logged in";
+                // We are assuming that the user has access to the employees list
+                header('Location: index.php?resource=user&action=menuselection');
+
+        }else{
+
             $this->userMessage = 'You were not able to login, check your username and password and try again.';
+
             $this->render();
+
         }
 
 

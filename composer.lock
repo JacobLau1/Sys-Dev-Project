@@ -4,8 +4,72 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0896b2e4a5869864ca8029772dca57ce",
+    "content-hash": "95af621a6484547db461995d054adc91",
     "packages": [
+        {
+            "name": "aura/auth",
+            "version": "4.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/auraphp/Aura.Auth.git",
+                "reference": "c88b713960c3a9f4449d264bd3de440719c086e9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/auraphp/Aura.Auth/zipball/c88b713960c3a9f4449d264bd3de440719c086e9",
+                "reference": "c88b713960c3a9f4449d264bd3de440719c086e9",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2.0"
+            },
+            "require-dev": {
+                "acclimate/container": "^2",
+                "phpunit/phpunit": "~8",
+                "vimeo/psalm": "~v4.15"
+            },
+            "suggest": {
+                "ext/imap": "For IMAP/POP/NNTP integration.",
+                "ext/ldap": "For LDAP integration."
+            },
+            "type": "library",
+            "extra": {
+                "aura": {
+                    "type": "library",
+                    "config": {
+                        "common": "Aura\\Auth\\_Config\\Common"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Aura\\Auth\\": "src/",
+                    "Aura\\Auth\\_Config\\": "config/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-2-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Aura.Auth Contributors",
+                    "homepage": "https://github.com/auraphp/Aura.Auth/contributors"
+                }
+            ],
+            "description": "Provides a unified interface to authenticate a user with local or remote authentication systems.",
+            "homepage": "https://github.com/auraphp/Aura.Auth",
+            "keywords": [
+                "Authentication",
+                "auth",
+                "authenticate"
+            ],
+            "support": {
+                "issues": "https://github.com/auraphp/Aura.Auth/issues",
+                "source": "https://github.com/auraphp/Aura.Auth/tree/4.0.3"
+            },
+            "time": "2021-12-15T20:58:43+00:00"
+        },
         {
             "name": "delight-im/auth",
             "version": "v8.3.0",

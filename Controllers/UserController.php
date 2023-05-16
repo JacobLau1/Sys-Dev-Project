@@ -61,11 +61,12 @@ class UserController
         }
 
         $view = new $viewClass($this->user);
+
     }
 
-private function handleLogin()
+    private function handleLogin()
     {
-       // echo "handleLogin called <br/>";
+        // echo "handleLogin called <br/>";
 
 
         if (isset($_POST['username'], $_POST['password'])) {
@@ -166,9 +167,11 @@ private function handleLogin()
 
     private function handleMenuSelection()
     {
-        if (isset($_COOKIE['UserSession'])) {
-            $username = $_COOKIE['UserSession'];
+        if (isset($_COOKIE['UserSessionUser'])) {
+            $username = $_COOKIE['UserSessionUser'];
             $this->user = $this->user->getUserByUsername($username)[0];
+        } else{
+            echo "UserSession cookie not set";
         }
     }
 

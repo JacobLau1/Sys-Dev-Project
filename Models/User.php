@@ -4,6 +4,8 @@ namespace models;
 
 use Delight\Auth\AuthError;
 use Delight\Auth\DuplicateUsernameException;
+$auth_factory = new \Aura\Auth\AuthFactory($_COOKIE);
+$auth = $auth_factory->newInstance();
 
 require_once(dirname(__DIR__) . DIRECTORY_SEPARATOR . "Core" . DIRECTORY_SEPARATOR . "DBConnectionManager.php");
 
@@ -12,6 +14,7 @@ require(dirname(__DIR__) . DIRECTORY_SEPARATOR . "Core" . DIRECTORY_SEPARATOR . 
 
 class User
 {
+
 
     private $id;
     private $position;
@@ -56,6 +59,8 @@ class User
                         :position, :first_name, :last_name, :last_seen, :date_fired, :date_hired,
                         :working_status, :termination_reason, :username, :password, :enabled2fa)";
         $statement = $this->dbConnection->prepare($query);
+
+
         $hashedPassword = password_hash($this->password, PASSWORD_DEFAULT);
 
         return $statement->execute([
@@ -69,36 +74,14 @@ class User
 
     function login()
     {
-      //  echo "User Class Login Function Called <br/>";
-
         // Get the password from the DB
-        $verified = false;
         $dbPassword = $this->getPasswordByUsername();
 
-      //  echo "DB Password: " . $dbPassword . "<br/>";
-      //  echo "Password: " . $this->password . "<br/>";
-        $info = password_get_info($dbPassword);
-     //   echo "Password Info: <br/>";
-      //  echo "<br/>";
-      //  var_dump($info);
-      // echo "<br/>";
-      //  echo "<br/>";
-        $info = password_get_info($dbPassword);
-      //  echo "Hashing algorithm: " . $info['algo'] . "<br>";
+        if(password_verify($this->password, $dbPassword)){
 
-        if (password_verify($this->password, $dbPassword)) {
-      //      echo "Password Verified <br/>";
-            $verified = true;
-        } else {
-      //      echo "Password NOT Verified <br/>";
+            $this->membershipProvider->login();
+
         }
-
-        // use the bcrypt algorithm to hash the password with a cost of 10
-        $hash = password_hash($this->password, PASSWORD_BCRYPT, ['cost' => 10]);
-      //  echo "Hash: " . $hash . "<br/>";
-
-        ////// remove the = true later
-        return $verified;
 
     }
 
