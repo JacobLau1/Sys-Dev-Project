@@ -53,7 +53,7 @@ class DrinkController{
         $drink_id = isset($_POST['drink_id']) ? $_POST['drink_id'] : null;
         $drinks = null;
         if(isset($drink_id)){
-            $drinks = $this->drink->getDrinkByID($drink_id);
+            $drinks = $this->drink->getDrinkByDrinkID($drink_id);
         }else{
             $drinks = $this->drink->getAll();
         }
@@ -83,7 +83,7 @@ class DrinkController{
         $image = $_POST['image'];
 
         // Update the drink object properties
-        $this->drink->setId($drink_id);
+        $this->drink->setDrinkID($drink_id);
         $this->drink->setAlcoholType($alcohol_type);
         $this->drink->setSaqCode($saq_code);
         $this->drink->setInventoryId($inventory_id);
@@ -107,11 +107,11 @@ class DrinkController{
         //if the form has not been submitted, render the edit view
         $drink_id = $_GET['drink_id'];
         $drinkModel = new \Models\Drink();
-        $drink = $drinkModel->getDrinkByID($drink_id);
+        $drink = $drinkModel->getDrinkByDrinkID($drink_id);
 
-        $this->drink->setID($drink['drink_id']);
+        $this->drink->setDrinkID($drink['drink_id']);
         $this->drink->setAlcoholType($drink['alcohol_type']);
-        $this->drink->setSaqType($drink['saq_code']);
+        $this->drink->setSaqCode($drink['saq_code']);
         $this->drink->setInventoryID($drink['inventory_id']);
         $this->drink->setCurrentLocation($drink['current_location']);
         $this->drink->setLastMovedBy($drink['last_moved_by']);
@@ -126,8 +126,8 @@ class DrinkController{
     }
 
     
-
-    public function handleAdd() {       //handle add
+    
+    public function handleAdd() {
         // Check if the form has been submitted
         if(isset($_POST['submit'])) {
             // Retrieve the submitted values
@@ -140,11 +140,9 @@ class DrinkController{
             $last_moved_at = $_POST['last_moved_at'];
             $image = $_POST['image'];
     
-            // Validate the submitted values (e.g. check if the price is a number)
-    
             // Create a new drink object and save it to the database
-            $this->drink = new \models\Drink();
-            $this->drink->setDrinkId($drink_id);
+            $this->drink = new \Models\Drink();
+            $this->drink->setDrinkID($drink_id);
             $this->drink->setAlcoholType($alcohol_type);
             $this->drink->setSaqCode($saq_code);
             $this->drink->setInventoryId($inventory_id);
@@ -152,19 +150,24 @@ class DrinkController{
             $this->drink->setLastMovedBy($last_moved_by);
             $this->drink->setLastMovedAt($last_moved_at);
             $this->drink->setImage($image);
-            $this->drink->create();
+            $success = $this->drink->create();
     
-            // Redirect to the drink menu after adding a new drink
-            header("Location: index.php?resource=drink&action=menu");
-            exit;
-        } else {
-            // display the add form
-            $viewClass = "\\views\\" . "DrinkAdd";
-            if(class_exists($viewClass)) {
-                $view = new $viewClass($this->drink);
-                $view->render();
+            // If the drink was saved successfully, redirect to the drink menu
+            if($success) {
+                header("Location: index.php?resource=drink&action=menu");
+                exit;
+            } else {
+                // If the save failed, display an error message
+                echo "Failed to add the drink";
             }
-        }   
+        } else {
+           // display the add form
+           $viewClass = "\\views\\" . "DrinkAdd";
+           if(class_exists($viewClass)) {
+               $view = new $viewClass($this->drink);
+               $view->render();
+           }
+        }
     }
     
 

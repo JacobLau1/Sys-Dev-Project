@@ -49,7 +49,7 @@ class Drink{
 
     }
   
-    function getDrinkByID($drink_id){
+    function getDrinkByDrinkID($drink_id){
         $query = "select * from drink where drink_id = :drink_id";
 
         $statement = $this->dbConnection->prepare($query);
@@ -73,7 +73,7 @@ class Drink{
 
     }
     // setter methods
-    public function setDrinkId($drink_id) {
+    public function setDrinkID($drink_id) {
         $this->drink_id = $drink_id;
     }
 
@@ -106,7 +106,7 @@ class Drink{
     }
 
     // getter methods
-    public function getDrinkId() {
+    public function getDrinkID() {
         return $this->drink_id;
     }
 
