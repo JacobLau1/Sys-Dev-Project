@@ -9,6 +9,7 @@ class Drink{
 
     private $drink_id;
     private $alcohol_type;
+    private $saq_code;
     private $inventory_id;
     private $current_location;
     private $last_moved_by;
@@ -31,13 +32,14 @@ class Drink{
 
     function create(){
 
-        $query = "INSERT INTO drink (drink_id, alcohol_type, inventory_id, current_location, last_moved_by, last_moved_at, image) VALUES(:drink_id, :alcohol_type, :inventory_id, :current_location, :last_moved_by, :last_moved_at, :image)";
+        $query = "INSERT INTO drink (drink_id, alcohol_type, saq_code, inventory_id, current_location, last_moved_by, last_moved_at, image) VALUES(:drink_id, :alcohol_type, :saq_code, :inventory_id, :current_location, :last_moved_by, :last_moved_at, :image)";
 
         $statement = $this->dbConnection->prepare($query);
 
         return $statement->execute([
             'drink_id' => $this->drink_id,
             'alcohol_type' => $this->alcohol_type,
+            'saq_code' => $this->saq_code,
             'inventory_id' => $this->inventory_id,
             'current_location' => $this->current_location,
             'last_moved_by' => $this->last_moved_by,
@@ -79,6 +81,10 @@ class Drink{
         $this->alcohol_type = $alcohol_type;
     }
 
+    public function setSaqCode($saq_code) {
+        $this->saq_code = $saq_code;
+    }
+
     public function setInventoryId($inventory_id) {
         $this->inventory_id = $inventory_id;
     }
@@ -108,6 +114,10 @@ class Drink{
         return $this->alcohol_type;
     }
 
+    public function getSaqCode() {
+        return $this->saq_code;
+    }
+
     public function getInventoryId() {
         return $this->inventory_id;
     }
@@ -129,10 +139,11 @@ class Drink{
     }
 
     function update() {
-        $query = "update drink set drink_id = :drink_id, alcohol_type = :alcohol_type, inventory_id = :inventory_id, current_location = :current_location, last_moved_by = :last_moved_by, last_moved_at = :last_moved_at, image = :image where ID = :id";
+        $query = "update drink set drink_id = :drink_id, alcohol_type = :alcohol_type, saq_code = :saq_code, inventory_id = :inventory_id, current_location = :current_location, last_moved_by = :last_moved_by, last_moved_at = :last_moved_at, image = :image where ID = :id";
         $statement = $this->dbConnection->prepare($query);
         $statement->bindParam(":drink_id", $this->drink_id);
         $statement->bindParam(":alcohol_type", $this->alcohol_type);
+        $statement->bindParam(":saq_code", $this->saq_code);
         $statement->bindParam(":inventory_id", $this->inventory_id);
         $statement->bindParam(":current_location", $this->current_location);
         $statement->bindParam(":last_moved_by", $this->last_moved_by);
@@ -149,7 +160,7 @@ class Drink{
     
         // Print the executed SQL query
         echo "Executed query: " . $query . "<br/>";
-        echo "With parameters: drink_id={$this->drink_id}, alcohol_type={$this->alcohol_type}, inventory_id={$this->inventory_id}, current_location={$this->current_location}, last_moved_by={$this->last_moved_by}, last_moved_at={$this->last_moved_at}, image={$this->image}, id={$this->id}<br/>";
+        echo "With parameters: drink_id={$this->drink_id}, alcohol_type={$this->alcohol_type},saq_code={$this->saq_code}, inventory_id={$this->inventory_id}, current_location={$this->current_location}, last_moved_by={$this->last_moved_by}, last_moved_at={$this->last_moved_at}, image={$this->image}, id={$this->id}<br/>";
     
         return $success;
     }

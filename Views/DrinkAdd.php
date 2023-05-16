@@ -43,11 +43,21 @@ class DrinkAdd {
         $html .= '<option value="spirit">Spirit</option>';
         $html .= '</select><br/><br/>';
         
+        $html .= '<label for="saq_code">SAQ Code:</label><br/>';
+        $html .= '<input type="text" name="saq_code" required><br/><br/>';
+        
+
         $html .= '<label for="inventory_id">Inventory ID:</label><br/>';
         $html .= '<input type="text" name="inventory_id" required><br/><br/>';
         
         $html .= '<label for="current_location">Current Location:</label><br/>';
-        $html .= '<input type="text" name="current_location" required><br/><br/>';
+        $html .= '<select name="current_location" required>';
+        $html .= '<option value="1">1 - bar1</option>';
+        $html .= '<option value="2">2 - bar2</option>';
+        $html .= '<option value="3">3 - upstairs</option>';
+        $html .= '<option value="4">4 - cellar</option>';
+        $html .= '<option value="5">5 - fridge</option>';
+        $html .= '</select><br/><br/>';
         
         $html .= '<label for="last_moved_by">Last Moved By:</label><br/>';
         $html .= '<input type="text" name="last_moved_by" required><br/><br/>';

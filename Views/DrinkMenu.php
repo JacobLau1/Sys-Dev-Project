@@ -41,6 +41,7 @@ class DrinkMenu
         $html .= '<tr class="w3-theme-d3">';
         $html .= '<th class="">Drink ID</th>
             <th>Alcohol Type</th>
+            <th>Saq Code</th>
             <th>Inventory ID</th>
             <th>Current Location</th>
             <th>Last Moved By</th>
@@ -83,6 +84,7 @@ foreach ($drinks as $drink) {
     $html .= "<tr>
         <td>" . $drink['drink_id'] . "</td>
         <td>" . $drink['alcohol_type'] . "</td>
+        <td>" . $drink['saq_code'] . "</td>
         <td>" . $drink['inventory_id'] . "</td>
         <td>" . $drink['current_location'] . "</td>
         <td>" . $drink['last_moved_by'] . "</td>

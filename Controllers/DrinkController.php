@@ -68,12 +68,14 @@ class DrinkController{
     function handleEdit() {
         //check if the form has been submitted
         if (isset($_POST['drink_id']) && isset($_POST['alcohol_type']) &&
+        isset($_POST['saq_code']) &&
         isset($_POST['inventory_id']) && isset($_POST['current_location']) &&
         isset($_POST['last_moved_by']) && isset($_POST['last_moved_at']) && isset($_POST['image'])) {
     
         // get the drink properties from the form
         $drink_id = $_POST['drink_id'];
         $alcohol_type = $_POST['alcohol_type'];
+        $saq_code = $_POST['saq_code'];
         $inventory_id = $_POST['inventory_id'];
         $current_location = $_POST['current_location'];
         $last_moved_by = $_POST['last_moved_by'];
@@ -83,6 +85,7 @@ class DrinkController{
         // Update the drink object properties
         $this->drink->setId($drink_id);
         $this->drink->setAlcoholType($alcohol_type);
+        $this->drink->setSaqCode($saq_code);
         $this->drink->setInventoryId($inventory_id);
         $this->drink->setCurrentLocation($current_location);
         $this->drink->setLastMovedBy($last_moved_by);
@@ -108,6 +111,7 @@ class DrinkController{
 
         $this->drink->setID($drink['drink_id']);
         $this->drink->setAlcoholType($drink['alcohol_type']);
+        $this->drink->setSaqType($drink['saq_code']);
         $this->drink->setInventoryID($drink['inventory_id']);
         $this->drink->setCurrentLocation($drink['current_location']);
         $this->drink->setLastMovedBy($drink['last_moved_by']);
@@ -129,6 +133,7 @@ class DrinkController{
             // Retrieve the submitted values
             $drink_id = $_POST['drink_id'];
             $alcohol_type = $_POST['alcohol_type'];
+            $saq_code = $_POST['saq_code'];
             $inventory_id = $_POST['inventory_id'];
             $current_location = $_POST['current_location'];
             $last_moved_by = $_POST['last_moved_by'];
@@ -141,6 +146,7 @@ class DrinkController{
             $this->drink = new \models\Drink();
             $this->drink->setDrinkId($drink_id);
             $this->drink->setAlcoholType($alcohol_type);
+            $this->drink->setSaqCode($saq_code);
             $this->drink->setInventoryId($inventory_id);
             $this->drink->setCurrentLocation($current_location);
             $this->drink->setLastMovedBy($last_moved_by);
