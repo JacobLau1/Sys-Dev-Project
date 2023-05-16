@@ -34,7 +34,7 @@ class BeerEdit {
         /* Table */
         $html = '';
         $html .= '<div class="w3-container w3-center" style="padding: 4rem" id="main">';
-        $html .= '<h1 class="center white-text">Wine Menu</h1>';
+        $html .= '<h1 class="center white-text">Beer Menu</h1>';
         $html .= '<section class="w3-card w3-white">';
         $html .= '<table id="employeesTable" class="w3-table w3-striped w3-hoverable w3-text-black">';
         $html .= '<tr class="w3-theme-d3">';
