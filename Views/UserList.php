@@ -138,6 +138,15 @@ class UserList
     $html .= '<input type="submit" value="Search">';
     $html .= '</form>';
 
+
+        // Add the search form
+        $html .=     '<form method="post" action="http://localhost/Sys-Dev-Project/index.php?resource=user&action=list">';
+        $html .= '<input type="text" name="usernamesearch" placeholder="Search by username...">';
+        $html .= '<input type="hidden" name="resource" value="user">';
+        $html .= '<input type="hidden" name="action" value="list">';
+        $html .= '<input type="submit" value="Search">';
+        $html .= '</form>';
+
 // Loop and fill the table with data from the database
 
         foreach ($users as $user) {
