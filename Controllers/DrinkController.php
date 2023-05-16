@@ -141,7 +141,7 @@ class DrinkController{
             $image = $_POST['image'];
     
             // Create a new drink object and save it to the database
-            $this->drink = new \Models\Drink();
+            $this->drink = new \models\Drink();
             $this->drink->setDrinkID($drink_id);
             $this->drink->setAlcoholType($alcohol_type);
             $this->drink->setSaqCode($saq_code);
@@ -150,16 +150,11 @@ class DrinkController{
             $this->drink->setLastMovedBy($last_moved_by);
             $this->drink->setLastMovedAt($last_moved_at);
             $this->drink->setImage($image);
-            $success = $this->drink->create();
+            $this->drink->create();
+         
+            header("Location: index.php?resource=drink&action=menu");
+            exit;
     
-            // If the drink was saved successfully, redirect to the drink menu
-            if($success) {
-                header("Location: index.php?resource=drink&action=menu");
-                exit;
-            } else {
-                // If the save failed, display an error message
-                echo "Failed to add the drink";
-            }
         } else {
            // display the add form
            $viewClass = "\\views\\" . "DrinkAdd";
