@@ -179,15 +179,36 @@ private function handleLogin()
         }
     }
 
+    // private function handleUserList()
+    // {
+    //     if (isset($_COOKIE['UserSession'])) {
+    //         $username = $_COOKIE['UserSession'];
+    //         $this->user = $this->user->getUserByUsername($username)[0];
+
+    //         $userModel = new \Models\User();
+    //         $users = $userModel->getAll();
+
+    //         $viewClass = "\\views\\" . "UserList";
+    //         if (class_exists($viewClass)) {
+    //             $view = new $viewClass($this->user);
+    //             $view->render($users);
+    //         }
+    //     }
+    // }
+
     private function handleUserList()
     {
         if (isset($_COOKIE['UserSession'])) {
-            $username = $_COOKIE['UserSession'];
-            $this->user = $this->user->getUserByUsername($username)[0];
-
             $userModel = new \Models\User();
-            $users = $userModel->getAll();
-
+            if (isset($_POST['usernamesearch'])) {
+                $usernamesearch = $_POST['usernamesearch'];
+                $users = [$userModel->getUserByUsername($usernamesearch)[0]];
+            } else {
+                $users = $userModel->getAll();
+            }
+            $username = $_COOKIE['UserSession'];
+            $this->user = $userModel->getUserByUsername($username)[0];
+    
             $viewClass = "\\views\\" . "UserList";
             if (class_exists($viewClass)) {
                 $view = new $viewClass($this->user);
@@ -195,6 +216,7 @@ private function handleLogin()
             }
         }
     }
+    
 
     private function handleLogout()
     {
