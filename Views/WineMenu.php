@@ -6,6 +6,8 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-teal.css">
     <script src="https://kit.fontawesome.com/99c47d5f92.js" crossorigin="anonymous"></script>
+    <title>Wine Menu</title>
+    <link rel="icon" type="image/x-icon" href="../favicon.ico" />
 </head>
 <body class="w3-theme-d5">
 <?php

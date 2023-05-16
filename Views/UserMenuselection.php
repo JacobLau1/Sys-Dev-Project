@@ -2,7 +2,7 @@
 
 <html>
 <head>
-    <title>User Management</title>
+    <title>Menu Selection</title>
     <link rel="stylesheet" href="./Styles/MenuSelection.css">
 </head>
 <body>

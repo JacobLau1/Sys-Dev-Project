@@ -1,6 +1,7 @@
 <?php namespace views;?>
 <html>
 <head>
+    <title>User Create</title>
     <style>
 body, a, h1, #employeesTable td, #employeesTable th {
     color: white;

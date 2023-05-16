@@ -2,6 +2,7 @@
 
 <html>
 <head>
+    <title>User Edit</title>
     <style>
 
         body {

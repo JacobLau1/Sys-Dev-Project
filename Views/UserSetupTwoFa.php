@@ -18,6 +18,9 @@ class UserSetupTwofa{
 
         $qrcodeimageURL= \TokenAuth6238::getBarCodeUrl($this->user->getUsername(), 'localhost', $this->user->getOTPsecretkey(), 'Sys-Dev-Projectvie');
 
+        echo 'Download and sent this page to the employee.';
+        echo '</br>';
+
         echo 'Download the authenticator app:';
         echo '</br>';
         echo 'Either the Google authenticator app';

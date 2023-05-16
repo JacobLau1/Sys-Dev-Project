@@ -4,6 +4,7 @@
 <head>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-teal.css">
+    <title>Wine Edit</title>
 </head>
 <body class="w3-theme-d5">
 <?php
@@ -71,7 +72,7 @@ class WineEdit {
         $html .= '<input type="text" id="price" name="price" value="'.$wine['price'].'"><br>';
         $html .= '<input type="submit" value="Submit">';
         $html .= '</form>';
-        
+
 
         $html .= '</section>';
 

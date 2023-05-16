@@ -2,10 +2,12 @@
 
 <html>
 <head>
+    <title>Beer Menu</title>
     <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-teal.css">
     <script src="https://kit.fontawesome.com/99c47d5f92.js" crossorigin="anonymous"></script>
+    <link rel="icon" type="image/x-icon" href="../favicon.ico" />
 </head>
 <body class="w3-theme-d5">
 <?php
