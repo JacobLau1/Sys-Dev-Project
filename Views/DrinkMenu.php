@@ -39,7 +39,7 @@ class DrinkMenu
         $html .= '<section class="w3-card w3-white">';
         $html .= '<table id="employeesTable" class="w3-table w3-striped w3-text-black">';
         $html .= '<tr class="w3-theme-d3">';
-        $html .= '<th class="">ID</th>
+        $html .= '<th class="">Drink ID</th>
             <th>Alcohol Type</th>
             <th>Inventory ID</th>
             <th>Current Location</th>
@@ -79,7 +79,6 @@ $html .= '<form method="post" action="http://localhost/Sys-Dev-Project/index.php
 // Loop and fill the table with data from the database
 foreach ($drinks as $drink) {
     $imageData = base64_encode($drink['image']);
-    $src = 'data:image/jpeg;base64,' . $imageData;
 
     $html .= "<tr>
         <td>" . $drink['drink_id'] . "</td>
@@ -88,7 +87,7 @@ foreach ($drinks as $drink) {
         <td>" . $drink['current_location'] . "</td>
         <td>" . $drink['last_moved_by'] . "</td>
         <td>" . $drink['last_moved_at'] . "</td>
-        <td><img src='$src' alt='Drink Image' width='50' height='50'></td>
+        <td><img src='data:image/jpeg;base64," . $imageData . "' style='width: 50%; height: 50%;'/></td>
         <td>
         <a class='w3-button w3-hover-blue-gray w3-round' href='http://localhost/Sys-Dev-Project/index.php?resource=drink&action=edit&id=" . $drink['drink_id'] . "'>
             <i class='fas fa-pen-fancy'></i>
