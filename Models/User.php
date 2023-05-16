@@ -35,7 +35,7 @@ class User
     private $dbConnection;
 
     private $membershipProvider;
-    private $email;
+
 
     function __construct()
     {
@@ -254,11 +254,6 @@ class User
         $this->last_name = $last_name;
     }
 
-    public function setEmail($email)
-    {
-        $this->email = $email;
-    }
-
     public function getLastName()
     {
         return $this->last_name;
@@ -314,11 +309,6 @@ class User
         return $this->termination_reason;
     }
 
-    public function getEmail()
-    {
-        return $this->email;
-    }
-
     function getAll()
     {
 
@@ -334,16 +324,26 @@ class User
 
     function update()
     {
-
-        $query = "UPDATE users SET position = :position, email = :email ,username = :username, password = :password, enabled2fa = :enabled2fa WHERE id = :id";
+        $query = "UPDATE users SET position = :position, first_name = :first_name, last_name = :last_name, last_seen = :last_seen, date_fired = :date_fired, date_hired = :date_hired, working_status = :working_status, termination_reason = :termination_reason, username = :username WHERE id = :id";
 
         $statement = $this->dbConnection->prepare($query);
 
         $hashedPassword = password_hash($this->password, PASSWORD_DEFAULT);
 
-        return $statement->execute(['position' => $this->position, 'email' => $this->email,'username' => $this->username, 'password' => $hashedPassword, 'enabled2fa' => $this->enabled2fa, 'id' => $this->id]);
-
+        return $statement->execute([
+            'position' => $this->position,
+            'first_name' => $this->first_name,
+            'last_name' => $this->last_name,
+            'last_seen' => $this->last_seen,
+            'date_fired' => $this->date_fired,
+            'date_hired' => $this->date_hired,
+            'working_status' => $this->working_status,
+            'termination_reason' => $this->termination_reason,
+            'username' => $this->username,
+            'id' => $this->id
+        ]);
     }
+
 
     public function getUserByID($id)
     {
@@ -373,7 +373,6 @@ class User
         return json_encode([
             'id' => $this->id,
             'position' => $this->position,
-            'email' => $this->email,
             'username' => $this->username,
             'password' => $this->password,
             'enabled2fa' => $this->enabled2fa,

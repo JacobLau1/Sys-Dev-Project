@@ -18,7 +18,7 @@ Class UserMenuselection{
 
         $membershipProvider = $this->user->getMembershipProvider();
 
-      
+
         if($membershipProvider->isLoggedIn()){
             $this->welcomeMessage = 'Welcome '.$this->user->getUsername();
             $html = "<header>";
