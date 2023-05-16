@@ -72,11 +72,6 @@ class BeerEdit {
         $html .= '<input type="submit" value="Submit">';
         $html .= '</form>';
 
-        // Button to delete the beer
-        $html .= '<form action="http://localhost/Sys-Dev-Project/index.php?resource=beer&action=delete" method="post">';
-        $html .= '<input type="hidden" id="id" name="id" value="'.$beer['id'].'"><br>';
-        $html .= '<input type="submit" value="Delete Beer">';
-        $html .= '</form>';
 
 
         $html .= '</section>';

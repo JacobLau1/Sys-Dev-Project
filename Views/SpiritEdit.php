@@ -63,11 +63,7 @@ class SpiritEdit {
         $html .= '<input type="submit" value="Submit">';
         $html .= '</form>';
 
-        // Button to delete the spirit
-        $html .= '<form action="http://localhost/Sys-Dev-Project/index.php?resource=spirit&action=delete" method="post">';
-        $html .= '<input type="hidden" id="id" name="id" value="'.$spirit['id'].'"><br>';
-        $html .= '<input type="submit" value="Delete Spirit">';
-        $html .= '</form>';
+
 
 $html .= '</div>';
 
