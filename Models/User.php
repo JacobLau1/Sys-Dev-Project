@@ -151,6 +151,17 @@ class User
 
     }
 
+    public function isAdmin()
+    {
+        return $this->position === 'admin';
+    }
+
+    public function isManager()
+    {
+        return $this->position === 'manager';
+    }
+
+
     public function getid()
     {
 

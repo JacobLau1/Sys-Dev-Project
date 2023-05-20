@@ -29,13 +29,10 @@ Class UserMenuselection{
             $html = '<nav>';
             $html .= '<div class="w3-bar w3-theme-d4 w3-top w3-left-align w3-large">';
             $html .= '<a href="" class="w3-bar-item w3-button w3-theme-d3">Modavie</a>';
-            if($this->user->getPosition() == 'admin'){
+            if($this->user->getPosition() == 'admin' || $this->user->getPosition() == 'manager'){
                 $html .= "<a href='http://localhost/Sys-Dev-Project/index.php?resource=user&action=management'  class='w3-bar-item w3-button w3-hide-small w3-hover-white'>Waiter Registration</a>";
             }
             $html .= "<a class='w3-bar-item w3-button' href='http://localhost/Sys-Dev-Project/index.php?resource=drink&action=menu'>Drinks</a>";
-            $html .= "<a class='w3-bar-item w3-button' href='http://localhost/Sys-Dev-Project/index.php?resource=wine&action=menu'>Wine</a>";
-            $html .= "<a class='w3-bar-item w3-button' href='http://localhost/Sys-Dev-Project/index.php?resource=beer&action=menu'>Beer</a>";
-            $html .= "<a class='w3-bar-item w3-button' href='http://localhost/Sys-Dev-Project/index.php?resource=spirit&action=menu'>Spirits</a>";
             $html .= "<a href='http://localhost/Sys-Dev-Project/index.php?resource=user&action=login' class='w3-bar-item w3-button w3-hide-small w3-hover-white'>Logout</a>";
             $html .= '</div>';
             $html .= '</nav>';

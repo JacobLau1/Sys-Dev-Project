@@ -36,6 +36,8 @@
       <path value="$PROJECT_DIR$/Vendor/ralouphie/getallheaders" />
       <path value="$PROJECT_DIR$/Vendor/guzzlehttp/guzzle" />
       <path value="$PROJECT_DIR$/Vendor/aura/auth" />
+      <path value="$PROJECT_DIR$/Vendor/monolog/monolog" />
+      <path value="$PROJECT_DIR$/Vendor/psr/log" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.0">

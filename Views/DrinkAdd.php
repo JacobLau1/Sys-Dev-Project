@@ -32,9 +32,6 @@ class DrinkAdd {
         echo '<h1>Add Drink</h1>';
         echo '<section>';
         $html = '<form method="POST" action="http://localhost/Sys-Dev-Project/index.php?resource=drink&action=add">';
-
-        $html .= '<label for="drink_id">Drink ID:</label><br/>';
-        $html .= '<input type="text" name="drink_id" required><br/><br/>';
         
         $html .= '<label for="alcohol_type">Alcohol Type:</label><br/>';
         $html .= '<select name="alcohol_type" required>';
@@ -45,11 +42,23 @@ class DrinkAdd {
         
         $html .= '<label for="saq_code">SAQ Code:</label><br/>';
         $html .= '<input type="text" name="saq_code" required><br/><br/>';
-        
 
-        $html .= '<label for="inventory_id">Inventory ID:</label><br/>';
-        $html .= '<input type="text" name="inventory_id" required><br/><br/>';
-        
+        $html .= '<label for="subtype">Subtype:</label><br/>';
+        $html .= '<input type="text" name="subtype" required><br/><br/>';
+
+        $html .= '<label for="name">Name:</label><br/>';
+        $html .= '<input type="text" name="name" required><br/><br/>';
+
+        $html .= '<label for="format">Format:</label><br/>';
+        $html .= '<input type="text" name="format" required><br/><br/>';
+
+        $html .= '<label for="price">Price:</label><br/>';
+        $html .= '<input type="number" name="price" min="0" step="0.01" required><br/><br/>';
+
+
+        $html .= '<input type="hidden" name="inventory_id" value="1">';
+
+
         $html .= '<label for="current_location">Current Location:</label><br/>';
         $html .= '<select name="current_location" required>';
         $html .= '<option value="1">1 - bar1</option>';
@@ -58,13 +67,7 @@ class DrinkAdd {
         $html .= '<option value="4">4 - cellar</option>';
         $html .= '<option value="5">5 - fridge</option>';
         $html .= '</select><br/><br/>';
-        
-        $html .= '<label for="last_moved_by">Last Moved By:</label><br/>';
-        $html .= '<input type="text" name="last_moved_by" required><br/><br/>';
-        
-        $html .= '<label for="last_moved_at">Last Moved At:</label><br/>';
-        $html .= '<input type="datetime-local" name="last_moved_at" required><br/><br/>';
-        
+
         $html .= '<label for="image">Image:</label><br/>';
         $html .= '<img src="wine.png" alt="Default Image" height="100" width="100"><br/>';
         $html .= '<input type="file" name="image" accept="image/*"><br/><br/>';

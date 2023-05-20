@@ -2,75 +2,11 @@
 
 <html>
 <head>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-teal.css">
     <title>User Edit</title>
-    <style>
-
-        body {
-            background-color: #18332B;
-            display: flex;
-            flex-direction: column;
-            width: 100vw;
-            height: 100vh;
-            margin: 0;
-        }
-
-        a {
-            color: white;
-            text-decoration: none;
-        }
-
-        a:hover {
-            color: #eeeeee;
-            text-decoration: underline;
-        }
-
-        section {
-            background-color: #eeeeee;
-
-            /* Centers the section */
-            margin: auto;
-            /* Centers the contents */
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-
-        }
-
-        h1 {
-            text-align: center;
-            color: #eeeeee;
-        }
-
-        #employeesTable {
-            font-family: Arial, Helvetica, sans-serif;
-            border-collapse: collapse;
-            width: 100%;
-        }
-
-        #employeesTable td, #employeesTable th {
-            border: 1px solid #ddd;
-            padding: 8px;
-        }
-
-        #employeesTable tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-
-        #employeesTable tr:hover {
-            background-color: #ddd;
-        }
-
-        #employeesTable th {
-            padding-top: 12px;
-            padding-bottom: 12px;
-            text-align: left;
-            background-color: #04AA6D;
-            color: white;
-        }
-    </style>
 </head>
-<body>
+<body class="w3-theme-d5">
 <?php
 
 class UserEdit {
@@ -78,43 +14,27 @@ class UserEdit {
 
     public function __construct($user) {
         $this->user = $user;
-
     }
 
     public function render($userModel = null) {
-        echo '<br/>';
-        echo '<a href="http://localhost/Sys-Dev-Project/index.php?resource=user&action=list">Back</a>';
-        echo '<br/>';
+        /* Nav Bar */
+        echo '<nav>';
+        echo '<div class="w3-bar w3-theme-d4 w3-top w3-left-align w3-large">';
+        echo '<a href="" class="w3-bar-item w3-button w3-theme-d3">UserEdit</a>';
+        echo '<a href="http://localhost/Sys-Dev-Project/index.php?resource=user&action=list" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Back to list</a>';
+        echo '</div>';
+        echo '</nav>';
 
         if ($userModel === null) {
             echo 'No user to display.';
             return;
         }
 
-
-        // $html = '<table id="employeesTable">';
-        // $html .= "<th>ID</th>
-        //     <th>Position</th>
-        //     <th>Username</th>
-        //     ";
-
-        // $html .=  "<tr>
-        //     <td>".$userModel->getID()."</td>
-        //     <td>".$userModel->getPosition()."</td>
-        //     <td>".$userModel->getUsername()."</td>
-        // </tr>";
-
-        // $html .= "</table>";
-
-        // // Form to edit the user
-        // $html .= '<form action="" method="post">';
-        // $html .= '<input type="hidden" id="id" name="id" value="'.$userModel->getID().'"><br>';
-        // $html .= '<label for="position">Position:</label><br>';
-        // $html .= '<input type="text" id="position" name="position" value="'.$userModel->getPosition().'"><br>';
-        // $html .= '<label for="username">Username:</label><br>';
-        // $html .= '<input type="text" id="username" name="username" value="'.$userModel->getUsername().'"><br>';
-
-        $html = '<section>';
+        /* Form */
+        $html = '';
+        $html .= '<div class="w3-container w3-center" style="padding: 4rem" id="main">';
+        $html .= '<h1 class="center white-text">User Edit</h1>';
+        $html .= '<section class="w3-card w3-white">';
         $html .= '<table id="employeesTable">';
 
         $html .= "<th>ID</th>
@@ -166,8 +86,8 @@ class UserEdit {
         $html .= '<input type="date" id="date_fired" name="date_fired" value="'.$userModel->getDateFired().'"><br>';
         $html .= '<label for="working_status">Working Status:</label><br>';
         $html .= '<select id="working_status" name="working_status">';
-        $html .= '<option value="0" '.($userModel->getWorkingStatus() == 0 ? 'selected' : '').'>0</option>';
-        $html .= '<option value="1" '.($userModel->getWorkingStatus() == 1 ? 'selected' : '').'>1</option>';
+        $html .= '<option value="0" '.($userModel->getWorkingStatus() == 0 ? 'selected' : '').'>Not Working</option>';
+        $html .= '<option value="1" '.($userModel->getWorkingStatus() == 1 ? 'selected' : '').'>Working</option>';
         $html .= '</select><br>';
         $html .= '<label for="termination_reason">Termination Reason:</label><br>';
         $html .= '<input type="text" id="termination_reason" name="termination_reason" value="'.$userModel->getTerminationReason().'"><br>';
@@ -177,11 +97,6 @@ class UserEdit {
         $html .= '<input type="submit" value="Submit">';
         $html .= '</form>';
 
-        // Button to delete the user
-        $html .= '<form action="" method="post">';
-        $html .= '<input type="hidden" id="id" name="id" value="'.$userModel->getID().'"><br>';
-        $html .= '<input type="submit" value="Terminate User">';
-        $html .= '</form>';
         $html .= '</section>';
 
         echo $html;
