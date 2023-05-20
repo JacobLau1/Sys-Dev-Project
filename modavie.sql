@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 16, 2023 at 06:19 AM
+-- Generation Time: May 20, 2023 at 04:42 AM
 -- Server version: 10.4.27-MariaDB
--- PHP Version: 7.4.33
+-- PHP Version: 8.1.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -51,15 +51,27 @@ INSERT INTO `beer` (`id`, `saq_code`, `type`, `name`, `format`, `price`) VALUES
 --
 
 CREATE TABLE `drink` (
-  `drink_id` varchar(50) NOT NULL,
-  `alcohol_type` varchar(50) NOT NULL,
+  `drink_id` int(11) NOT NULL,
   `saq_code` varchar(50) NOT NULL,
+  `alcohol_type` varchar(50) NOT NULL,
+  `subtype` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `format` int(11) NOT NULL,
+  `price` decimal(10,0) NOT NULL,
   `inventory_id` int(11) DEFAULT NULL,
   `current_location` int(11) NOT NULL,
-  `last_moved_by` int(11) NOT NULL,
-  `last_moved_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `last_moved_by` int(11) DEFAULT NULL,
+  `last_moved_at` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `image` blob NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `drink`
+--
+
+INSERT INTO `drink` (`drink_id`, `saq_code`, `alcohol_type`, `subtype`, `name`, `format`, `price`, `inventory_id`, `current_location`, `last_moved_by`, `last_moved_at`, `image`) VALUES
+(1, '123', 'wine', 'sda', 'ew', 12, '12', 1, 1, 19, '2024-06-20 12:05:00', ''),
+(2, '23123', 'beer', 'fds', 'sfd', 123, '123', 1, 1, 19, '2025-06-20 12:19:00', '');
 
 -- --------------------------------------------------------
 
@@ -196,8 +208,7 @@ ALTER TABLE `drink`
   ADD PRIMARY KEY (`drink_id`) USING BTREE,
   ADD KEY `inventoryfk` (`inventory_id`),
   ADD KEY `location` (`current_location`),
-  ADD KEY `lastmovedby` (`last_moved_by`),
-  ADD KEY `saq_codeforeignkey` (`saq_code`) USING BTREE;
+  ADD KEY `lastmovedby` (`last_moved_by`);
 
 --
 -- Indexes for table `inventory`
@@ -236,6 +247,12 @@ ALTER TABLE `wine`
 --
 
 --
+-- AUTO_INCREMENT for table `drink`
+--
+ALTER TABLE `drink`
+  MODIFY `drink_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `inventory`
 --
 ALTER TABLE `inventory`
@@ -261,18 +278,7 @@ ALTER TABLE `users`
 -- Constraints for table `drink`
 --
 ALTER TABLE `drink`
-  ADD CONSTRAINT `drink_ibfk_1` FOREIGN KEY (`inventory_id`) REFERENCES `inventory` (`inventory_id`),
-  ADD CONSTRAINT `drink_ibfk_2` FOREIGN KEY (`current_location`) REFERENCES `location` (`location_id`),
-  ADD CONSTRAINT `drink_ibfk_3` FOREIGN KEY (`last_moved_by`) REFERENCES `users` (`id`),
-  ADD CONSTRAINT `drink_ibfk_4` FOREIGN KEY (`saq_code`) REFERENCES `wine` (`saq_code`),
-  ADD CONSTRAINT `fk_beer_saq_code` FOREIGN KEY (`saq_code`) REFERENCES `beer` (`saq_code`),
-  ADD CONSTRAINT `fk_spirit_saq_code` FOREIGN KEY (`saq_code`) REFERENCES `spirit` (`saq_code`);
-
---
--- Constraints for table `inventory`
---
-ALTER TABLE `inventory`
-  ADD CONSTRAINT `inventory_ibfk_1` FOREIGN KEY (`drink_id`) REFERENCES `drink` (`drink_id`);
+  ADD CONSTRAINT `drink_ibfk_3` FOREIGN KEY (`last_moved_by`) REFERENCES `users` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
