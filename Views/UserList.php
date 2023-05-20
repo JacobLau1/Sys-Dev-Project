@@ -36,7 +36,7 @@ class UserList
         /* Table */
 
         $html = '<div class="w3-container w3-center w3-round" style="padding: 4rem" id="main">';
-        $html .= '<h1 class="center white-text">Wine Menu</h1>';
+        $html .= '<h1 class="center white-text">Employee List</h1>';
         $html .= '<section class="w3-card w3-white">';
         $html .= "<form method='post' action='http://localhost/Sys-Dev-Project/index.php?resource=user&action=list' class='w3-bar'>";
         $html .= "<input type='text' name='usernamesearch' placeholder='Search by username...' class='w3-bar-item w3-input w3-white w3-mobile'>";

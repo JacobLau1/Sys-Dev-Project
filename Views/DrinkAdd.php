@@ -24,13 +24,14 @@ class DrinkAdd {
         echo '<a href="" class="w3-bar-item w3-button w3-theme-d3">Modavie</a>';
         echo '<a href="http://localhost/Sys-Dev-Project/index.php?resource=drink&action=menu" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Back to menu</a>';
         echo '</div>';
-        echo '</nav>';
+        echo '</nav><br>';
 
 
 
+        echo '<div class="w3-container w3-center" style="padding: 4rem" id="main">';
 
         echo '<h1>Add Drink</h1>';
-        echo '<section>';
+        echo '<section class="w3-card w3-white">';
         $html = '<form method="POST" action="http://localhost/Sys-Dev-Project/index.php?resource=drink&action=add">';
         
         $html .= '<label for="alcohol_type">Alcohol Type:</label><br/>';
@@ -77,7 +78,8 @@ class DrinkAdd {
         $html .= '<input type="submit" name="submit" value="Add"><br/><br/>';
         $html .= "</form>";
         $html .= '</section>';
-        
+        $html .= '</div>';
+
 
         echo $html;
     }

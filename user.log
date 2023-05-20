@@ -10,3 +10,5 @@
 [2023-05-20T04:18:53.957484+02:00] user.INFO: Attempting Registration [] []
 [2023-05-20T04:22:38.354600+02:00] user.INFO: Attempting Registration [] []
 [2023-05-20T04:25:32.731417+02:00] user.INFO: Attempting Registration [] []
+[2023-05-20T05:41:19.019235+02:00] user.INFO: Attempting login {"username":"ross"} []
+[2023-05-20T05:43:22.545559+02:00] user.INFO: Attempting Registration [] []
